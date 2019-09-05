@@ -198,6 +198,5 @@ class ProjectController extends Controller
 
     public function darLike() {
 
-        echo "alowowow";
     }
 }

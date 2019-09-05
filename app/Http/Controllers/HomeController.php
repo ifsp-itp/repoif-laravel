@@ -26,7 +26,5 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function bla() {
-        return view('bla');
-    }
+
 }
