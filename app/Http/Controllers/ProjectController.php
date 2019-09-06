@@ -21,11 +21,6 @@ php artisan make:model Project -m
 class ProjectController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -102,9 +97,9 @@ class ProjectController extends Controller
         ]);
 
         $nameFile = $video->getVideoId();
-        $caminhoDaImagem = $video->getThumbnailUrl();
+        //$caminhoDaImagem = $video->getThumbnailUrl();
 
-        dd($caminhoDaImagem);
+        //dd($caminhoDaImagem);
 
 
 
@@ -160,9 +155,6 @@ class ProjectController extends Controller
     public function edit(Project $id) //mostrar o formulario preenchido com os dados
     {
         $project = Project::find($id);
-        $this->authorize('pass', $project);
-
-
         return view('project.edit')->with('project', $id);
     }
 
@@ -196,7 +188,11 @@ class ProjectController extends Controller
 
     }
 
-    public function darLike() {
+    public function darLike($id) {
+        $project = Project::find($id);
+        $project->likes += 1;
+        $project->save(); 
 
+        return back()->withInput();
     }
 }

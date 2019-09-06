@@ -45,12 +45,26 @@
 	<td><a href="/projects/edit/{{ $project->id }}">EDITAR</a></td>
 	<td><a href="/projects/destroy/{{ $project->id }}">DELETAR</a></td>
 </tr>
+
+<tr>
+	<td>
+		<a href="/download/{{$project->download}}">
+		<button style="padding: 3px; border-radius: 5px;">
+			<strong style="float: left;">download</strong>
+		</button>
+	</a>
+	</td>
+	<td>
+		<form method="post" action="/projects/like/{{ $project->id }}">
+			@method('PUT')
+	    	@csrf
+				<button name="likes" style="padding: 3px; border-radius: 5px;" type="submit">Like</button> 
+			{{$project->likes}} people liked this
+		</form>
+	</td>
+</tr>
 </table> 
 <br>
 
-<a href="/download/{{$project->download}}"><button style="padding: 3px; border-radius: 10px;" class="lef"><strong>download</strong></button></a>
-<button class="like" style="margin-left: 5%;">Like</button> 
-{{$project->likes}} liked it
-<br><br>
 <a href="/projects" class="lef">Voltar</a>
 @endsection

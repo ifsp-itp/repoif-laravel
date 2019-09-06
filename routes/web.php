@@ -26,9 +26,11 @@ Route::group(['middleware' => ['auth']], function () {
     //projeto
 	Route::get('/projects/create', 'ProjectController@create');
 	Route::post('/projects', 'ProjectController@store');
-	Route::get('/projects/edit/{id}', 'ProjectController@edit')->middleware('auth:user');
+	Route::get('/projects/edit/{id}', 'ProjectController@edit');
 	Route::put('/projects/show/{id}', 'ProjectController@update');
 	Route::get('/projects/destroy/{id}', 'ProjectController@destroy');
+	//like
+	Route::put('/projects/like/{id}', 'ProjectController@darLike');
 
 	//baixar
 	Route::get("/download/{file}", function ($file="") {

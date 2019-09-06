@@ -31,7 +31,7 @@
 
 <br>
 
-<button class="lef"><a href="/projects" >VER</a></button>
+<a href="/projects" >VER</a>
 
 
 @endsection
