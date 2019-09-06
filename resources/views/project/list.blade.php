@@ -5,7 +5,7 @@
 
 	<div class="card-deck">
 		@foreach ($projects as $project) 
-		  <div class="card">
+		  <div class="card mb-3" style="min-width: 18rem;">
 		    <img src="/storage/files/{{$project->project}}" class="card-img-top" alt="...">
 		    <div class="card-body">
 		      <h5 class="card-title">{{$project->title}}</h5>
