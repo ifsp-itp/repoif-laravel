@@ -25,7 +25,7 @@ class CreateProjectsTable extends Migration
             $table->integer('likes');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('thumbnailURL')->nullable();
         });
     }
 

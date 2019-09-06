@@ -8,6 +8,7 @@ use App\Project;
 use App\User;
 
 use Dawson\Youtube\Facades\Youtube;
+use Exception;
 
 /*
 
@@ -56,6 +57,9 @@ class ProjectController extends Controller
      */
     public function store(Request $request) //salvar o projeto
     {
+
+        $thumbnailURL = null;
+
         $actDate = date('Y/m/d');
         $nameFile = null;
 
@@ -94,17 +98,27 @@ class ProjectController extends Controller
                         
         if($tipo == '2') {
 
-            $video = Youtube::upload($request->file('file'), [
-            'title'       => 'Teste',
-            'description' => 'You can also specify your video description here.',
-            'tags'        => ['foo', 'bar', 'baz'],
-            'category_id' => 10
-        ]);
+            try{
 
-        $nameFile = $video->getVideoId();
-        $caminhoDaImagem = $video->getThumbnailUrl();
+                $video = Youtube::upload($request->file('file'), [
+                    'title'       => 'Teste',
+                    'description' => 'You can also specify your video description here.',
+                    'tags'        => ['foo', 'bar', 'baz'],
+                    'category_id' => 10
+                ]);
 
-        dd($caminhoDaImagem);
+                $nameFile = $video->getVideoId();
+                $videoSinppet = $video->getSnippet();
+                $thumbnailURL = $videoSinppet->thumbnails->high->url; //pegar URL da miniatura
+
+            } catch(Exception $e) {
+                dd($e->getMessage());
+            }
+
+
+     
+        
+
 
 
 
@@ -129,7 +143,8 @@ class ProjectController extends Controller
             'download' => $download,
             'date' => $actDate,
             'project' => $nameFile,
-            'likes' => 0
+            'likes' => 0,
+            'thumbnailURL' => $thumbnailURL
 
     ])->save();                
 
