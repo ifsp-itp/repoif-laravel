@@ -11,13 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ProjectController@index');
 
 //acesso sem logar
 Route::get('/projects', 'ProjectController@index');
 Route::get('/projects/show/{id}', 'ProjectController@show');
+Route::get('/user/profile/{id}', 'UserController@profile');
 
 
 //login para acessar
@@ -29,6 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/projects/edit/{id}', 'ProjectController@edit');
 	Route::put('/projects/show/{id}', 'ProjectController@update');
 	Route::get('/projects/destroy/{id}', 'ProjectController@destroy');
+
 	//like
 	Route::put('/projects/like/{id}', 'ProjectController@darLike');
 
@@ -39,10 +39,10 @@ Route::group(['middleware' => ['auth']], function () {
 
 	//usuário
 	Route::get('/user/profile/', 'UserController@profile');
-    Route::get('/user/profile/{id}', 'UserController@profile');
+    
 
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'ProjectController@index');

@@ -1,28 +1,117 @@
-<h1>Dados do usuário</h1>
+@extends('layouts.app')
 
-<table border="1">
-<tr>
-	<td><strong>This is Name:</strong></td>
-	<td>{{ $user->name }}</td>
-</tr>
-<tr>
-	<td><strong>This is e-mail:</strong></td>
-	<td>{{ $user->email }}</td>
-</tr>
-</table>
+@section('content')
 
-<h1>Projetos:</h1>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-<table border="1">
-	<tr>
-		<td><a href="#">id</a></td>
-		<td>nome</td>
-		<td>data</td>
-		<td>tipo</td>
-	</tr>
-	
-</table>
-
-
-<br>
-<a href="/projects">Voltar</a>
+<div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="/storage/files/profile.jpg" alt=""/>
+                            @if(auth()->id() == $user->id)
+                            <div class="file btn btn-lg btn-primary">
+                                Change Photo
+                                <input type="file" name="file"/>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        {{$user->name}}
+                                    </h5>
+                                    <h6>
+                                        CURSO VAI AQUI
+                                    </h6>
+                                    <p class="proile-rating">Total de Likes : <span>##</span></p>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Projetos</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    @if(auth()->id() == $user->id)
+                    <div class="col-md-2">
+                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                    </div>
+                    @endif
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-work">
+                            <p>LINKS UTEIS</p>
+                            <a href="https://www.ifsp.edu.br/">IFSP</a><br/>
+                            <a href="https://itp.ifsp.edu.br/">IFSP ITAPE</a><br/>
+                            <a href="https://suap.ifsp.edu.br/accounts/login/?next=/">SUAP</a><br/>
+                            <a href="https://moodle.itp.ifsp.edu.br/">MOODLE</a><br/>
+                            <a href="http://pergamum.biblioteca.ifsp.edu.br/">PERGAMUM</a>
+                            <p>Desenvolvedores</p>
+                            <a href="">Prof. Danilo Camargo</a><br/>
+                            <a href="">Aluno. Guilherme Siciliano</a><br/>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>User Id</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{$user->id}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{$user->name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{$user->email}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Phone</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>123 456 7890</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Profession</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Web Developer and Designer</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        Projetos blá blá
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>           
+        </div>
+@endsection
