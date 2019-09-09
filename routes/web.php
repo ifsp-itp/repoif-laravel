@@ -15,6 +15,7 @@ Route::get('/', 'ProjectController@index');
 
 //acesso sem logar
 Route::get('/projects', 'ProjectController@index');
+Route::post('/projects/search', 'ProjectController@search');
 Route::get('/projects/show/{id}', 'ProjectController@show');
 Route::get('/user/profile/{id}', 'UserController@profile');
 

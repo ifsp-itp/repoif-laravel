@@ -61,6 +61,24 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="course" class="col-md-4 col-form-label text-md-right">{{ __('Course') }}</label>
+                            <div class="col-md-6">
+                              <select class="custom-select" id="inputGroupSelect01" name="course">
+                                <option value="EDIFICAÇÕES">Edificações</option>
+                                <option value="ENGENHARIA MECÂNICA">Engenharia Mecânica</option>
+                                <option value="ESPECIALIZAÇÃO EM INFORMÁTICA APLICADA À EDUCAÇÃO">Especialização em Informática Aplicada à Educação</option> 
+                                <option value="FÍSICA">Física</option>
+                                <option value="INFORMÁTICA">Informática</option>
+                                <option value="INTEGRADO ELETROMECÂNICA">Integrado Eletromecânica</option>
+                                <option value="INTEGRADO INFORMÁTICA">Integrado Informática</option>
+                                <option value="FORMAÇÃO PEDAGÓGICA">Formação Pedagógica</option>
+                                <option value="MATEMÁTICA">Matemática</option>
+                                <option value="MECÂNICA">Mecânica</option>
+                              </select>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

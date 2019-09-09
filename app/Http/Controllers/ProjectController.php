@@ -34,6 +34,17 @@ class ProjectController extends Controller
         return view('project.list')->with('projects', $projects);
     }
 
+    //PESQUISAR PROJETOS
+    public function search(Request $request)
+    {
+        $projects = Project::search($request->search);
+
+        return view('project.list', [
+            'projects' => $projects,
+            'search' => $request->search
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -132,7 +143,7 @@ class ProjectController extends Controller
             'date' => $actDate,
             'project' => $nameFile,
             'likes' => 0,
-            'thumbnailURL' => $thumbnailURL
+            //'thumbnailURL' => $thumbnailURL
 
     ])->save();                
 

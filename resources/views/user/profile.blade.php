@@ -27,7 +27,7 @@
                                         {{$user->name}}
                                     </h5>
                                     <h6>
-                                        CURSO VAI AQUI
+                                        {{$user->course}}
                                     </h6>
                                     <p class="proile-rating">Total de Likes : <span>##</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -57,8 +57,8 @@
                             <a href="https://moodle.itp.ifsp.edu.br/">MOODLE</a><br/>
                             <a href="http://pergamum.biblioteca.ifsp.edu.br/">PERGAMUM</a>
                             <p>Desenvolvedores</p>
-                            <a href="">Prof. Danilo Camargo</a><br/>
-                            <a href="">Aluno. Guilherme Siciliano</a><br/>
+                            <a href="">##</a><br/>
+                            <a href="">##</a><br/>
                             
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>User Id</label>
+                                                <label>ID</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{$user->id}}</p>
@@ -75,7 +75,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Name</label>
+                                                <label>Nome</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{$user->name}}</p>
@@ -91,7 +91,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Phone</label>
+                                                <label>Telefone</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>123 456 7890</p>
@@ -99,10 +99,10 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Profession</label>
+                                                <label>Curso</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Web Developer and Designer</p>
+                                                <p>{{$user->course}}</p>
                                             </div>
                                         </div>
                             </div>
