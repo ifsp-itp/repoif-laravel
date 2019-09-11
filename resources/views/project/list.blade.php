@@ -5,7 +5,7 @@
 
 	<div class="card-deck">
 		@foreach ($projects as $project) 
-		  <div class="card mb-3" style="min-width: 19.3rem;">
+		  <div class="card mb-3" style="min-width: 19.3rem;" >
 		  	<a href="/projects/show/{{$project->id}}">
 		    	<img src="/storage/files/{{$project->project}}" class="card-img-top" alt="...">
 		    </a>
@@ -50,10 +50,5 @@
 		  </div>
 		@endforeach
 	</div>
-
-	<br>
-	<a href="projects/create">CRIAR</a>
-
-	
 </div>
 @endsection

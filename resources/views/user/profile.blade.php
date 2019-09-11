@@ -34,15 +34,19 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Projetos</a>
-                                </li>
+                                @if(auth()->id() == $user->id)
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Projetos</a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
                     @if(auth()->id() == $user->id)
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        <a href="/user/edit/{{ $user->id }}" class="profile-edit-btn" name="btnAddMore">
+                            Editar Informações
+                        </a>
                     </div>
                     @endif
                     
@@ -106,9 +110,9 @@
                                             </div>
                                         </div>
                             </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        Projetos blá blá
-                            </div>
+                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                            Projetos blá blá
+                                </div>
                         </div>
                     </div>
                 </div>
