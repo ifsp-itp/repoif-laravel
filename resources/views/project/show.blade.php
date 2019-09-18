@@ -2,6 +2,20 @@
 
 @section('content')
 
+<div class="row"> 
+	@if($project->type == '2')         
+	
+		<div class="embed-responsive embed-responsive-16by9">
+      		<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$project->project}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>         
+      	</div>
+    
+	@else
+      <img src="/storage/files/{{$project->project}}" class="img-responsive">
+	@endif
+
+</div>
+
+
 <h1 class="lef">Mostrar um item</h1> 
 
 <h1 class="lef"> ESSE É O PROJETO NÚMERO {{$project->id}}</h1>
@@ -34,11 +48,7 @@
 <tr>
 	<td><strong>This is your file:</strong></td>
 
-	@if($project->type == '2')         
-      <td><iframe width="560" height="315" src="https://www.youtube.com/embed/{{$project->project}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>         
-	@else
-      <td><img src="/storage/files/{{$project->project}}" width="200px" height="200px"></td>       
-	@endif
+
 	
 </tr>
 <tr>

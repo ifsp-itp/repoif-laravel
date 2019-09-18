@@ -18,7 +18,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/darktheme.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -42,7 +43,7 @@
                     </div>
                 </form>
                 
-                    <a href="projects/create" style="margin-left: 15px">CRIAR</a>
+                    <a href="{{ url('/projects/create') }}" style="margin-left: 15px">CRIAR</a>
                 
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">

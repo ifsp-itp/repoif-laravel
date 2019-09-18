@@ -107,20 +107,18 @@ class ProjectController extends Controller
             try{
 
                 $video = Youtube::upload($request->file('file'), [
-                    'title'       => 'Teste',
-                    'description' => 'You can also specify your video description here.',
-                    'tags'        => ['foo', 'bar', 'baz'],
-                    'category_id' => 10
+                    'title'       => request('title'),
+                    'description' => request('description'),
+                    'tags'        => request('tags'),
+                    'category_id' => request('type')
                 ]);
 
-                $nameFile = $video->getVideoId();
-                //$caminhoDaImagem = $video->getThumbnailUrl();
+                $snippet = $video->getSnippet();
+                $thumbnailURL = $snippet->thumbnails->high->url;
 
-                //dd($caminhoDaImagem);
-
-                    } catch(Exception $e) {
-                        dd($e->getMessage());
-                    }
+                } catch(Exception $e) {
+                    dd($e->getMessage());
+                }
                     
         } 
 
@@ -143,9 +141,9 @@ class ProjectController extends Controller
             'date' => $actDate,
             'project' => $nameFile,
             'likes' => 0,
-            //'thumbnailURL' => $thumbnailURL
-
-    ])->save();                
+            'thumbnailURL' => $thumbnailURL
+            
+        ])->save();                
 
               
 }
@@ -213,5 +211,11 @@ class ProjectController extends Controller
         $project->save(); 
 
         return back()->withInput();
+    }
+
+    public function userProject($user_id)
+    {
+        $projects = Project::find($user_id)->get();
+        return view('project.list')->with('projects', $projects);
     }
 }

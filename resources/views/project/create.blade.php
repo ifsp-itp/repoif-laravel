@@ -13,6 +13,12 @@
 	Descrição:<br>
 	<textarea name="description"></textarea>
 	<br>
+	Tags:<br>
+	<textarea name="tags" 
+		placeholder="Separar todas as tags com vírgulas, EX: 'informatica, projetos, etc,' " style="width: 245px; height: 80px;">
+		
+	</textarea>
+	<br>
 	Tipo do projeto:<br>
 	<select name="type">
           <option value="1">Foto</option>
