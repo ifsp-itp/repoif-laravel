@@ -121,14 +121,6 @@ class ProjectController extends Controller
                 }
                     
         } 
-
-        else if ($tipo == '3') {
-            $nameFile = 'pdf.png';
-        } 
-
-        else if ($tipo =='4') {
-            $nameFile = 'script.png';
-        }
                        
 
         $project = Project::create([
@@ -213,9 +205,10 @@ class ProjectController extends Controller
         return back()->withInput();
     }
 
-    public function userProject($user_id)
+    public function userProject($id)
     {
-        $projects = Project::find($user_id)->get();
+        $projects = Project::where(
+            'user_id', $id)->get();
         return view('project.list')->with('projects', $projects);
     }
 }
