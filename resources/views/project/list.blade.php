@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 	<div class="card-deck">
 		@foreach ($projects as $project) 
 			<div class="card mb-3 cover">

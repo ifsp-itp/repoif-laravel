@@ -4,8 +4,24 @@
 	margin-left: 12px;
 }
 
+.img-resposive, .embed-responsive {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-bottom: 2%;
+}
+
 .card-deck {
     margin-left: 2%;
+}
+
+.mgl {
+    margin-left: 4%;
+}
+
+.btns {
+    width: 80px; 
+    border-radius: 5px;
+    margin-bottom: 15%;
 }
 
 .userThumb {
@@ -44,7 +60,6 @@
 #imgCardRI {
 	height: 20em;
 }
-
 
 
 //USER PAGE

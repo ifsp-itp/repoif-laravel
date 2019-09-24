@@ -11,7 +11,7 @@
 	<input type="text" name="title">
 	<br>
 	Descrição:<br>
-	<textarea name="description"></textarea>
+	<textarea name="description" maxlength="138"></textarea>
 	<br>
 	Tags:<br>
 	<textarea name="tags" 
@@ -28,7 +28,7 @@
     </select>
     <br>
     Projeto:<br>
-    <input type="file" name="file">
+    <input type="file" name="file" id="poster">
     <br><br>
 
 	<button type="submit">Enviar</button>
@@ -37,7 +37,6 @@
 
 <br>
 
-<a href="/projects" >VER</a>
-
+<a href="/projects" class="lef">VER</a>
 
 @endsection

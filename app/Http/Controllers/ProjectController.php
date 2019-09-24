@@ -30,20 +30,73 @@ class ProjectController extends Controller
     public function index() //listar todos
     {
 
-        $projects = Project::all();
+        $projects = Project::all()->sortByDesc("likes");
         return view('project.list')->with('projects', $projects);
     }
 
     //PESQUISAR PROJETOS
     public function search(Request $request)
     {
-        $projects = Project::search($request->search);
+        $projects = Project::search($request->search)->sortByDesc("likes");
 
         return view('project.list', [
             'projects' => $projects,
             'search' => $request->search
         ]);
     }
+
+    //NOVOS
+    public function newProjects()
+    {
+        $projects = Project::all()->sortByDesc("date");
+        return view('project.list')->with('projects', $projects);
+    }
+
+    //POR TIPO
+
+    //FOTOS
+    public function photosProjects()
+    {
+        $projects = Project::where(
+            'type', 1)->get();
+        return view('project.list')->with('projects', $projects);
+    }
+
+    //VIDEOS
+    public function videosProjects()
+    {
+        $projects = Project::where(
+            'type', 2)->get();
+        return view('project.list')->with('projects', $projects);
+    }
+
+    //PDF
+    public function pdfProjects()
+    {
+        $projects = Project::where(
+            'type', 3)->get();
+        return view('project.list')->with('projects', $projects);
+    }
+
+    //SCRIPTS
+    public function codesProjects()
+    {
+        $projects = Project::where(
+            'type', 4)->get();
+        return view('project.list')->with('projects', $projects);
+    }
+
+
+
+    //USUARIOS
+    public function userProject($id)
+    {
+        $projects = Project::where(
+            'user_id', $id)->get();
+        return view('project.list')->with('projects', $projects);
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -203,12 +256,5 @@ class ProjectController extends Controller
         $project->save(); 
 
         return back()->withInput();
-    }
-
-    public function userProject($id)
-    {
-        $projects = Project::where(
-            'user_id', $id)->get();
-        return view('project.list')->with('projects', $projects);
     }
 }

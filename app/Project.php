@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    
     protected $guarded = []; //preciso disso para poder adicionar
 
     public function user()
