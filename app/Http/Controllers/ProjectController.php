@@ -58,7 +58,7 @@ class ProjectController extends Controller
     public function photosProjects()
     {
         $projects = Project::where(
-            'type', 1)->get();
+            'type', 1)->orderBy('likes', 'DESC')->get();
         return view('project.list')->with('projects', $projects);
     }
 
@@ -66,7 +66,7 @@ class ProjectController extends Controller
     public function videosProjects()
     {
         $projects = Project::where(
-            'type', 2)->get();
+            'type', 2)->orderBy('likes', 'DESC')->get();
         return view('project.list')->with('projects', $projects);
     }
 
@@ -74,7 +74,7 @@ class ProjectController extends Controller
     public function pdfProjects()
     {
         $projects = Project::where(
-            'type', 3)->get();
+            'type', 3)->orderBy('likes', 'DESC')->get();
         return view('project.list')->with('projects', $projects);
     }
 
@@ -82,7 +82,7 @@ class ProjectController extends Controller
     public function codesProjects()
     {
         $projects = Project::where(
-            'type', 4)->get();
+            'type', 4)->orderBy('likes', 'DESC')->get();
         return view('project.list')->with('projects', $projects);
     }
 
@@ -92,7 +92,7 @@ class ProjectController extends Controller
     public function userProject($id)
     {
         $projects = Project::where(
-            'user_id', $id)->get();
+            'user_id', $id)->orderBy('likes', 'DESC')->get();
         return view('project.list')->with('projects', $projects);
     }
 

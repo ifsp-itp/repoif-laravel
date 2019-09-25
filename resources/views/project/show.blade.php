@@ -15,20 +15,31 @@
 
 	</div>
 
-	<div class="fl mgl">
+<div>
+
+	<div class="fl mgl dvShow">
 
 		<h4>{{ $project->title }}</h4>
-		<ul>
-			<li>{{ $project->id }}</li>
-			<li>{{ $project->description }}</li>
-			<li>{{ $project->type }}</li>
-			<li>{{$project->user->name}}</li>
-			<li>{{ date('d/m/Y', strtotime($project->date))}}</li>
-		</ul>
+		
+		<div id="description">
+			{{ $project->description }}
+		</div>	
+
+		<span class="creator"> Criado por:
+			<a href="/projects/userProject/{{$project->user->id}}">
+				{{$project->user->name}}
+			</a>
+		</span>	
+
+		<p>
+			<span class="creator">
+				Data: {{ date('d/m/Y', strtotime($project->date))}}
+			</span>
+		</p>
+			
 	</div>
 
-
-	<div class="fl mgl">
+	<div class="fl mgl dvShow">
 		<h4> Dados </h4>
 		<ul>
 			<li>X pessoas visualizaram isso</li>
@@ -37,7 +48,7 @@
 		</ul>
 	</div>
 
-	<div class="fl mgl">
+	<div class="fl mgl dvShow">
 		<a href="/download/{{$project->download}}">
 			<button class="btns">
 				<strong class="fl" >BAIXAR</strong>
@@ -68,7 +79,9 @@
 		
 	</div>
 
+	<div class="clb"></div>
 	
+</div>
 
 
 

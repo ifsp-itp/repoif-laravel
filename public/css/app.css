@@ -1,5 +1,35 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 
+
+#description {
+    background-color: red;
+    width: 30%;
+}
+
+.dvShow{
+    width: 29.3%;
+}
+
+.creator {
+    color: #D3D3D3;
+    font-size: 12px;
+}
+
+.clb {
+    clear: both;
+}
+
+h4 {
+    color: #838B8B;
+}
+
+.teste {
+    color: #00bc8c;
+    border: solid 1px;
+    padding: 5px;
+    border-radius: 10%;
+}
+
 .lef {
 	margin-left: 12px;
 }
@@ -15,7 +45,7 @@
 }
 
 .mgl {
-    margin-left: 4%;
+    margin-left: 3%;
 }
 
 .btns {
