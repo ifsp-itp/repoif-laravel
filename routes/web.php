@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/projects/destroy/{id}', 'ProjectController@destroy');
 
 	//like
-	Route::put('/projects/like/{id}', 'ProjectController@darLike');
+	Route::post('/projects/like/{id}', 'LikesController@store');
 
 	//baixar
 	Route::get("/download/{file}", function ($file="") {

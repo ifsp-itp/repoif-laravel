@@ -2,6 +2,7 @@
 
 @section('content')
 
+@if ($user->id == auth()->id() || auth()->id() == '1')
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -95,14 +96,6 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Telefone</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>123 456 7890</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
                                                 <label>Curso</label>
                                             </div>
                                             <div class="col-md-6">
@@ -110,12 +103,31 @@
                                             </div>
                                         </div>
                             </div>
-                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                            Projetos blá blá
-                                </div>
                         </div>
                     </div>
                 </div>
             </form>           
         </div>
+@else
+    <link href='https://fonts.googleapis.com/css?family=Anton|Passion+One|PT+Sans+Caption' rel='stylesheet' type='text/css'>
+<body>
+
+        <!-- Error Page -->
+            <div class="error">
+                <div class="container-floud">
+                    <div class="col-xs-12 ground-color text-center">
+                        <div class="container-error-404">
+                            <div class="clip"><div class="shadow"><span class="digit thirdDigit"></span></div></div>
+                            <div class="clip"><div class="shadow"><span class="digit secondDigit"></span></div></div>
+                            <div class="clip"><div class="shadow"><span class="digit firstDigit"></span></div></div>
+                            <div class="msg">OH!<span class="triangle"></span></div>
+                        </div>
+                        <h2 class="h1">Sorry! Page not found</h2>
+                    </div>
+                </div>
+            </div>
+        <!-- Error Page -->
+</body>
+
+@endif
 @endsection

@@ -2,47 +2,61 @@
 
 @section('content')
 
+<div id="background">
 	<div class="card-deck">
+
 		@foreach ($projects as $project) 
-			<div class="card mb-3 cover">
-			  	<a href="/projects/show/{{$project->id}}">
-			  		@if($project->type == 2)
+			<div class="card mb-3 cover total">
+				@if($project->type == 1)
+			  	<a href="/projects/show/{{$project->id}}" class="border-card-1 project-icon">
+			  		<img src="/storage/files/{{$project->project}}" class="cover card-img-top" id="imgCardRI" alt="...">
+			  	@elseif($project->type == 2)
+			  	<a href="/projects/show/{{$project->id}}" class="border-card-2 project-icon">
 			    	<img src="{{$project->thumbnailURL}}" class="cover card-img-top" id="imgCardRI" alt="...">
-			    	@else
-			    	<img src="/storage/files/{{$project->project}}" class="cover card-img-top" id="imgCardRI" alt="...">
-			    	@endif
+			    @elseif($project->type == 2)
+			    <a href="/projects/show/{{$project->id}}" class="border-card-3 project-icon">
+			    	<img src="{{$project->thumbnailURL}}" class="cover card-img-top" id="imgCardRI" alt="...">
+			 	@endif
 			    </a>
 			    
 			    <div class="card-body">
-			      <h5 class="card-title">{{$project->title}}</h5>
-			      <p class="card-text">{{$project->description}}</p>
+			      <h5 class="card-title fs">{{$project->title}}</h5>
+			      <p class="card-text">
+			      	<small class="text-muted fl">
+				      	<a href="/projects/userProject/{{$project->user->id}}">
+				      		<img src="/storage/files/profile.jpg" class="userThumb"> 
+				      		<span class="nameControll">{{$project->user->name}}</span>
+				      	</a>
+			      	</small>
+
+			      </p>
 			    </div>
 			    <div class="card-footer">
 
-			      <small class="text-muted fl">
-			      	<a href="/projects/userProject/{{$project->user->id}}">
-			      		<img src="/storage/files/profile.jpg" class="userThumb"> 
-			      	</a>
-			      </small>
-
-			      <span class="likesControll fl">
-			      	{{$project->likes}}
+			      <span class="likesControll">
+			      	<i class="fa fa-heart fontIcon"></i> {{$project->likes}}
 			      </span>
-			      	
 
-			     @if($project->likes<=150)
-			      	<img src="/storage/files/tier1.png" class="imgDefine fr">
-			      @elseif($project->likes<=300)
-			      	<img src="/storage/files/tier2.png" class="imgDefine fr">
-			      @elseif($project->likes<=500)
-			      	<img src="/storage/files/tier3.png" class="imgDefine fr">
-			      @else
-			      	<img src="/storage/files/tier4.png" class="imgDefine fr">
+			      <span class="likesControll">
+			      	<i class="fa fa-comment fontIcon"></i> 0
+			      </span>
+
+			      <span class="likesControll">
+			      	<i class="fa fa-eye fontIcon"></i> 0
+			      </span>
+
+			      @if ($project->type == 1)
+			      <img src="/storage/files/photo.png" class="imgList">
+			      @elseif ($project->type == 2)
+			      <img src="/storage/files/video.png" class="imgList">
+			      @elseif ($project->type == 3)
+			      <img src="/storage/files/script.png" class="imgList">
 			      @endif
 
 			    </div>
 			</div>
 		@endforeach
+
 	</div>
 </div>
 @endsection

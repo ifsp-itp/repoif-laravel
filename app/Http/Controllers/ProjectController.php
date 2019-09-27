@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Policies\ProjectPolicy;
 use App\Project;
 use App\User;
+use App\Likes;
 
 use Dawson\Youtube\Facades\Youtube;
 use Exception;
@@ -162,7 +163,7 @@ class ProjectController extends Controller
                 $video = Youtube::upload($request->file('file'), [
                     'title'       => request('title'),
                     'description' => request('description'),
-                    'tags'        => request('tags'),
+                    //'tags'        => request('tags'),
                     'category_id' => request('type')
                 ]);
 
