@@ -1,32 +1,84 @@
-<h1> Editar Itens </h1>
+@extends('layouts.app')
+
+@section('content')
 
 @if ($project->user_id == auth()->id() || auth()->id() == '1')
-<form method="post" action="/projects/show/{{ $project->id }}" enctype="multipart/form-data">
 
-    @method('PUT')
-    @csrf
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Editar Projeto</div>
 
-    Titulo:<br>
-    <input type="text" name="title" value="{{ $project->title }}">
-    <br>
-    Descrição:<br>
-    <textarea name="description">{{ $project->description }}</textarea>
-    <br>
-    Tipo do projeto:<br>
-    <select name="type">
-          <option value="1">Foto</option>
-          <option value="2">Vídeo</option>
-          <option value="3">PDF</option>
-          <option value="4">Código</option>
-    </select>
-    <br>
-    Projeto:<br>
-    <img src="/storage/files/{{$project->project}}" width="200px" height="200px">
-    <br>
+                <div class="card-body">
+                    <form method="post" action="/projects/show/{{ $project->id }}" enctype="multipart/form-data">
 
-    <button type="submit">Atualizar</button>
+                        @method('PUT')
+                        @csrf
 
-</form>
+                        <div class="form-group row">
+                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Titulo:') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="title" maxlength="34" value="{{ $project->title }}">
+
+                                @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Descrição do projeto:') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea name="description" class="formsEdit" style="height: 100px;">
+                                    {{ $project->description }}
+                                </textarea>
+
+                                @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Tipo do projeto:') }}</label>
+
+                            <div class="col-md-6">
+                                <select name="type">
+                                  <option value="1">Foto</option>
+                                  <option value="2">Vídeo</option>
+                                  <option value="3">Código</option>
+                            </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div></div>
+                            <label for="file" class="col-md-4 col-form-label text-md-right">{{ __('Arquivo:') }}</label>
+                            <div class="col-md-6">
+                              <img src="/storage/files/{{$project->project}}" class="formsEdit">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-outline-success">
+                                    {{ __('Atualizar') }}
+                                </button>
+                            </div>
+                        </div>                       
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @else
 
@@ -51,8 +103,6 @@
 </body>
 
 @endif
-<br>
+@endsection
 
-<a href="/projects/show/{{$project->id}} ">VER</a>
-<br>
-<a href="/projects">LISTAR</a>
+

@@ -3,7 +3,7 @@
 @section('content')
 
 @if ($user->id == auth()->id() || auth()->id() == '1')
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
@@ -30,23 +30,20 @@
                                     <h6>
                                         {{$user->course}}
                                     </h6>
-                                    <p class="proile-rating">Total de Likes : <span>##</span></p>
+                                    <p class="proile-rating">ID do Usuário : <span>{{$user->id}}</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
                                 </li>
-                                @if(auth()->id() == $user->id)
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Projetos</a>
-                                    </li>
-                                @endif
                             </ul>
                         </div>
                     </div>
                     @if(auth()->id() == $user->id)
                     <div class="col-md-2">
                         <a href="/user/edit/{{ $user->id }}" class="profile-edit-btn" name="btnAddMore">
-                            Editar Informações
+                            <button type="button" class="btn btn-outline-success">
+                                Editar Informações
+                            </button>
                         </a>
                     </div>
                     @endif
@@ -54,16 +51,52 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
+
                         <div class="profile-work">
+
+                            <table class="table table-bordered">
+                              <thead>
+                                <tr>
+                                  <th colspan="2">Dados</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th>
+                                    <i class="fa fa-clipboard">
+                                        Projetos: 
+                                    </i> 
+                                  </th>
+                                  <th>{{$user->id}}</th>
+                                </tr>
+                                
+                                <tr>
+                                  <th>
+                                    <i class="fa fa-thumbs-o-up">
+                                        Curtidas:  
+                                    </i> 
+                                  </th>
+                                  <th>{{$user->id}}</th>
+                                </tr>
+
+                                <tr>
+                                  <th>
+                                    <i class="fa fa-comments-o">
+                                        Comentarios: 
+                                    </i>  
+                                  </th>
+                                  <th>{{$user->id}}</th>
+                                </tr>
+                              </tbody>
+                            </table>
+
                             <p>LINKS UTEIS</p>
                             <a href="https://www.ifsp.edu.br/">IFSP</a><br/>
                             <a href="https://itp.ifsp.edu.br/">IFSP ITAPE</a><br/>
                             <a href="https://suap.ifsp.edu.br/accounts/login/?next=/">SUAP</a><br/>
                             <a href="https://moodle.itp.ifsp.edu.br/">MOODLE</a><br/>
                             <a href="http://pergamum.biblioteca.ifsp.edu.br/">PERGAMUM</a>
-                            <p>Desenvolvedores</p>
-                            <a href="">##</a><br/>
-                            <a href="">##</a><br/>
+                            
                             
                         </div>
                     </div>
