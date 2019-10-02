@@ -25,6 +25,9 @@ Route::post('/projects/search', 'ProjectController@search');
 Route::get('/projects/show/{id}', 'ProjectController@show');
 Route::get('/user/profile/{id}', 'UserController@profile');
 
+//FACE
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+Route::get('/callback/{provider}', 'SocialController@callback');
 
 
 //login para acessar
@@ -55,3 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
 Auth::routes();
 
 Route::get('/home', 'ProjectController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

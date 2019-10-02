@@ -9,7 +9,7 @@
                 <div class="card-header">Criar Projeto</div>
 
                 <div class="card-body">
-                    <form method="post" action="/projects" enctype="multipart/form-data" class="lef">
+                    <form method="post" id="formProject" action="/projects" enctype="multipart/form-data" class="lef">
 
 						@csrf
 
@@ -56,18 +56,19 @@
                         <div class="form-group row">
                             <label for="file" class="col-md-4 col-form-label text-md-right">{{ __('Selecionar arquivo: ') }}</label>
                             <div class="col-md-6">
-                              <input type="file" name="file" id="poster">
+                              <input type="file" name="file" id="file">
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-success">
+                                <button type="submit" name="upload" value="Upload" class="btn btn-success">
                                     {{ __('Enviar projeto') }}
                                 </button>
                             </div>
-                        </div>                       
+                        </div>                     
                     </form>
+
                 </div>
             </div>
         </div>

@@ -64,11 +64,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if('image == null')
+        {
+            $image = 'profile.jpg';
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'course' => $data['course'],
+            'image' => $image,
         ]);
     }
 }

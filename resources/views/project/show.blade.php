@@ -15,6 +15,33 @@
 
 		<div class="comentArea fl">
 			
+			<table class="table table-bordered table-dark">
+			  <thead>
+			    <tr>
+			      <th scope="col" colspan="2">
+			      	<img src="/storage/users/profile.jpg" class="userComent">
+			      	<span class="userComentLink"> Fulano da Silva Sauro</span>
+			      </th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td>
+			      	<span class="comentArea">
+			      		Comentario bem louco aqui e blá blá blá blá blá blá blá blá
+			      	</span>
+			      </td>
+			  	</tr>
+			  	<tr>
+			  		<td>
+			  			<span class="comentDate">
+			  				{{ date('d/m/Y', strtotime($project->date))}}
+			  			</span>
+			  		</td>
+			  	</tr>
+			  </tbody>
+			</table>
+
 		</div>
 		
 	</div>
@@ -66,6 +93,7 @@
 			<form action="/projects/like/{{$project->id}}" method="POST">
 				@method('POST')
 				@csrf
+				<br>
 				<button class="btn btn-outline-success btn-sm" name="idProjeto">
 					<i class="fa fa-thumbs-up"> Like</i>
 				</button>

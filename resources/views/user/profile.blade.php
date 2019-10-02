@@ -4,19 +4,21 @@
 
 @if ($user->id == auth()->id() || auth()->id() == '1')
 
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
 <div class="container emp-profile">
             <form method="post">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="/storage/files/profile.jpg" alt=""/>
+
+                            @if($user->image == NULL)
+                            <img src="/storage/users/profile.jpg" alt=""/>
+                            @else
+                            <img src="/storage/users/{{$user->image}}" alt=""/>
+                            @endif
+
                             @if(auth()->id() == $user->id)
                             <div class="file btn btn-lg btn-primary">
-                                Change Photo
+                                Selecione sua foto
                                 <input type="file" name="file"/>
                             </div>
                             @endif
@@ -24,15 +26,15 @@
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                                    <h5>
+                                    <h4>
                                         {{$user->name}}
                                     </h5>
                                     <h6>
                                         {{$user->course}}
                                     </h6>
-                                    <p class="proile-rating">ID do Usuário : <span>{{$user->id}}</span></p>
+
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
+                                <li class="nav-item marginProfile">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
                                 </li>
                             </ul>
@@ -54,41 +56,37 @@
 
                         <div class="profile-work">
 
-                            <table class="table table-bordered">
-                              <thead>
-                                <tr>
-                                  <th colspan="2">Dados</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th>
-                                    <i class="fa fa-clipboard">
-                                        Projetos: 
-                                    </i> 
-                                  </th>
-                                  <th>{{$user->id}}</th>
-                                </tr>
-                                
-                                <tr>
-                                  <th>
-                                    <i class="fa fa-thumbs-o-up">
-                                        Curtidas:  
-                                    </i> 
-                                  </th>
-                                  <th>{{$user->id}}</th>
-                                </tr>
-
-                                <tr>
-                                  <th>
-                                    <i class="fa fa-comments-o">
-                                        Comentarios: 
-                                    </i>  
-                                  </th>
-                                  <th>{{$user->id}}</th>
-                                </tr>
-                              </tbody>
-                            </table>
+                            <ul class="list-group">
+                                <li class="list-group-item text-muted">Atividade <i class="fa fa-dashboard fa-1x"></i></li>
+                                <li class="list-group-item text-right">
+                                    <span class="pull-left">
+                                        <strong>
+                                            Curtidas  
+                                        </strong>
+                                    </span>
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                     13
+                                </li>
+                                <li class="list-group-item text-right">
+                                    <span class="pull-left">
+                                        <strong>
+                                            Projetos Criados
+                                        </strong>  
+                                    </span> 
+                                    <i class="fa fa-clipboard"></i>
+                                     37
+                                </li>
+                                <li class="list-group-item text-right">
+                                    <span class="pull-left">
+                                        <strong>
+                                            Cometários Recebidos
+                                        </strong>
+                                    </span>
+                                    <i class="fa fa-comments-o"></i>
+                                     78
+                                </li>
+                              </ul>
+ 
 
                             <p>LINKS UTEIS</p>
                             <a href="https://www.ifsp.edu.br/">IFSP</a><br/>
@@ -101,7 +99,7 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-content profile-tab userInfo" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-6">

@@ -55,7 +55,7 @@
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
-                                </button>
+                                </button>        
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -65,6 +65,14 @@
                             </div>
                         </div>
                     </form>
+
+                    <button class="btn btn-primary btn-sm">    
+                    <a href="{{ url('/auth/redirect/facebook') }}" class="btn btn-primary">
+                        
+                            <i class="fa fa-facebook"></i> Facebook
+                        
+                    </a>
+                    </button>
                 </div>
             </div>
         </div>

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Policies\ProjectPolicy;
+use Validator;
 use App\Project;
 use App\User;
-use App\Likes;
 
 use Dawson\Youtube\Facades\Youtube;
 use Exception;
@@ -147,6 +147,7 @@ class ProjectController extends Controller
         // Se tiver funcionado o arquivo foi armazenado em storage/app/public/files/nomedinamicoarquivo.extensao
  
         // Verifica se NÃO deu certo o upload (Redireciona de volta)
+
         if ( !$upload )
             return redirect()
                         ->back()
@@ -173,7 +174,8 @@ class ProjectController extends Controller
                 } catch(Exception $e) {
                     dd($e->getMessage());
                 }
-                    
+
+                $nameFile = $video->getVideoId();
         } 
                        
 

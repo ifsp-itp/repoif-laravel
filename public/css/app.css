@@ -125,9 +125,28 @@
 }
 
 .comentArea {
-    background-color: white;
+    background-color: #303030;
     width: 20%;
     margin-bottom: 2%;
+    overflow: auto;
+    height: 800px;
+}
+
+.userComent {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.comentArea {
+    color: lightgrey;
+    font-size: 14px;
+}   
+
+.comentDate{
+    color: #00bc8c;
+    font-size: 12px;
+    float: right;
 }
 
 .formsEdit {
@@ -181,6 +200,15 @@ h4 {
 .profile-img{
     text-align: center;
 }
+
+.marginProfile{
+    margin-top: 6%;
+}
+
+.userInfo {
+    margin-top: -15%;
+}
+
 .profile-img img{
     width: 70%;
     height: 100%;
@@ -201,11 +229,11 @@ h4 {
     right: 0;
     top: 0;
 }
-.profile-head h5{
-    color: #333;
+.profile-head h4{
+    color: white;
 }
 .profile-head h6{
-    color: #0062cc;
+    color: #00bc8c;
 }
 .profile-edit-btn{
     border: none;

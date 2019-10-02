@@ -24,7 +24,11 @@
 			      <p class="card-text">
 			      	<small class="text-muted fl">
 				      	<a href="/projects/userProject/{{$project->user->id}}">
-				      		<img src="/storage/files/profile.jpg" class="userThumb"> 
+				      		@if($project->user->image == null)
+				      		<img src="/storage/users/profile.jpg" class="userThumb">
+				      		@else
+				      		<img src="/storage/users/{{$project->user->image}}" class="userThumb">
+				      		@endif
 				      		<span class="nameControll">{{$project->user->name}}</span>
 				      	</a>
 			      	</small>
@@ -46,11 +50,11 @@
 			      </span>
 
 			      @if ($project->type == 1)
-			      <img src="/storage/files/photo.png" class="imgList">
+			      <img src="/storage/icons/photo.png" class="imgList">
 			      @elseif ($project->type == 2)
-			      <img src="/storage/files/video.png" class="imgList">
+			      <img src="/storage/icons/video.png" class="imgList">
 			      @elseif ($project->type == 3)
-			      <img src="/storage/files/script.png" class="imgList">
+			      <img src="/storage/icons/script.png" class="imgList">
 			      @endif
 
 			    </div>
