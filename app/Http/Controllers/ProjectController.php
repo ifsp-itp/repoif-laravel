@@ -196,7 +196,7 @@ class ProjectController extends Controller
               
 }
 
-    return redirect('projects'); 
+    return response()->json(['success'=>'You have successfully upload file.']);
     
 }
 
@@ -206,8 +206,16 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $id) //mostrar o projeto
+    public function show(Project $id, Request $request) //mostrar o projeto
     {
+
+        $nomeSessao = 'viewProject-' . $id;
+
+        if (!$request->session()->exists($nomeSessao)) {
+            $request->session()->put($nomeSessao, true);
+            //fazer o update para somar um na visualizacao!
+        }
+
         return view('project.show')->with('project', $id);
     }
 

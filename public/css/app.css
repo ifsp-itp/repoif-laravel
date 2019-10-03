@@ -129,7 +129,7 @@
     width: 20%;
     margin-bottom: 2%;
     overflow: auto;
-    height: 800px;
+    height: 100%;
 }
 
 .userComent {

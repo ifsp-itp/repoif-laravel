@@ -2,6 +2,12 @@
 
 @section('content')
 
+ <style>
+    .progress { position:relative; width:100%; border: 1px solid #7F98B2; padding: 1px; border-radius: 3px; }
+    .bar { background-color: #B4F5B4; width:0%; height:25px; border-radius: 3px; }
+    .percent { position:absolute; display:inline-block; top:3px; left:48%; color: #7F98B2;}
+</style>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -58,6 +64,13 @@
                             <div class="col-md-6">
                               <input type="file" name="file" id="file">
                             </div>
+
+                             <div class="progress">
+                                <div class="bar progress-bar progress-bar-striped progress-bar-animated"></div >
+                                <div class="percent"></div >
+                            </div>
+
+                            <div id="status"></div>
                         </div>
 
                         <div class="form-group row mb-0">
@@ -74,4 +87,50 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+ 
+    function validate(formData, jqForm, options) {
+        var form = jqForm[0];
+        if (!form.file.value) {
+            alert('File not found');
+            return false;
+        }
+    }
+ 
+    (function() {
+ 
+    var bar = $('.bar');
+    var percent = $('.percent');
+    var status = $('#status');
+ 
+    $('form').ajaxForm({
+        beforeSubmit: validate,
+        beforeSend: function() {
+            status.empty();
+            var percentVal = '0%';
+            var posterValue = $('input[name=file]').fieldValue();
+            bar.width(percentVal)
+            percent.html(percentVal);
+        },
+        uploadProgress: function(event, position, total, percentComplete) {
+            var percentVal = percentComplete + '%';
+            bar.width(percentVal)
+            percent.html(percentVal);
+        },
+        success: function() {
+            var percentVal = 'Wait, Saving';
+            bar.width(percentVal)
+            percent.html(percentVal);
+        },
+        complete: function(xhr) {
+            let resultado = JSON.parse(xhr.responseText);
+            status.html(resultado.success);
+            //window.location.href = "/projects";
+        }
+    });
+     
+    })();
+</script>
+
 @endsection
