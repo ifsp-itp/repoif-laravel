@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('course');
             $table->string('image')->nullable();
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

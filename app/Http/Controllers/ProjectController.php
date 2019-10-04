@@ -71,19 +71,11 @@ class ProjectController extends Controller
         return view('project.list')->with('projects', $projects);
     }
 
-    //PDF
-    public function pdfProjects()
-    {
-        $projects = Project::where(
-            'type', 3)->orderBy('likes', 'DESC')->get();
-        return view('project.list')->with('projects', $projects);
-    }
-
     //SCRIPTS
     public function codesProjects()
     {
         $projects = Project::where(
-            'type', 4)->orderBy('likes', 'DESC')->get();
+            'type', 3)->orderBy('likes', 'DESC')->get();
         return view('project.list')->with('projects', $projects);
     }
 
@@ -197,7 +189,7 @@ class ProjectController extends Controller
               
 }
 
-    return response()->json(['success'=>'You have successfully upload file.']);
+    return redirect('projects');
     
 }
 
