@@ -88,7 +88,7 @@
 		<h4> Dados </h4>
 
 		<div id="description">
-			<i class="fa fa-eye"> X pessoas visualizaram isso</i>
+			<i class="fa fa-eye"> {{$project->views}} pessoas visualizaram isso</i>
 			<i class="fa fa-heart"> {{$project->likes}} pessoas gostaram disso</i>
 			<form action="/projects/like/{{$project->id}}" method="POST">
 				@method('POST')

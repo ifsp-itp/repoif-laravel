@@ -188,6 +188,7 @@ class ProjectController extends Controller
             'download' => $download,
             'date' => $actDate,
             'project' => $nameFile,
+            'views' => 0,
             'likes' => 0,
             'thumbnailURL' => $thumbnailURL
             
@@ -213,7 +214,8 @@ class ProjectController extends Controller
 
         if (!$request->session()->exists($nomeSessao)) {
             $request->session()->put($nomeSessao, true);
-            //fazer o update para somar um na visualizacao!
+
+            //add view aqui blá blá
         }
 
         return view('project.show')->with('project', $id);

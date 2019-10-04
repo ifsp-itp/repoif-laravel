@@ -36,9 +36,16 @@
 
 .userThumb {
     border-radius: 10%;
+    width: 45px;
+    height: 45px;
 }
 
-.imgDefine, .userThumb {
+.profileThumbHome{
+    width: 16%;
+
+}
+
+.imgDefine{
 	height: 40px;
 	width: 40px;
 }
@@ -57,13 +64,16 @@
     max-width: 26em;
 }
 
+.projectNameControll {
+    color: #DCDCDC;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .nameControll {
     color: #B4CDCD;
-    font-size: 16px;
-    margin-top: 15px;
+    font-size: 14px;
     position: absolute;
-    margin-top: 5%;
-    margin-left: 2%;
 }
 
 .fs {
@@ -81,15 +91,30 @@
 }
 
 .border-card-1 {
-    border-color: #27408B;
+    border-color: #32CD32;
 }
 
 .border-card-2 {
-    border-color: #CD2626;
+    border-color: #CD3333;
 }
 
 .border-card-3 {
-    border-color: red;
+    border-color: #40E0D0;
+}
+
+.fontList1{
+    font-size: 35px;
+    color: #32CD32;
+}
+
+.fontList2{
+    font-size: 35px;
+    color: #CD3333;
+}
+
+.fontList3{
+    font-size: 35px;
+    color: #40E0D0;
 }
 
 .likesControll {
@@ -99,12 +124,6 @@
     padding: 6px;
     border-radius: 5px;
     margin-right: 3%;
-}
-
-.imgList{
-    width: 30px;
-    height: 30px;
-    float: right;
 }
 
 .cover {

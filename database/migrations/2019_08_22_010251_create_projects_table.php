@@ -23,6 +23,7 @@ class CreateProjectsTable extends Migration
             $table->integer('type');
             $table->date('date');
             $table->integer('likes');
+            $table->integer('views');
             $table->timestamps();
 
             $table->string('thumbnailURL')->nullable();
