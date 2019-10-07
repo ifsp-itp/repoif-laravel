@@ -22,7 +22,6 @@ class CreateProjectsTable extends Migration
             $table->text('description');
             $table->integer('type');
             $table->date('date');
-            $table->integer('likes');
             $table->integer('views');
             $table->timestamps();
 

@@ -49,7 +49,7 @@
 			    <div class="card-footer">
 
 			      <span class="likesControll">
-			      	<i class="fa fa-heart fontIcon"></i> {{$project->likes}}
+			      	<i class="fa fa-heart fontIcon"></i> {{$project->likes->count()}}
 			      </span>
 
 			      <span class="likesControll">

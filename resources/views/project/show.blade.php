@@ -102,8 +102,9 @@
 
 		<div id="description">
 			<i class="fa fa-eye"> {{$project->views}} pessoas visualizaram isso</i>
-			<i class="fa fa-heart"> {{$project->likes}} pessoas gostaram disso</i>
-			<form action="/projects/like/{{$project->id}}" method="POST">
+			<i class="fa fa-heart"> {{$project->likes->count()}} pessoas gostaram disso</i>
+
+			<form action="/like/{{$project->id}}" method="POST">
 				@method('POST')
 				@csrf
 				<br>
@@ -111,6 +112,7 @@
 					<i class="fa fa-thumbs-up"> Like</i>
 				</button>
 			</form>
+			
 		</div>
 	</div>
 

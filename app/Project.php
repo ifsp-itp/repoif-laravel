@@ -19,6 +19,11 @@ class Project extends Model
       return $this->hasMany('App\Comment');
     }
 
+    public function likes()
+    {
+      return $this->hasMany('App\Likes');
+    }
+
     public function getProjectAtributes($project)
     {
     	return ($project ? asset('storage/' . $project) : asset('public/teste.jpg'));

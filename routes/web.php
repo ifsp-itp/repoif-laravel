@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/projects/destroy/{id}', 'ProjectController@destroy');
 
 	//like
-	Route::post('/projects/like/{id}', 'LikesController@store');
+	Route::post('/like/{id}', 'LikesController@store');
 
 	//comentario
 	Route::post('/coments/{id}', 'CommentsController@store');

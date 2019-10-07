@@ -31,14 +31,14 @@ class ProjectController extends Controller
     public function index() //listar todos
     {
 
-        $projects = Project::all()->sortByDesc("likes");
+        $projects = Project::all();
         return view('project.list')->with('projects', $projects);
     }
 
     //PESQUISAR PROJETOS
     public function search(Request $request)
     {
-        $projects = Project::search($request->search)->sortByDesc("likes");
+        $projects = Project::search($request->search);
 
         return view('project.list', [
             'projects' => $projects,
@@ -49,7 +49,7 @@ class ProjectController extends Controller
     //NOVOS
     public function newProjects()
     {
-        $projects = Project::all()->sortByDesc("date");
+        $projects = Project::all()->sortByDesc("id");
         return view('project.list')->with('projects', $projects);
     }
 
@@ -59,7 +59,7 @@ class ProjectController extends Controller
     public function photosProjects()
     {
         $projects = Project::where(
-            'type', 1)->orderBy('likes', 'DESC')->get();
+            'type', 1)->get();
         return view('project.list')->with('projects', $projects);
     }
 
@@ -67,7 +67,7 @@ class ProjectController extends Controller
     public function videosProjects()
     {
         $projects = Project::where(
-            'type', 2)->orderBy('likes', 'DESC')->get();
+            'type', 2)->get();
         return view('project.list')->with('projects', $projects);
     }
 
@@ -75,7 +75,7 @@ class ProjectController extends Controller
     public function codesProjects()
     {
         $projects = Project::where(
-            'type', 3)->orderBy('likes', 'DESC')->get();
+            'type', 3)->get();
         return view('project.list')->with('projects', $projects);
     }
 
@@ -85,7 +85,7 @@ class ProjectController extends Controller
     public function userProject($id)
     {
         $projects = Project::where(
-            'user_id', $id)->orderBy('likes', 'DESC')->get();
+            'user_id', $id)->get();
         return view('project.list')->with('projects', $projects);
     }
 
@@ -181,7 +181,6 @@ class ProjectController extends Controller
             'date' => $actDate,
             'project' => $nameFile,
             'views' => 0,
-            'likes' => 0,
             'thumbnailURL' => $thumbnailURL
             
         ])->save();                
@@ -255,11 +254,4 @@ class ProjectController extends Controller
 
     }
 
-    public function darLike($id) {
-        $project = Project::find($id);
-        $project->likes += 1;
-        $project->save(); 
-
-        return back()->withInput();
-    }
 }
