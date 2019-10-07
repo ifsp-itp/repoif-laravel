@@ -22,7 +22,7 @@ Route::get('/projects/videos', 'ProjectController@videosProjects');
 Route::get('/projects/codes', 'ProjectController@codesProjects');
 Route::get('/projects/pdf', 'ProjectController@pdfProjects');
 Route::post('/projects/search', 'ProjectController@search');
-Route::get('/projects/show/{id}', 'ProjectController@show');
+Route::get('/projects/show/{id}', 'ProjectController@show')->name('project.show');
 Route::get('/user/profile/{id}', 'UserController@profile');
 
 //FACE
@@ -42,6 +42,9 @@ Route::group(['middleware' => ['auth']], function () {
 
 	//like
 	Route::post('/projects/like/{id}', 'LikesController@store');
+
+	//comentario
+	Route::post('/coments/{id}', 'CommentsController@store');
 
 	//baixar
 	Route::get("/download/{file}", function ($file="") {

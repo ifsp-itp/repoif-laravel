@@ -14,34 +14,47 @@
 		@endif
 
 		<div class="comentArea fl">
-			
-			<table class="table table-bordered table-dark">
-			  <thead>
-			    <tr>
-			      <th scope="col" colspan="2">
-			      	<img src="/storage/users/profile.jpg" class="userComent">
-			      	<span class="userComentLink"> Fulano da Silva Sauro</span>
-			      </th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr>
-			      <td>
-			      	<span class="comentArea">
-			      		Comentario bem louco aqui e blá blá blá blá blá blá blá blá
-			      	</span>
-			      </td>
-			  	</tr>
-			  	<tr>
-			  		<td>
-			  			<span class="comentDate">
-			  				{{ date('d/m/Y', strtotime($project->date))}}
-			  			</span>
-			  		</td>
-			  	</tr>
-			  </tbody>
-			</table>
+			@forelse ($project->comments as $comment)
+				<table class="table table-bordered table-dark">
+				  <thead>
+				    <tr>
+				      <th scope="col" colspan="2">
+				      	<span class="userComentLink"> 
+				      		{{ $comment->user->name }} {{$comment->created_at}}
+				      	</span>
+				      </th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <td>
+				      	<span class="comentArea">
+				      		{{ $comment->body }}
+				      	</span>
+				      </td>
+				  	</tr>
+				  	<tr>
+				  		<td>
+				  			<span class="comentDate">
+				  				{{ date('d/m/Y', strtotime($comment->date))}}
+				  			</span>
+				  		</td>
+				  	</tr>
+				  </tbody>
+				</table>
 
+				@empty
+				<table class="table table-bordered table-dark">
+				  <thead>
+				    <tr>
+				      <th scope="col" colspan="2">
+				  		Ainda não houve nenhum comentário! Seja o primeiro.
+					  </th>
+					</tr>
+				  </thead>
+				</table>
+			
+			@endforelse
 		</div>
 		
 	</div>
@@ -103,6 +116,15 @@
 
 	<div class="fl mgl dvShow">
 
+		<form action="/coments/{{$project->id}}" method="POST">
+			@method('POST')
+			@csrf
+			<textarea name="body">
+				
+			</textarea>
+			<button type="submit"> Comentar </button>
+		</form>
+
 		<a href="/download/{{$project->download}}" class="fr">
 			<button type="button" class="btn btn-outline-success">
 				<i class="fa fa-cloud-download"> Download</i>
@@ -111,6 +133,7 @@
 	</div>
 
 	<div class="clb"></div>
+
 </div>
 
 

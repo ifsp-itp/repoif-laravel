@@ -232,7 +232,7 @@
         complete: function(xhr) {
             let resultado = JSON.parse(xhr.responseText);
             status.html(resultado.success);
-            window.location.href = "/projects";
+            //window.location.href = "/projects";
         }
     });
      

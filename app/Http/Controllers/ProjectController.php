@@ -188,8 +188,8 @@ class ProjectController extends Controller
 
               
 }
-
-    return redirect('projects');
+    
+    return response()->json(['success'=>'Projeto enviado com sucesso.']);
     
 }
 

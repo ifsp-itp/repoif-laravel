@@ -14,6 +14,11 @@ class Project extends Model
     	return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function comments()
+    {
+      return $this->hasMany('App\Comment');
+    }
+
     public function getProjectAtributes($project)
     {
     	return ($project ? asset('storage/' . $project) : asset('public/teste.jpg'));
