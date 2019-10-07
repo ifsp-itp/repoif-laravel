@@ -53,7 +53,7 @@
 			      </span>
 
 			      <span class="likesControll">
-			      	<i class="fa fa-comment fontIcon"></i> 0
+			      	<i class="fa fa-comment fontIcon"></i> {{$project->comments->count()}}
 			      </span>
 
 			      <span class="likesControll">
