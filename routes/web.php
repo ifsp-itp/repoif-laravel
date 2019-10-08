@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 	//comentario
 	Route::post('/coments/{id}', 'CommentsController@store');
+	Route::get('/comment/destroy/{id}', 'CommentsController@destroy');
 
 	//baixar
 	Route::get("/download/{file}", function ($file="") {

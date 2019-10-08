@@ -143,12 +143,16 @@
     margin-bottom: 2%;
 }
 
+.imgdefine {
+    max-height: 800px;
+}
+
 .comentArea {
     background-color: #303030;
     width: 20%;
     margin-bottom: 2%;
     overflow: auto;
-    height: 100%;
+    height: 800px;
 }
 
 .userComent {
@@ -183,14 +187,15 @@
 
 
 .firstDiv{
-    width: 60%;
+    width: 55%;
 }
 
 .dvShow{
-    width: 15.5%;
+    width: 18%;
 }
 
 .dvDados{
+    width: 17.2%;
 }
 
 .dvButtons{
@@ -205,8 +210,18 @@ h4 {
     color: #838B8B;
 }
 
+.btnLike {
+    margin-right: 11%;
+}
 
+.btnLD {
+    margin-top: 5%;
+}
 
+.txtPerson {
+    width: 100%;
+    margin-bottom: 4%;
+}
 
 /* PROFILE */
 .emp-profile{

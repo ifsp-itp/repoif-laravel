@@ -5,12 +5,12 @@
 	<div class="row"> 
 		@if($project->type == '2')         
 		
-			<div class="embed-responsive embed-responsive-16by9 fl">
+			<div class="embed-responsive embed-responsive-16by9 fl imgdefine">
 	      		<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$project->project}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>         
 	      	</div>
 	    
 		@else
-	      <img src="/storage/files/{{$project->project}}" class="img-resposive">
+	      <img src="/storage/files/{{$project->project}}" class="img-resposive imgdefine">
 		@endif
 
 		<div class="comentArea fl">
@@ -20,25 +20,35 @@
 				    <tr>
 				      <th scope="col" colspan="2">
 				      	<span class="userComentLink"> 
-				      		{{ $comment->user->name }} {{$comment->created_at}}
+				      		{{ $comment->user->name }} 
 				      	</span>
+
+				      	<span class="comentDate">
+				  			{{ date('d/m/Y', strtotime($comment->date))}}
+				  		</span>
 				      </th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <td>
+				      <td colspan="2">
 				      	<span class="comentArea">
 				      		{{ $comment->body }}
 				      	</span>
 				      </td>
 				  	</tr>
 				  	<tr>
-				  		<td>
-				  			<span class="comentDate">
-				  				{{ date('d/m/Y', strtotime($comment->date))}}
-				  			</span>
+				  		
+				  		<td colspan="2">
+				  			@if($comment->user_id == auth()->id())
+				  			<a onclick="return myFunction();" href="/comment/destroy/{{ $comment->id }}">
+								<button class="btn btn-danger btn-sm fr" type="submit">
+									Deletar Comentário
+								</button> 
+							</a>
+							@endif
 				  		</td>
+				  		
 				  	</tr>
 				  </tbody>
 				</table>
@@ -104,14 +114,22 @@
 			<i class="fa fa-eye"> {{$project->views}} pessoas visualizaram isso</i>
 			<i class="fa fa-heart"> {{$project->likes->count()}} pessoas gostaram disso</i>
 
-			<form action="/like/{{$project->id}}" method="POST">
+			<a href="/download/{{$project->download}}" class="fr btnLD" style="margin-right: 13%;">
+				<button type="button" class="btn btn-outline-success btn-sm ">
+					<i class="fa fa-cloud-download"> Download</i>
+				</button>
+			</a>
+
+			<form action="/like/{{$project->id}}" method="POST" class="form-inline fr btnLD btnLike">
 				@method('POST')
 				@csrf
 				<br>
 				<button class="btn btn-outline-success btn-sm" name="idProjeto">
-					<i class="fa fa-thumbs-up"> Like</i>
+					<i class="fa fa-thumbs-up"> Curtir</i>
 				</button>
 			</form>
+
+			
 			
 		</div>
 	</div>
@@ -121,17 +139,11 @@
 		<form action="/coments/{{$project->id}}" method="POST">
 			@method('POST')
 			@csrf
-			<textarea name="body">
-				
+			<textarea name="body" id="form7" 
+			class="md-textarea form-control txtPerson">Deixe seu comentário!
 			</textarea>
-			<button type="submit"> Comentar </button>
+			<button type="submit" class="btn btn-outline-success fr"> Comentar </button>
 		</form>
-
-		<a href="/download/{{$project->download}}" class="fr">
-			<button type="button" class="btn btn-outline-success">
-				<i class="fa fa-cloud-download"> Download</i>
-			</button>
-		</a>
 	</div>
 
 	<div class="clb"></div>
