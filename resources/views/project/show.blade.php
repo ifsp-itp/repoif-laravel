@@ -9,8 +9,12 @@
 	      		<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$project->project}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>         
 	      	</div>
 	    
-		@else
+		@elseif($project->type == '1')
 	      <img src="/storage/files/{{$project->project}}" class="img-resposive imgdefine">
+
+	    @else
+		    <iframe class="codeExib" src="/storage/files/{{$project->project}}">
+		    </iframe>
 		@endif
 
 		<div class="comentArea fl">

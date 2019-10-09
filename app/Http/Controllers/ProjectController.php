@@ -202,14 +202,16 @@ class ProjectController extends Controller
     {
 
         $nomeSessao = 'viewProject-' . $id;
+        $project= $id;
 
         if (!$request->session()->exists($nomeSessao)) {
-            $request->session()->put($nomeSessao, true);
+            $project->views += 1;
+            $project->save();
 
-            //add view aqui blá blá
+            $request->session()->put($nomeSessao, true);     
         }
 
-        return view('project.show')->with('project', $id);
+       return view('project.show')->with('project', $id);
     }
 
     /**
