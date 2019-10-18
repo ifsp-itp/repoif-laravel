@@ -81,20 +81,16 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
                     </form>
-                    <br />
-                    <button class="btn btn-primary btn-sm">    
-                    <a href="{{ url('/auth/redirect/facebook') }}" class="btn btn-primary">
-                        
-                            <i class="fa fa-facebook"></i> Facebook
-                        
-                    </a>
-                    </button>
+                    <br /> 
+                        <a href="{{ url('/auth/redirect/facebook') }}" class="btn btn-primary">
+                            <i class="fab fa-facebook-square"> facebook</i> 
+                        </a>
                 </div>
             </div>
         </div>

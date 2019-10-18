@@ -7,6 +7,9 @@ use App\Policies\ProjectPolicy;
 use Validator;
 use App\Project;
 use App\User;
+use App\Likes;
+
+use Illuminate\Support\Facades\Auth;
 
 use Dawson\Youtube\Facades\Youtube;
 use Exception;
@@ -112,79 +115,61 @@ class ProjectController extends Controller
 
         $thumbnailURL = null;
 
-        $actDate = date('Y/m/d');
+        $actDate = date('d-m-Y');
         $nameFile = null;
 
         $tipo = request('type');
+  
 
-        
-
-
-
-        
-
-        if ($request->hasFile('file') && $request->file('file')->isValid()) {
-
-        // Define um aleatório para o arquivo baseado no timestamps atual
-        $name = uniqid(date('HisYmd'));
- 
-        // Recupera a extensão do arquivo
-        $extension = $request->file->extension();
-
-        // Define finalmente o nome
-        $nameFile = "{$name}.{$extension}";
- 
-        // Faz o upload:
-        $upload = $request->file->storeAs('files', $nameFile);
-        // Se tiver funcionado o arquivo foi armazenado em storage/app/public/files/nomedinamicoarquivo.extensao
- 
-        // Verifica se NÃO deu certo o upload (Redireciona de volta)
-
-        if ( !$upload )
-            return redirect()
-                        ->back()
-                        ->with('error', 'Falha ao fazer upload')
-                        ->withInput();
-        $download = $nameFile;
-
-
-                        
-        if($tipo == '2') {
-
-            try{
-
-                $video = Youtube::upload($request->file('file'), [
-                    'title'       => request('title'),
-                    'description' => request('description'),
-                    //'tags'        => request('tags'),
-                    'category_id' => request('type')
-                ]);
-
-                $snippet = $video->getSnippet();
-                $thumbnailURL = $snippet->thumbnails->high->url;
-
-                } catch(Exception $e) {
-                    dd($e->getMessage());
-                }
-
-                $nameFile = $video->getVideoId();
-        } 
-                       
-
-        $project = Project::create([
-
-            'user_id' => auth()->id(),
-            'title' => request('title'),
-            'description' => request('description'),
-            'type' => request('type'),
-            'download' => $download,
-            'date' => $actDate,
-            'project' => $nameFile,
-            'views' => 0,
-            'thumbnailURL' => $thumbnailURL
-            
-        ])->save();                
-
+    if ($request->hasFile('file') && $request->file('file')->isValid()) {
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = uniqid(date('HisYmd'));
+     
+            // Recupera a extensão do arquivo
+            $extension = $request->file->extension();
+            // Define finalmente o nome
+            $nameFile = "{$name}.{$extension}";
+     
+            // Faz o upload:
+            $upload = $request->file->storeAs('files', $nameFile);
+            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/files/nomedinamicoarquivo.extensao
+     
+            // Verifica se NÃO deu certo o upload (Redireciona de volta)
+            if ( !$upload )
+                return redirect()
+                            ->back()
+                            ->with('error', 'Falha ao fazer upload')
+                            ->withInput();
+            $download = $nameFile;
+                            
+            if($tipo == '2') {
+                try{
+                    $video = Youtube::upload($request->file('file'), [
+                        'title'       => request('title'),
+                        'description' => request('description'),
+                        //'tags'        => request('tags'),
+                        'category_id' => request('type')
+                    ]);
+                    $snippet = $video->getSnippet();
+                    $thumbnailURL = $snippet->thumbnails->high->url;
+                    } catch(Exception $e) {
+                        dd($e->getMessage());
+                    }
+                    $nameFile = $video->getVideoId();
+            } 
+                           
+            $project = Project::create([
+                'user_id' => auth()->id(),
+                'title' => request('title'),
+                'description' => request('description'),
+                'type' => request('type'),
+                'download' => $download,
+                'date' => $actDate,
+                'project' => $nameFile,
+                'views' => 0,
+                'thumbnailURL' => $thumbnailURL
+                
+            ])->save();                
               
 }
     
@@ -201,7 +186,7 @@ class ProjectController extends Controller
     public function show(Project $id, Request $request) //mostrar o projeto
     {
 
-        $nomeSessao = 'viewProject-' . $id;
+        $nomeSessao = 'viewProject-' . $id->id;
         $project= $id;
 
         if (!$request->session()->exists($nomeSessao)) {
@@ -211,7 +196,20 @@ class ProjectController extends Controller
             $request->session()->put($nomeSessao, true);     
         }
 
-       return view('project.show')->with('project', $id);
+        $like = Likes::where([
+            ['user_id', Auth::id()],
+            ['project_id', $project->id],
+        ])->get();
+
+        
+
+        if($like->isEmpty()) {
+            $temLike = 'Curtir';
+        } else {
+            $temLike = 'Descurtir';
+        }
+
+       return view('project.show')->with('project', $id)->with('temLike', $temLike); 
     }
 
     /**

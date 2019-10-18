@@ -175,10 +175,9 @@
                                 <div class="bar progress-bar progress-bar-striped progress-bar-animated"></div >
                                 <div class="percent"></div >
                             </div>
-
-                            <div id="status"></div>
                         </div>
 
+                            <div id="status"></div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" name="upload" value="Upload" class="btn btn-success">

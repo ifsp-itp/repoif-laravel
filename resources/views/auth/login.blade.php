@@ -66,13 +66,10 @@
                         </div>
                     </form>
 
-                    <button class="btn btn-primary btn-sm">    
+                        
                     <a href="{{ url('/auth/redirect/facebook') }}" class="btn btn-primary">
-                        
-                            <i class="fa fa-facebook"></i> Facebook
-                        
+                        <i class="fab fa-facebook-square"> facebook</i>
                     </a>
-                    </button>
                 </div>
             </div>
         </div>

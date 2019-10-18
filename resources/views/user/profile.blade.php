@@ -16,12 +16,6 @@
                             <img src="/storage/users/{{$user->image}}" alt=""/>
                             @endif
 
-                            @if(auth()->id() == $user->id)
-                            <div class="file btn btn-lg btn-primary">
-                                Selecione sua foto
-                                <input type="file" name="file"/>
-                            </div>
-                            @endif
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -56,7 +50,7 @@
 
                         <div class="profile-work">
 
-                            <ul class="list-group">
+                            <ul class="list-group atividades">
                                 <li class="list-group-item text-muted">Atividade <i class="fa fa-dashboard fa-1x"></i></li>
                                 <li class="list-group-item text-right">
                                     <span class="pull-left">

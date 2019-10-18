@@ -113,7 +113,7 @@
 
 	<div class="fl mgl dvShow dvDados">
 		<h4> Dados </h4>
-
+		
 		<div id="description">
 			<i class="fa fa-eye"> {{$project->views}} pessoas visualizaram isso</i>
 			<i class="fa fa-heart"> {{$project->likes->count()}} pessoas gostaram disso</i>
@@ -129,7 +129,7 @@
 				@csrf
 				<br>
 				<button class="btn btn-outline-success btn-sm" name="idProjeto">
-					<i class="fa fa-thumbs-up"> Curtir</i>
+					<i class="fa fa-thumbs-up"> {{$temLike}}</i>
 				</button>
 			</form>
 

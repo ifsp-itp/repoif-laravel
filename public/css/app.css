@@ -219,7 +219,7 @@ h4 {
 }
 
 .btnLike {
-    margin-right: 11%;
+    margin-right: 5%;
 }
 
 .btnLD {
@@ -232,9 +232,13 @@ h4 {
 }
 
 /* PROFILE */
+
+.atividades {
+    margin-top: 5%;
+}
+
 .emp-profile{
     padding: 3%;
-    margin-top: 3%;
     margin-bottom: 3%;
     border-radius: 0.5rem;
     background-color: #303030;
@@ -253,7 +257,7 @@ h4 {
 
 .profile-img img{
     width: 70%;
-    height: 100%;
+    height: 260px;
 }
 .profile-img .file {
     position: relative;
@@ -334,7 +338,11 @@ h4 {
     color: #0062cc;
 }
 
-
+#status {
+    width: 30%;
+    margin-left: 30%;
+    margin-bottom: 3%;
+}
 
 {
   font-family: 'PT Sans Caption', sans-serif, 'arial', 'Times New Roman';
