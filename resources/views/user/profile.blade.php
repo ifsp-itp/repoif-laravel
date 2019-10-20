@@ -49,40 +49,47 @@
                     <div class="col-md-4">
 
                         <div class="profile-work">
+                            
+                                <ul class="list-group atividades text-muted">
+                                    <li class="list-group-item text-muted">
+                                        Atividade 
+                                        <i class="fas fa-chart-line iconsProfile"></i>
+                                    </li>
 
-                            <ul class="list-group atividades">
-                                <li class="list-group-item text-muted">Atividade <i class="fa fa-dashboard fa-1x"></i></li>
-                                <li class="list-group-item text-right">
-                                    <span class="pull-left">
-                                        <strong>
-                                            Curtidas  
-                                        </strong>
-                                    </span>
-                                    <i class="fa fa-thumbs-o-up"></i>
-                                     13
-                                </li>
-                                <li class="list-group-item text-right">
-                                    <span class="pull-left">
-                                        <strong>
-                                            Projetos Criados
-                                        </strong>  
-                                    </span> 
-                                    <i class="fa fa-clipboard"></i>
-                                     37
-                                </li>
-                                <li class="list-group-item text-right">
-                                    <span class="pull-left">
-                                        <strong>
-                                            Cometários Recebidos
-                                        </strong>
-                                    </span>
-                                    <i class="fa fa-comments-o"></i>
-                                     78
-                                </li>
-                              </ul>
+                                    <li class="list-group-item text-muted">
+                                        <span class="pull-left">
+                                            <strong>
+                                                Projetos Criados
+                                            </strong>  
+                                        </span> 
+                                        <i class="fas fa-file-upload iconsProfile"></i>
+                                         {{$created}}
+                                    </li>
+
+                                    <li class="list-group-item text-muted">
+                                        <span class="pull-left">
+                                            <strong>
+                                                Curtidas Recebidas
+                                            </strong>
+                                        </span>
+                                        <i class="fa fa-thumbs-o-up iconsProfile"></i>
+                                         {{$likes}}
+                                    </li>
+
+                                    <li class="list-group-item text-muted">
+                                        <span class="pull-left">
+                                            <strong>
+                                                Cometários Recebidos
+                                            </strong>
+                                        </span>
+                                        <i class="far fa-comment-dots iconsProfile"></i>
+                                         {{$comments}}
+                                    </li>
+                                  </ul>
+                              
  
 
-                            <p>LINKS UTEIS</p>
+                            <p id="linksUteis">LINKS UTEIS</p>
                             <a href="https://www.ifsp.edu.br/">IFSP</a><br/>
                             <a href="https://itp.ifsp.edu.br/">IFSP ITAPE</a><br/>
                             <a href="https://suap.ifsp.edu.br/accounts/login/?next=/">SUAP</a><br/>

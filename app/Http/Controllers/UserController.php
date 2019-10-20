@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Project;
 
 class userController extends Controller
 {
@@ -18,7 +19,28 @@ class userController extends Controller
 
     public function profile(User $id) //mostrar o Usuário
     {
-        return view('user.profile')->with('user', $id);
+        $user = $id;
+        $likes = 0;
+        $comments =0;
+        $projects = Project::where(
+            'user_id', $user->id)->get();
+
+        $created = Project::where(
+            'user_id', $user->id)->count();
+
+        foreach ($projects as $project)
+        {
+            $likes += $project->likes->count();
+            $comments += $project->comments->count();
+            
+        }
+        
+
+        return view('user.profile')->with('user', $id)
+                                    ->with('projects', $projects)
+                                    ->with('created', $created)
+                                    ->with('likes', $likes)
+                                    ->with('comments', $comments);
     }
 
 
@@ -40,8 +62,10 @@ class userController extends Controller
 
         $auth = auth()->user();
         $user = $request->all();
-
         $user['image'] = $auth->image;
+        $user['password'] = Hash::make($request->password);
+        $user['email'] = $auth->email;
+
         if($request->hasFile('imageProfile') && $request->file('imageProfile')->isValid())
         {   
 
@@ -68,7 +92,6 @@ class userController extends Controller
         User::find($id)->update($user);
 
         return redirect('projects');
-        
     }
 
 }

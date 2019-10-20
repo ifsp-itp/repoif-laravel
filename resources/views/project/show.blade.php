@@ -23,6 +23,13 @@
 				  <thead>
 				    <tr>
 				      <th scope="col" colspan="2">
+				      	<span>
+				      		@if($comment->user->image == null)
+					  			<img src="/storage/users/profile.jpg" class="userComent">
+					  		@else
+					  			<img src="/storage/users/{{$project->user->image}}" class="userComent">
+					  		@endif
+				      	</span>
 				      	<span class="userComentLink"> 
 				      		{{ $comment->user->name }} 
 				      	</span>
@@ -46,7 +53,7 @@
 				  		<td colspan="2">
 				  			@if($comment->user_id == auth()->id())
 				  			<a onclick="return myFunction();" href="/comment/destroy/{{ $comment->id }}">
-								<button class="btn btn-danger btn-sm fr" type="submit">
+								<button class="btn btn-danger btn-sm fr delComent" type="submit">
 									Deletar Comentário
 								</button> 
 							</a>
