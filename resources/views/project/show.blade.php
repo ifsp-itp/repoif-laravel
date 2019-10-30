@@ -3,12 +3,14 @@
 @section('content')
 
 	<div class="row"> 
-		@if($project->type == '2')         
-		
+		@if($project->type == '2' && $project->sent == '1')         
 			<div class="embed-responsive embed-responsive-16by9 fl imgdefine">
 	      		<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$project->project}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>         
 	      	</div>
-	    
+	      	
+	    @elseif($project->type == '2' && $project->sent == '0')
+      		<iframe class="embed-responsive-item" src="/storage/files/{{$project->project}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>         
+	      
 		@elseif($project->type == '1')
 	      <img src="/storage/files/{{$project->project}}" class="img-resposive imgdefine">
 
@@ -125,13 +127,7 @@
 			<i class="fa fa-eye"> {{$project->views}} pessoas visualizaram isso</i>
 			<i class="fa fa-heart"> {{$project->likes->count()}} pessoas gostaram disso</i>
 
-			<a href="/download/{{$project->download}}" class="fr btnLD" style="margin-right: 13%;">
-				<button type="button" class="btn btn-outline-success btn-sm ">
-					<i class="fa fa-cloud-download"> Download</i>
-				</button>
-			</a>
-
-			<form action="/like/{{$project->id}}" method="POST" class="form-inline fr btnLD btnLike">
+			<form action="/like/{{$project->id}}" method="POST" class="form-inline fl btnLD btnLike">
 				@method('POST')
 				@csrf
 				<br>
@@ -140,8 +136,14 @@
 				</button>
 			</form>
 
-			
-			
+			@if($project->type != '2')
+			<a href="/download/{{$project->download}}" class="fl btnLD" style="margin-right: 13%;">
+				<button type="button" class="btn btn-outline-success btn-sm ">
+					<i class="fa fa-cloud-download"> Download</i>
+				</button>
+			</a>
+			@endif
+								
 		</div>
 	</div>
 

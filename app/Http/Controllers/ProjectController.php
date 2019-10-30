@@ -113,63 +113,126 @@ class ProjectController extends Controller
     public function store(Request $request) //salvar o projeto
     {
 
-        $thumbnailURL = null;
-
-        $actDate = date('d-m-Y');
         $nameFile = null;
-
+        $download = null;
+        $thumbnailURL = null;
         $tipo = request('type');
-  
+        $actDate = date('d-m-Y');
 
-    if ($request->hasFile('file') && $request->file('file')->isValid()) {
-            // Define um aleatório para o arquivo baseado no timestamps atual
-            $name = uniqid(date('HisYmd'));
-     
-            // Recupera a extensão do arquivo
-            $extension = $request->file->extension();
-            // Define finalmente o nome
-            $nameFile = "{$name}.{$extension}";
-     
-            // Faz o upload:
-            $upload = $request->file->storeAs('files', $nameFile);
-            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/files/nomedinamicoarquivo.extensao
-     
-            // Verifica se NÃO deu certo o upload (Redireciona de volta)
-            if ( !$upload )
-                return redirect()
-                            ->back()
-                            ->with('error', 'Falha ao fazer upload')
-                            ->withInput();
-            $download = $nameFile;
-                            
-            if($tipo == '2') {
-                try{
+
+        if($tipo == '2') {
+
+                try {
+
                     $video = Youtube::upload($request->file('file'), [
                         'title'       => request('title'),
                         'description' => request('description'),
                         //'tags'        => request('tags'),
                         'category_id' => request('type')
                     ]);
+
                     $snippet = $video->getSnippet();
                     $thumbnailURL = $snippet->thumbnails->high->url;
-                    } catch(Exception $e) {
-                        dd($e->getMessage());
-                    }
+                    $enviado = 1;
+
                     $nameFile = $video->getVideoId();
+
+                    $project = Project::create([
+                    'user_id' => auth()->id(),
+                    'title' => request('title'),
+                    'description' => request('description'),
+                    'type' => request('type'),
+                    'download' => $download,
+                    'date' => $actDate,
+                    'project' => $nameFile,
+                    'sent' => $enviado,
+                    'views' => 0,
+                    'thumbnailURL' => $thumbnailURL
+
+                    ])->save();
+
+                    } catch(Exception $e) {
+
+                        $enviado = 0;
+
+                        if ($request->hasFile('file') && $request->file('file')->isValid()) {
+                        // Define um aleatório para o arquivo baseado no timestamps atual
+                        $name = uniqid(date('HisYmd'));
+                 
+                        // Recupera a extensão do arquivo
+                        $extension = $request->file->extension();
+                        // Define finalmente o nome
+                        $nameFile = "{$name}.{$extension}";
+                 
+                        // Faz o upload:
+                        $upload = $request->file->storeAs('files', $nameFile);
+                        // Se tiver funcionado o arquivo foi armazenado em storage/app/public/files/nomedinamicoarquivo.extensao
+                 
+                        // Verifica se NÃO deu certo o upload (Redireciona de volta)
+                        if ( !$upload )
+                            return redirect()
+                                        ->back()
+                                        ->with('error', 'Falha ao fazer upload')
+                                        ->withInput();
+                        $download = $nameFile;
+                        }
+
+                        $project = Project::create([
+                        'user_id' => auth()->id(),
+                        'title' => request('title'),
+                        'description' => request('description'),
+                        'type' => request('type'),
+                        'download' => $download,
+                        'date' => $actDate,
+                        'project' => $nameFile,
+                        'sent' => $enviado,
+                        'views' => 0,
+                        'thumbnailURL' => $thumbnailURL
+
+                    ])->save();
             } 
-                           
-            $project = Project::create([
-                'user_id' => auth()->id(),
-                'title' => request('title'),
-                'description' => request('description'),
-                'type' => request('type'),
-                'download' => $download,
-                'date' => $actDate,
-                'project' => $nameFile,
-                'views' => 0,
-                'thumbnailURL' => $thumbnailURL
-                
-            ])->save();                
+/*
+            } else {
+
+                if ($request->hasFile('file') && $request->file('file')->isValid()) {
+                // Define um aleatório para o arquivo baseado no timestamps atual
+                $name = uniqid(date('HisYmd'));
+         
+                // Recupera a extensão do arquivo
+                $extension = $request->file->extension();
+                // Define finalmente o nome
+                $nameFile = "{$name}.{$extension}";
+         
+                // Faz o upload:
+                $upload = $request->file->storeAs('files', $nameFile);
+                // Se tiver funcionado o arquivo foi armazenado em storage/app/public/files/nomedinamicoarquivo.extensao
+         
+                // Verifica se NÃO deu certo o upload (Redireciona de volta)
+                if ( !$upload )
+                    return redirect()
+                                ->back()
+                                ->with('error', 'Falha ao fazer upload')
+                                ->withInput();
+                $download = $nameFile;
+                                 
+                               
+                $project = Project::create([
+                    'user_id' => auth()->id(),
+                    'title' => request('title'),
+                    'description' => request('description'),
+                    'type' => request('type'),
+                    'download' => $download,
+                    'date' => $actDate,
+                    'project' => $nameFile,
+                    'views' => 0,
+                    'thumbnailURL' => $thumbnailURL
+                    
+                ])->save();
+
+
+            }*/
+
+                      
               
 }
     

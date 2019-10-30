@@ -18,8 +18,9 @@ class CreateProjectsTable extends Migration
             $table->integer('user_id');
             $table->string('title');
             $table->string('project');
-            $table->string('download');
+            $table->string('download')->nullable();
             $table->text('description');
+            $table->integer('sent')->nullable();
             $table->integer('type');
             $table->date('date');
             $table->integer('views');

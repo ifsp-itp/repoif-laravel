@@ -10,9 +10,13 @@
 				@if($project->type == 1)
 			  	<a href="/projects/show/{{$project->id}}" class="border-card-1 project-icon">
 			  		<img src="/storage/files/{{$project->project}}" class="cover card-img-top" id="imgCardRI" alt="...">
-			  	@elseif($project->type == 2)
+			  	@elseif($project->type == 2 && $project->sent == '0')
+			  	<a href="/projects/show/{{$project->id}}" class="border-card-2 project-icon">
+			    	<img src="/storage/icons/videoThumb.png" class="cover card-img-top" id="imgCardRI" alt="...">
+			  	@elseif($project->type == 2 && $project->sent == '1')
 			  	<a href="/projects/show/{{$project->id}}" class="border-card-2 project-icon">
 			    	<img src="{{$project->thumbnailURL}}" class="cover card-img-top" id="imgCardRI" alt="...">
+			    
 			    @elseif($project->type == 3)
 			    <a href="/projects/show/{{$project->id}}" class="border-card-3 project-icon">
 			    	<img src="/storage/icons/script.jpg" class="cover card-img-top" id="imgCardRI" alt="...">
