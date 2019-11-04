@@ -15,6 +15,7 @@ Route::get('/', 'ProjectController@index');
 
 //acesso sem logar
 Route::get('/projects', 'ProjectController@index');
+Route::get('/projects/sent', 'ProjectController@pesquisaSent');
 Route::get('/projects/userProject/{id}', 'ProjectController@userProject');
 Route::get('/projects/news', 'ProjectController@newProjects');
 Route::get('/projects/photos', 'ProjectController@photosProjects');

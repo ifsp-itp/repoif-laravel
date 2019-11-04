@@ -191,7 +191,7 @@ class ProjectController extends Controller
 
                     ])->save();
             } 
-/*
+
             } else {
 
                 if ($request->hasFile('file') && $request->file('file')->isValid()) {
@@ -230,7 +230,7 @@ class ProjectController extends Controller
                 ])->save();
 
 
-            }*/
+            }
 
                       
               
@@ -315,6 +315,45 @@ class ProjectController extends Controller
         Project::find($id)->delete();
         return redirect('projects');
 
+    }
+
+    public function pesquisaSent()
+    {
+        $upload = Project::where(
+            'sent', 0)->get()->first();
+
+        if ($upload) {
+
+            $arquivo = "storage/files/$upload->project";
+
+        try {
+
+            $video = Youtube::upload($arquivo, [
+                'title'       => $upload->title,
+                'description' => $upload->description,
+                //'tags'        => $upload->title,
+                'category_id' => $upload->type
+            ]);
+            $snippet = $video->getSnippet();
+            $thumbnailURL = $snippet->thumbnails->high->url;
+            $nameFile = $video->getVideoId();
+
+            $upload->sent = '1';
+            $upload->thumbnailURL = $thumbnailURL;
+            $upload->project = $nameFile;
+            $upload->save(); 
+            
+        } catch(Exception $e) {
+            dd($e);
+        }
+
+        }
+        
+        else {
+            echo "nada pra enviar aqui!";
+        }
+
+        
     }
 
 }

@@ -5,6 +5,14 @@
     font-size: 12px;
 }
 
+.largura {
+    width: 100%;
+}
+
+.meiaLargura {
+    width: 50%;
+}
+
 .teste {
     background-color: #00bc8c;
     color: #303030;
@@ -204,6 +212,7 @@
 
 .dvShow{
     width: 18%;
+
 }
 
 .dvDados{
