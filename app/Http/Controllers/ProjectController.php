@@ -319,14 +319,19 @@ class ProjectController extends Controller
 
     public function pesquisaSent()
     {
-        $upload = Project::where(
-            'sent', 0)->get()->first();
 
-        if ($upload) {
+    	$naoEnviados = Project::where(
+            'sent', 0)->get();
+
+    	$contador = $naoEnviados->count();
+
+    	while ($contador > 0) {
+
+    		$upload = $naoEnviados->where('sent', '0')->first->id;
 
             $arquivo = "storage/files/$upload->project";
 
-        try {
+       try {
 
             $video = Youtube::upload($arquivo, [
                 'title'       => $upload->title,
@@ -341,18 +346,16 @@ class ProjectController extends Controller
             $upload->sent = '1';
             $upload->thumbnailURL = $thumbnailURL;
             $upload->project = $nameFile;
-            $upload->save(); 
+            $upload->save();
+
+            unlink($arquivo);  
             
-        } catch(Exception $e) {
+        } 
+        catch(Exception $e)
+        {
             dd($e);
         }
-
         }
-        
-        else {
-            echo "nada pra enviar aqui!";
-        }
-
         
     }
 
