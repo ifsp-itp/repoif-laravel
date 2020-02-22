@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Policies\ProjectPolicy;
-use Validator;
-use App\Project;
 use App\User;
 use App\Likes;
-
-use Illuminate\Support\Facades\Auth;
-
-use Dawson\Youtube\Facades\Youtube;
 use Exception;
+use Validator;
+use App\Comment;
+use App\Project;
+
+use Illuminate\Http\Request;
+
+use App\Policies\ProjectPolicy;
+use Dawson\Youtube\Facades\Youtube;
+use Illuminate\Support\Facades\Auth;
 
 /*
 
@@ -117,7 +118,7 @@ class ProjectController extends Controller
         $download = null;
         $thumbnailURL = null;
         $tipo = request('type');
-        $actDate = date('d-m-Y');
+        $actDate = date('Y-m-d');
 
 
         if($tipo == '2') {
@@ -312,10 +313,33 @@ class ProjectController extends Controller
     public function destroy($id) //deletar o projeto
     {
 
-        Project::find($id)->delete();
-        return redirect('projects');
+
+        try{
+
+            $comment = new Comment();
+            $likes = new Likes();
+
+            foreach($comment::where("project_id" , $id)->get() as $com){
+              $com->delete();
+            }
+            foreach($likes::where("project_id" , $id)->get() as $like){
+                $like->delete();
+            }
+
+
+            Project::find($id)->delete();
+
+
+
+            return redirect('projects');
+
+        }catch(Exception $ex){
+            return redirect()->back();
+        }
+
 
     }
+
 
     public function pesquisaSent()
     {

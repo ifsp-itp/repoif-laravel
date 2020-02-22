@@ -29,7 +29,7 @@
 				      <th scope="col" colspan="2">
 				      	<span>
 				      		@if($comment->user->image == null)
-					  			<img src="/storage/users/profile.jpg" class="userComent">
+					  			<img src="/storage/users/profile.png" class="userComent">
 					  		@else
 					  			<img src="/storage/users/{{$project->user->image}}" class="userComent">
 					  		@endif

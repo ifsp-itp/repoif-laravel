@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
 	//usuário
 	Route::get('/user/profile/', 'UserController@profile');
     Route::get('/user/edit/{id}', 'UserController@edit');
-    Route::put('/user/profile/{id}', 'UserController@update');
+    Route::put('/user/profile/{id}', 'UserController@update')->name('user.update');
 
 });
 

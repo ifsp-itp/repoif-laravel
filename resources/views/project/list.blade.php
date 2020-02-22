@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="background">
-	<div class="card-deck">
+	<div class="card-deck total">
 
 		@foreach ($projects as $project) 
 			<div class="card mb-3 cover total">
