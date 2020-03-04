@@ -9,8 +9,9 @@ use Validator;
 use App\Comment;
 use App\Project;
 
-use Illuminate\Http\Request;
+use ZanySoft\Zip\Zip;
 
+use Illuminate\Http\Request;
 use App\Policies\ProjectPolicy;
 use Dawson\Youtube\Facades\Youtube;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,7 @@ class ProjectController extends Controller
     //NOVOS
     public function newProjects()
     {
+    
         $projects = Project::all()->sortByDesc("id");
         return view('project.list')->with('projects', $projects);
     }

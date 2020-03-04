@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Dawson\Youtube\YoutubeServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        ZanySoft\Zip\ZipServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -229,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Youtube' => Dawson\Youtube\Facades\Youtube::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Zip' => ZanySoft\Zip\ZipFacade::class,
 
     ],
 
