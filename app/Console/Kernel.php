@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\Yousent',//classe do comando abaixo
     ];
 
     /**
@@ -28,13 +28,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            
-            //
+        //O camando sent:video só executará o horario dentro do metodo dailyAt()
+        $schedule->command("yousent:job")->dailyAt('24:01');
 
-        })->daily();
-    
     }
+
 
     /**
      * Register the commands for the application.

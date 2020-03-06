@@ -316,28 +316,36 @@ class ProjectController extends Controller
     {
 
 
+                /**
+         * use Facade Storage
+         * method delete image
+         */
         try{
-
+            //instancia os Likes e Commentarios para excluilos pelo id do projeto
+            //para não haver erros de forenkey
             $comment = new Comment();
             $likes = new Likes();
 
             foreach($comment::where("project_id" , $id)->get() as $com){
+
               $com->delete();
             }
             foreach($likes::where("project_id" , $id)->get() as $like){
                 $like->delete();
             }
 
-
+            //deleta imagem
+            Storage::delete('files/'. Project::find($id)->project);
+            //deleta projeto com id informado
             Project::find($id)->delete();
 
-
-
+            //retorna a listagem  de projetos
             return redirect('projects');
 
         }catch(Exception $ex){
             return redirect()->back();
         }
+
 
 
     }
