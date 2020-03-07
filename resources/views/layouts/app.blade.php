@@ -12,7 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    
+
     <!-- Progress Bar -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -30,7 +30,7 @@
 </head>
 <body>
     <div id="app">
-            <nav class="navbar navbar-expand-md bg-dark">
+            <nav class="navbar navbar-expand-md " style="background-color: #caedc7;">
                 <a class="navbar-brand mr-auto" href="{{ url('/projects') }}">
                     REPOIF
                 </a>
@@ -52,7 +52,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/projects/create') }}">
-                                <span  class="teste"> 
+                                <span  class="teste">
                                     CRIAR
                                 </span>
                             </a>
@@ -64,7 +64,7 @@
                         @csrf
                         <input class="form-control mr-sm-2" name="search" type="text" placeholder="Buscar ...">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                    </form> 
+                    </form>
 
                     <ul class="navbar-nav flex-row mr-lg-0">
                     @guest
@@ -85,7 +85,7 @@
                                 <a class="dropdown-item" href="/user/profile/{{auth()->id()}}">
                                     Meu Perfil
                                 </a>
-                                    
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -99,11 +99,11 @@
                             </div>
                         </li>
                     @endguest
-                </ul>                
+                </ul>
 
                 </div>
             </nav>
-       
+
 
         <div class="container-fluid">
 
