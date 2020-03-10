@@ -3,10 +3,10 @@
 @section('content')
 
 <div id="background">
-	<div class="card-deck total">
+	<div class="card card-deck" style="display: flex; flex-wrap: wrap;">
 
 		@foreach ($projects as $project) 
-			<div class="card mb-3 cover total">
+			<div class="w-50 card mb-3 cover">
 				@if($project->type == 1)
 			  	<a href="/projects/show/{{$project->id}}" class="border-card-1 project-icon">
 			  		<img src="/storage/files/{{$project->project}}" class="cover card-img-top" id="imgCardRI" alt="...">

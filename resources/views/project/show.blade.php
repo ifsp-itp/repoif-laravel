@@ -9,78 +9,85 @@
 	      	</div>
 	      	
 	    @elseif($project->type == '2' && $project->sent == '0')
-      		<div class="embed-responsive embed-responsive-16by9 fl imgdefine">
+      		<div class="embed-responsive embed-responsive-16 by9 w-100 fl imgdefine">
 	      		<iframe class="embed-responsive-item" src="/storage/files/{{$project->project}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>         
 	      	</div>         
 	      
 		@elseif($project->type == '1')
-	      <img src="/storage/files/{{$project->project}}" class="img-resposive imgdefine">
+	      <img src="/storage/files/{{$project->project}}" class="img-resposive w-100 imgdefine">
 
 	    @else
-		    <iframe class="codeExib" src="/storage/files/{{$project->project}}">
+			<iframe class="codeExib w-100 h-50" src="">
+			
 		    </iframe>
 		@endif
-
-		<div class="comentArea fl">
-			@forelse ($project->comments as $comment)
-				<table class="table table-bordered table-dark">
-				  <thead>
-				    <tr>
-				      <th scope="col" colspan="2">
-				      	<span>
-				      		@if($comment->user->image == null)
-					  			<img src="/storage/users/profile.png" class="userComent">
-					  		@else
-					  			<img src="/storage/users/{{$project->user->image}}" class="userComent">
-					  		@endif
-				      	</span>
-				      	<span class="userComentLink"> 
-				      		{{ $comment->user->name }} 
-				      	</span>
-
-				      	<span class="comentDate">
-				  			{{ date('d/m/Y', strtotime($comment->date))}}
-				  		</span>
-				      </th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr>
-				      <td colspan="2">
-				      	<span class="comentArea">
-				      		{{ $comment->body }}
-				      	</span>
-				      </td>
-				  	</tr>
-				  	<tr>
-				  		
-				  		<td colspan="2">
-				  			@if($comment->user_id == auth()->id())
-				  			<a onclick="return myFunction();" href="/comment/destroy/{{ $comment->id }}">
-								<button class="btn btn-danger btn-sm fr delComent" type="submit">
-									Deletar Comentário
-								</button> 
-							</a>
-							@endif
-				  		</td>
-				  		
-				  	</tr>
-				  </tbody>
-				</table>
-
-				@empty
-				<table class="table table-bordered table-dark">
-				  <thead>
-				    <tr>
-				      <th scope="col" colspan="2">
-				  		Ainda não houve nenhum comentário! Seja o primeiro.
-					  </th>
-					</tr>
-				  </thead>
-				</table>
+	  
+		<div class="comentArea fl w-100">
 			
-			@endforelse
-		</div>
+				@forelse ($project->comments as $comment)
+					<table class="table table-bordered table-dark">
+					<div class="container">
+					<thead>
+						<tr>
+						<th scope="col" colspan="2">
+							<span>
+								@if($comment->user->image == null)
+									<img src="/storage/users/profile.png" class="userComent">
+								@else
+									<img src="/storage/users/{{$project->user->image}}" class="userComent">
+								@endif
+							</span>
+							<span class="userComentLink"> 
+								{{ $comment->user->name }} 
+							</span>
+
+							<span class="comentDate">
+								{{ date('d/m/Y', strtotime($comment->date))}}
+							</span>
+						</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+						<td colspan="2" style="padding-bottom: 70px;">
+							<span class="comentArea" >
+								{{ $comment->body }}
+							</span>
+						</td>
+						</tr>
+						<tr>
+							
+							<td colspan="2" style="padding-bottom: 45px;">
+								@if($comment->user_id == auth()->id())
+								<a onclick="return myFunction();" href="/comment/destroy/{{ $comment->id }}">
+									<button class="btn btn-danger btn-sm fr delComent" type="submit">
+										Deletar Comentário
+									</button> 
+								</a>
+								@endif
+							</td>
+							
+						</tr>
+					</tbody>
+					</div>
+					</table>
+
+					@empty
+					<table class="table table-bordered table-dark">
+					<thead>
+						<tr>
+						<th scope="col" colspan="2">
+							Ainda não houve nenhum comentário! Seja o primeiro.
+						</th>
+						</tr>
+					</thead>
+					
+					</table>
+					
+				@endforelse
+			</div>
+		
+	</div>
 		
 	</div>
 
@@ -155,7 +162,7 @@
 			@method('POST')
 			@csrf
 			<textarea name="body" id="form7" 
-			class="md-textarea form-control txtPerson">Deixe seu comentário!
+			class="md-textarea form-control txtPerson" style="height:200px; font-size: 20pt;">Deixe seu comentário!
 			</textarea>
 			<button type="submit" class="btn btn-outline-success fr"> Comentar </button>
 		</form>

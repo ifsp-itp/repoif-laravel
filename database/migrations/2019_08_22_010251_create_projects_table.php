@@ -23,6 +23,7 @@ class CreateProjectsTable extends Migration
             $table->integer('sent')->nullable();
             $table->integer('type');
             $table->date('date');
+            $table->text('path_web')->nullable();
             $table->integer('views');
             $table->timestamps();
 

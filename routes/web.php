@@ -67,3 +67,6 @@ Route::get('/home', 'ProjectController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/address/{url}', 'ProjectController@callback')->name('url.site');
+

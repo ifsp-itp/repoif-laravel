@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Policies\ProjectPolicy;
 use Dawson\Youtube\Facades\Youtube;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 /*
 
@@ -196,6 +197,63 @@ class ProjectController extends Controller
             } 
 
             } else {
+                try{
+                if($tipo =="3"){
+                   
+                        if($request->file->extension() == "zip"){
+                            if(Storage::makeDirectory("web")){
+                                if ($request->hasFile('file') && $request->file('file')->isValid()) {
+                                    // Define um aleatório para o arquivo baseado no timestamps atual
+                                    $name = uniqid(date('HisYmd'));
+                             
+                                    // Recupera a extensão do arquivo
+                                    $extension = $request->file->extension();
+                                    // Define finalmente o nome
+                                    $nameFile = "{$name}.{$extension}";
+    
+                                    // Faz o upload:
+                                    $upload = $request->file->storeAs('files', $nameFile);
+                                    
+                                    if(Zip::open('storage/files/'.$nameFile)->extract("storage/web/$name")){
+                                        $path = "storage/web/$name";
+                                        $status = true;
+                                    }else{
+                                        $status = false;
+                                    }
+                                    Storage::delete("files/$nameFile");
+                                    // Se tiver funcionado o arquivo foi armazenado em storage/app/public/files/nomedinamicoarquivo.extensao
+                             
+                                    // Verifica se NÃO deu certo o upload (Redireciona de volta)
+                                    if ( !$upload )
+                                        return redirect()
+                                                    ->back()
+                                                    ->with('error', 'Falha ao fazer upload')
+                                                    ->withInput();
+                                    $download = $nameFile;
+                                                     
+                                                   
+                                    $project = Project::create([
+                                        'user_id' => auth()->id(),
+                                        'title' => request('title'),
+                                        'description' => request('description'),
+                                        'type' => request('type'),
+                                        'download' => $download,
+                                        'path_web' => $path,
+                                        'date' => $actDate,
+                                        'project' => $nameFile,
+                                        'views' => 0,
+                                        'thumbnailURL' => $thumbnailURL
+                                        
+                                    ])->save();
+                                    return response()->json(['success'=>'Projeto enviado com sucesso.']);
+    
+                                
+                            }
+                      
+                    }
+                    }
+                    
+            }
 
                 if ($request->hasFile('file') && $request->file('file')->isValid()) {
                 // Define um aleatório para o arquivo baseado no timestamps atual
@@ -231,16 +289,23 @@ class ProjectController extends Controller
                     'thumbnailURL' => $thumbnailURL
                     
                 ])->save();
+            }else{
+                return response()->json(['success'=>'Não é possivel descompactar arquivos rar mude para zip']);
+            }
 
+
+            }catch(Exception $ex){
+                return response()->json(['success' => 'Não é possivel descompactar arquivos rar mude para zip']);
 
             }
 
                       
               
-}
+
     
     return response()->json(['success'=>'Projeto enviado com sucesso.']);
     
+}
 }
 
     /**
@@ -391,6 +456,9 @@ class ProjectController extends Controller
         }
         }
         
+    }
+    public function callback(string $url){
+        return Storage::url('web/'.$url.'/index.html');
     }
 
 }

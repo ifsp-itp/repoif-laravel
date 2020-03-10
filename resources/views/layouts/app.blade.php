@@ -30,7 +30,7 @@
 </head>
 <body>
     <div id="app">
-            <nav class="navbar navbar-expand-md " style="background-color: #caedc7;">
+            <nav class="navbar navbar-expand-md bg-dark">
                 <a class="navbar-brand mr-auto" href="{{ url('/projects') }}">
                     REPOIF
                 </a>
@@ -62,7 +62,7 @@
                     <form class="form-inline my-2 my-lg-0 mgr" action="/projects/search" method="post">
                         @method('POST')
                         @csrf
-                        <input class="form-control mr-sm-2" name="search" type="text" placeholder="Buscar ...">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Buscar ...">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
 
@@ -78,7 +78,7 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle mr-3 mr-lg-0 mgl" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret">{{ Auth::user()->name }}</span>
+                            <a class="nav-link dropdown-toggle mr-3 mr-lg-0 mgl " id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret">{{ Auth::user()->name }}</span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
@@ -107,7 +107,7 @@
 
         <div class="container-fluid">
 
-            <main class="py-4">
+            <main class="py-4 w-100">
                 @yield('content')
             </main>
     </div>
