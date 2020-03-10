@@ -45,16 +45,16 @@
                         </a>
                     </div>
                     @endif
-                    
+
                 </div>
                 <div class="row">
                     <div class="col-md-4">
 
                         <div class="profile-work">
-                            
+
                                 <ul class="list-group atividades text-muted">
                                     <li class="list-group-item text-muted">
-                                        Atividade 
+                                        Atividade
                                         <i class="fas fa-chart-line iconsProfile"></i>
                                     </li>
 
@@ -62,8 +62,8 @@
                                         <span class="pull-left">
                                             <strong>
                                                 Projetos Criados
-                                            </strong>  
-                                        </span> 
+                                            </strong>
+                                        </span>
                                         <i class="fas fa-file-upload iconsProfile"></i>
                                          {{$created}}
                                     </li>
@@ -88,17 +88,17 @@
                                          {{$comments}}
                                     </li>
                                   </ul>
-                              
- 
+
+
 
                             <p id="linksUteis">LINKS UTEIS</p>
-                            <a href="https://www.ifsp.edu.br/">IFSP</a><br/>
-                            <a href="https://itp.ifsp.edu.br/">IFSP ITAPE</a><br/>
-                            <a href="https://suap.ifsp.edu.br/accounts/login/?next=/">SUAP</a><br/>
-                            <a href="https://moodle.itp.ifsp.edu.br/">MOODLE</a><br/>
-                            <a href="http://pergamum.biblioteca.ifsp.edu.br/">PERGAMUM</a>
-                            
-                            
+                            <a href="https://www.ifsp.edu.br/" target="_blank">IFSP</a><br/>
+                            <a href="https://itp.ifsp.edu.br/" target="_blank">IFSP ITAPE</a><br/>
+                            <a href="https://suap.ifsp.edu.br/accounts/login/?next=/" target="_blank">SUAP</a><br/>
+                            <a href="https://moodle.itp.ifsp.edu.br/" target="_blank">MOODLE</a><br/>
+                            <a href="http://pergamum.biblioteca.ifsp.edu.br/" target="_blank">PERGAMUM</a>
+
+
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                 </div>
-            </form>           
+            </form>
         </div>
 @else
     <link href='https://fonts.googleapis.com/css?family=Anton|Passion+One|PT+Sans+Caption' rel='stylesheet' type='text/css'>
