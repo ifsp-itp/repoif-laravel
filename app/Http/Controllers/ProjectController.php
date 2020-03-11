@@ -220,7 +220,7 @@ class ProjectController extends Controller
                                     }else{
                                         $status = false;
                                     }
-                                    Storage::delete("files/$nameFile");
+                                    //Storage::delete("files/$nameFile");
                                     // Se tiver funcionado o arquivo foi armazenado em storage/app/public/files/nomedinamicoarquivo.extensao
                              
                                     // Verifica se NÃO deu certo o upload (Redireciona de volta)
