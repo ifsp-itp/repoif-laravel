@@ -36,29 +36,29 @@
 </head>
 <body>
     <div id="app">
-            <nav class="navbar navbar-expand-md bg-dark">
-                <a class="navbar-brand mr-auto" href="{{ url('/projects') }}">
-                    REPOIF
+    <nav class="navbar navbar-expand-md" style="background-color: #195128;">
+                <a class="navbar-brand text-light mr-auto" href="{{ url('/projects') }}">
+                    <img src="/storage/icons/logo.png" alt="logo do repositorio REPOIF">
                 </a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto mgl">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/projects/news') }}">Ultimos envios</a>
+                            <a class="nav-link text-light" href="{{ url('/projects/news') }}">Ultimos envios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/projects/photos') }}">Fotos</a>
+                            <a class="nav-link text-light" href="{{ url('/projects/photos') }}">Fotos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/projects/videos') }}">Vídeos</a>
+                            <a class="nav-link text-light" href="{{ url('/projects/videos') }}">Vídeos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/projects/codes') }}">Scripts</a>
+                            <a class="nav-link text-light" href="{{ url('/projects/codes') }}">Scripts</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/projects/create') }}">
-                                <span  class="teste"> 
+                            <a class="nav-link text-light" href="{{ url('/projects/create') }}">
+                                <span  class="teste">
                                     CRIAR
                                 </span>
                             </a>
@@ -68,9 +68,9 @@
                     <form class="form-inline my-2 my-lg-0 mgr" action="/projects/search" method="post">
                         @method('POST')
                         @csrf
-                        <input class="form-control mr-sm-2" name="search" type="text" placeholder="Buscar ...">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Buscar ...">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                    </form> 
+                    </form>
 
                     <ul class="navbar-nav flex-row mr-lg-0">
                     @guest
@@ -84,14 +84,14 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a class="nav-link text-success dropdown-toggle mr-3 mr-lg-0 mgl" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret text-light"><p class="text-light">{{ Auth::user()->name }}</p></span>
+                            <a class="nav-link text-light dropdown-toggle mr-3 mr-lg-0 mgl " id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret text-light">{{ Auth::user()->name }}</span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="/user/profile/{{auth()->id()}}">
                                     Meu Perfil
                                 </a>
-                                    
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -105,7 +105,7 @@
                             </div>
                         </li>
                     @endguest
-                </ul>                
+                </ul>
 
                 </div>
             </nav>

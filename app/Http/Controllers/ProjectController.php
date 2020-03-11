@@ -178,7 +178,7 @@ class ProjectController extends Controller
                                         ->back()
                                         ->with('error', 'Falha ao fazer upload')
                                         ->withInput();
-                        $download = $nameFile;
+                                $download = $nameFile;
                         }
 
                         $project = Project::create([

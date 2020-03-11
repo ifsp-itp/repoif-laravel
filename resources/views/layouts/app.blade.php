@@ -30,28 +30,29 @@
 </head>
 <body>
     <div id="app">
-            <nav class="navbar navbar-expand-md bg-dark">
-                <a class="navbar-brand mr-auto" href="{{ url('/projects') }}">
-                    REPOIF
+            <nav class="navbar navbar-expand-md" style="background-color: #195128;">
+                <a class="navbar-brand text-light mr-auto" href="{{ url('/projects') }}">
+                    <img src="/storage/icons/logo.png" alt="logo do repositorio REPOIF">
+
                 </a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto mgl">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/projects/news') }}">Ultimos envios</a>
+                            <a class="nav-link text-light" href="{{ url('/projects/news') }}">Ultimos envios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/projects/photos') }}">Fotos</a>
+                            <a class="nav-link text-light" href="{{ url('/projects/photos') }}">Fotos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/projects/videos') }}">Vídeos</a>
+                            <a class="nav-link text-light" href="{{ url('/projects/videos') }}">Vídeos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/projects/codes') }}">Scripts</a>
+                            <a class="nav-link text-light" href="{{ url('/projects/codes') }}">Scripts</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/projects/create') }}">
+                            <a class="nav-link text-light" href="{{ url('/projects/create') }}">
                                 <span  class="teste">
                                     CRIAR
                                 </span>
