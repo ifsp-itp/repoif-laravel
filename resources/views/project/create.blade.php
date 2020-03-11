@@ -160,9 +160,16 @@
                                 <select name="type">
                                   <option value="1">Foto</option>
                                   <option value="2">Vídeo</option>
-                                  <option value="3">Código</option>
-                            </select>
+                                  <option value="3" data-toggle="tooltip" title="Por favor caso seu arquivo for um site envie em formato zip e deixe sua pagína principal nomeada como index">Código
+                                </select>
                             </div>
+                        </div>
+                        <div class="row" style="margin: auto auto auto 100px; text-align: center;">
+                            <section>
+                                <strong>
+                                    <p>Por favor caso seu arquivo for um site envie em formato zip <br>e deixe sua pagína principal nomeada como index</p>
+                                </strong>                            
+                            </section>
                         </div>
 
                         <div class="form-group row">

@@ -19,7 +19,7 @@
 			    
 			    @elseif($project->type == 3)
 			    <a href="/projects/show/{{$project->id}}" class="border-card-3 project-icon">
-			    	<img src="/storage/icons/script.jpg" class="cover card-img-top" id="imgCardRI" alt="...">
+			    	<img src="/storage/icons/code.jpg" class="cover card-img-top" id="imgCardRI" alt="...">
 			 	@endif
 			    </a>
 			    
@@ -28,7 +28,7 @@
 			      <div class="profileThumbHome fl">
 			      	<a href="/projects/userProject/{{$project->user->id}}">
 				      	@if($project->user->image == null)
-				  		<img src="/storage/users/profile.jpg" class="userThumb">
+				  		<img width="25px" height="25px" src="/storage/icons/user.png" class="userThumb">
 				  		@else
 				  		<img src="/storage/users/{{$project->user->image}}" class="userThumb">
 				  		@endif

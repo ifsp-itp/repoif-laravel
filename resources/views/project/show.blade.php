@@ -3,6 +3,7 @@
 @section('content')
 
 	<div class="row"> 
+	
 		@if($project->type == '2' && $project->sent == '1')         
 			<div class="embed-responsive embed-responsive-16by9 fl imgdefine">
 	      		<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$project->project}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>         
@@ -17,7 +18,7 @@
 	      <img src="/storage/files/{{$project->project}}" class="img-resposive w-100 imgdefine">
 
 	    @else
-			<iframe class="codeExib w-100 h-50" src="">
+			<iframe class="codeExib w-100 h-50" style="min-height: 550px;" src="{{$project->path_web}}/index.html">
 			
 		    </iframe>
 		@endif
@@ -46,7 +47,11 @@
 							</span>
 						</th>
 						</tr>
-					</thead>
+
+						</code>
+
+						
++				</thead>
 					<tbody>
 						<tr>
 						<td colspan="2" style="padding-bottom: 70px;">

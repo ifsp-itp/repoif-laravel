@@ -212,10 +212,18 @@ class ProjectController extends Controller
                                     $nameFile = "{$name}.{$extension}";
     
                                     // Faz o upload:
+                                    $isindex = false;
                                     $upload = $request->file->storeAs('files', $nameFile);
-                                    
+                                   foreach(Zip::open('storage/files/'.$nameFile)->listFiles() as $item){
+                                            if("index.html" == $item){
+                                                $isindex = true;
+                                                break;
+                                            }
+                                   }
+                                   if($isindex == true){
                                     if(Zip::open('storage/files/'.$nameFile)->extract("storage/web/$name")){
-                                        $path = "storage/web/$name";
+                                        $path = "/storage/web/$name";
+                                        
                                         $status = true;
                                     }else{
                                         $status = false;
@@ -245,7 +253,14 @@ class ProjectController extends Controller
                                         'thumbnailURL' => $thumbnailURL
                                         
                                     ])->save();
-                                    return response()->json(['success'=>'Projeto enviado com sucesso.']);
+                                    return response()->json(['success'=> "Sucesso, seu projeto foi enviado !!!"]);
+
+                                   }else{
+                                    return response()->json(['success'=> "falha ao enviar o projeto arquivo index.html não encontrado !!!"]);
+
+                                   }
+                                    
+                                    
     
                                 
                             }
