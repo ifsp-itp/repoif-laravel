@@ -84,7 +84,7 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle mr-3 mr-lg-0 mgl" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret">{{ Auth::user()->name }}</span>
+                            <a class="nav-link text-success dropdown-toggle mr-3 mr-lg-0 mgl" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret text-light"><p class="text-light">{{ Auth::user()->name }}</p></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
