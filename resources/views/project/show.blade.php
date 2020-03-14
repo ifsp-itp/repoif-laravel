@@ -3,34 +3,6 @@
 @section('content')
 
 <div class="row">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        <figure>
-            <img class="cover" src="https://img.icons8.com/wired/64/000000/code.png" />
-        </figure>
-    </button>
-    enble
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">codigo-fonte</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    en
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     @if($project->type == '2' && $project->sent == '1')
     <div class="embed-responsive embed-responsive-16by9 fl imgdefine">
         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$project->project}}" frameborder="0"
@@ -50,6 +22,36 @@
     <iframe class="codeExib w-100 h-50" style="min-height: 550px;" src="{{$project->path_web}}/index.html">
 
     </iframe>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <figure>
+            <img class="w-25" src="https://img.icons8.com/wired/64/000000/code.png" />
+            <caption>
+                Código-fonte
+            </caption>
+        </figure>
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">codigo-fonte</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <iframe src="{{ $project->path_code }}/index.txt" frameborder="2"></iframe>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @endif
 
     <div class="comentArea fl w-100">
@@ -166,6 +168,7 @@
 
     <div class="fl mgl dvShow dvDados">
         <h4> Dados </h4>
+        <div id="date">ola</div>
 
         <div id="description">
             <i class="fa fa-eye largura"> {{$project->views}} pessoas visualizaram isso</i>
@@ -191,6 +194,7 @@
         </div>
     </div>
 
+
     <div class="fl mgl dvShow">
 
         <form action="/coments/{{$project->id}}" method="POST">
@@ -211,9 +215,12 @@
 
 
 <script>
+
 function myFunction() {
     if (!confirm("DESEJA MESMO DELETAR ISSO?"))
         event.preventDefault();
 }
+    
+
 </script>
 @endsection

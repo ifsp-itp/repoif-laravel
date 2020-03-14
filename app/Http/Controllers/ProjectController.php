@@ -199,7 +199,7 @@ class ProjectController extends Controller
             } else {
                 try{
                 if($tipo =="3"){
-                   
+                        
                         if($request->file->extension() == "zip"){
                             if(Storage::makeDirectory("web")){
                                 if ($request->hasFile('file') && $request->file('file')->isValid()) {
@@ -214,6 +214,7 @@ class ProjectController extends Controller
                                     // Faz o upload:
                                     $isindex = false;
                                     $upload = $request->file->storeAs('files', $nameFile);
+                                   //percorre pasta procurando index.html se achar ele sai do loop com o break
                                    foreach(Zip::open('storage/files/'.$nameFile)->listFiles() as $item){
                                             if("index.html" == $item){
                                                 $isindex = true;
@@ -223,7 +224,16 @@ class ProjectController extends Controller
                                    if($isindex == true){
                                     if(Zip::open('storage/files/'.$nameFile)->extract("storage/web/$name")){
                                         $path = "/storage/web/$name";
-                                        
+                                        //cria pasta code caso existir ele retorna true mesmo assim
+                                        if(Storage::makeDirectory("code")){
+                                            //copia index.html para code renomeando para index.txt
+                                            if(Storage::copy("web/$name/index.html", "code/$name/index.txt")){
+                                            //capiturando path do codigo
+                                                $path_code = "/storage/code/$name";
+                                            }
+                                        }
+                                      
+                                      
                                         $status = true;
                                     }else{
                                         $status = false;
@@ -247,6 +257,7 @@ class ProjectController extends Controller
                                         'type' => request('type'),
                                         'download' => $download,
                                         'path_web' => $path,
+                                        'path_code' => $path_code,
                                         'date' => $actDate,
                                         'project' => $nameFile,
                                         'views' => 0,
@@ -310,7 +321,7 @@ class ProjectController extends Controller
 
 
             }catch(Exception $ex){
-                return response()->json(['success' => 'Não é possivel descompactar arquivos rar mude para zip']);
+                return response()->json(['success' => 'Arquivo não suportado']);
 
             }
 
