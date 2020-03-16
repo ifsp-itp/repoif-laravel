@@ -22,6 +22,7 @@ class CreateProjectsTable extends Migration
             $table->text('description');
             $table->integer('sent')->nullable();
             $table->integer('type');
+            $table->integer('file_type')->nullable();
             $table->date('date');
             $table->text('path_code')->nullable();
             $table->text('path_web')->nullable();

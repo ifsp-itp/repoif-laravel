@@ -30,11 +30,18 @@
 </head>
 <body>
     <div id="app">
-            <nav class="navbar navbar-expand-md" style="background-color: #195128;">
+            <nav class="navbar navbar-expand-lg" style="background-color: #195128;">
                 <a class="navbar-brand text-light mr-auto" href="{{ url('/projects') }}">
                     <img src="/storage/icons/logo.png" alt="logo do repositorio REPOIF">
 
                 </a>
+                
+                <!--menu dropdown-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                    <div type="context" style="text-align: center;">
+                      <p class="h3 pt-3 bg-transparent text-light">menu</p> 
+                    </div>
+                </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto mgl">
