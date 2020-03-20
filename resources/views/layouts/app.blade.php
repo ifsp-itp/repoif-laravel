@@ -30,9 +30,9 @@
 </head>
 <body>
     <div id="app">
-            <nav class="navbar navbar-expand-lg" style="background-color: #195128;">
+            <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand text-light mr-auto" href="{{ url('/projects') }}">
-                    <img src="/storage/icons/logo.png" alt="logo do repositorio REPOIF">
+                    REPOIF
 
                 </a>
                 
