@@ -23,7 +23,23 @@ body {
     min-width: 90%;
     width: 100%;
 }
+.fildcontainer{
+    border: 2px solid rgba(207, 197, 197, 0.376);
+}
+.align-content-center{
+    margin: 4px auto 4px 170px;
+}
+.helper{
+    margin: auto auto auto 200px;
+    text-align: center;
+}
+.inputformact{
+    margin: 2px auto 2px auto;
+    padding: 2px auto 2px auto;
+    border-color: 1px solid gray;
+}
 .imgprofile{
+   
     width: 270px;
     height: auto;
 }

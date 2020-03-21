@@ -14,7 +14,7 @@ class userController extends Controller
     {
 
         $users = User::all();
-        //
+        
     }
 
     public function profile(User $id) //mostrar o Usuário
