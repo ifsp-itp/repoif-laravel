@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -78,10 +78,14 @@
                               </select>
                             </div>
                         </div>
+                        <div class="row py-2 my-2">
+                            <input type="file" name="userimage" onChange="teste()" id="validImage">
+                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-success">
+
+                                <button type="submit" id="valid" class="btn btn-success">
                                     {{ __('Register') }}
                                 </button>
                             </div>
@@ -96,4 +100,34 @@
         </div>
     </div>
 </div>
+<script>
+    function teste() {
+        var imageinput = window.document.getElementById('validImage')
+        if(imageinput != ""){
+            var num = imageinput.value.length
+
+            var newnovo = num - 4
+            var newout = num - 5
+            var imageo = imageinput.value.slice(newout, num)
+ 
+            var image =  imageinput.value.slice(newnovo, num)
+
+            if(image == '.jpg'){
+                document.getElementById('valid').removeAttribute('class', 'd-none')
+                document.getElementById('valid').setAttribute('class', 'btn btn-success')
+            }else if(image == '.png'){
+                document.getElementById('valid').removeAttribute('class', 'd-none')
+                document.getElementById('valid').setAttribute('class', 'btn btn-success')
+            }else if(imageo == '.jpeg'){
+                document.getElementById('valid').removeAttribute('class', 'd-none')
+                document.getElementById('valid').setAttribute('class', 'btn btn-success')
+              
+            }else{
+                document.getElementById('valid').setAttribute('class', 'd-none')
+                alert('informe uma extensão valida!!!')
+            }
+        }
+    }
+   
+</script>
 @endsection

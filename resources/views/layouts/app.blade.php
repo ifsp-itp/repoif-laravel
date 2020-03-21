@@ -8,6 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <meta name="theme-colors" content="#000"/>
+
     <title>REPOIF</title>
 
     <!-- Scripts -->
@@ -30,7 +32,7 @@
 </head>
 <body>
     <div id="app">
-            <nav class="navbar navbar-expand-lg">
+            <nav class="navbar navbar-expand-lg nav-color">
                 <a class="navbar-brand text-light mr-auto" href="{{ url('/projects') }}">
                     REPOIF
 
@@ -38,7 +40,7 @@
                 
                 <!--menu dropdown-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-                    <div type="context" style="text-align: center;">
+                    <div type="context center">
                       <p class="h3 pt-3 bg-transparent text-light">menu</p> 
                     </div>
                 </button>
@@ -115,7 +117,7 @@
 
         <div class="container-fluid">
 
-            <main class="py-4 w-100">
+            <main class="py-4">
                 @yield('content')
             </main>
     </div>

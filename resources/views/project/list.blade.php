@@ -6,7 +6,7 @@
 	<div class="card card-deck" style="display: flex; flex-wrap: wrap;">
 
 		@foreach ($projects as $project) 
-			<div class="w-50 card mb-3 cover">
+			<div class="block-size card mb-3 cover">
 				@if($project->type == 1)
 			  	<a href="/projects/show/{{$project->id}}" class="border-card-1 project-icon">
 			  		<img src="/storage/files/{{$project->project}}" class="cover card-img-top" id="imgCardRI" alt="...">

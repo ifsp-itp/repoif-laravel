@@ -15,7 +15,7 @@
                             @elseif($user->provider == "facebook")
                             <img src="{{$user->image}}" alt=""/>
                             @else
-                            <img src="/storage/users/{{$user->image}}" alt=""/>
+                            <img class="ml-4 imgprofile" src="/storage/{{$user->image}}" alt=""/>
                             @endif
 
                         </div>

@@ -64,13 +64,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if(!empty($data['userimage'])){
+            $upload = $data['userimage']->store('users');
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'course' => $data['course'],
+                'image' => $upload
+            ]);
+        }else{
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'course' => $data['course'],
+                'image' => null
+            ]);
+        }
 
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'course' => $data['course'],
-            'image' => null,
-        ]);
+
+        
     }
 }

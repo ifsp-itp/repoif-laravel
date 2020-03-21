@@ -8,5 +8,66 @@
 @import '~bootstrap/scss/bootstrap';
 
 body {
+    background-color: white;
+    min-width: 80px;
+}
+.nav-color{
     background-color: red;
 }
+.block-size{
+    min-width: 44%;
+    width: auto;
+    max-width: 45%;
+}
+.size-container{
+    min-width: 90%;
+    width: 100%;
+}
+.imgprofile{
+    width: 270px;
+    height: auto;
+}
+.center{
+    text-align: center;
+}
+.progress { 
+     position:relative; width:100%;
+     border: 1px solid #7F98B2; 
+     padding: 1px; 
+     border-radius: 3px; 
+}
+.bar { 
+    background-color: #B4F5B4;
+    width:0%;
+    height:25px;
+    border-radius: 3px;
+ }
+.percent { 
+    position:absolute;
+    display:inline-block;
+    top:3px;
+    left:48%;
+    color: #7F98B2;
+}
+
+
+.btn-search{
+    border-color: #c8f8c8;
+    background-color: #86d68a;
+    font: bold;
+    color: white;
+}
+#file{
+    padding: 5px 5px 5px 5px;
+    margin: 5px auto 5px auto;
+}
+.file{
+ 
+   border-radius: 10px;
+   width: 380px;
+   height: 60px;                                                                                      
+}
+.file:hover{
+    background-color: rgba(70, 63, 63, 0.7);                                                                                    
+ }
+  

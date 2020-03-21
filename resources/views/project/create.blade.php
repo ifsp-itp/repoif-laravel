@@ -27,19 +27,20 @@
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <style>
-        .progress { position:relative; width:100%; border: 1px solid #7F98B2; padding: 1px; border-radius: 3px; }
-        .bar { background-color: #B4F5B4; width:0%; height:25px; border-radius: 3px; }
-        .percent { position:absolute; display:inline-block; top:3px; left:48%; color: #7F98B2;}
-    </style>
-
 </head>
 <body>
     <div id="app">
-    <nav class="navbar navbar-expand-md" style="background-color: #195128;">
+    <nav class="navbar navbar-expand-lg nav-color">
                 <a class="navbar-brand text-light mr-auto" href="{{ url('/projects') }}">
-                    <img src="/storage/icons/logo.png" alt="logo do repositorio REPOIF">
+                    REPOIF
                 </a>
+
+                 <!--menu dropdown-->
+                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                    <div type="context center">
+                      <p class="h3 pt-3 bg-transparent text-light">menu</p> 
+                    </div>
+                </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto mgl">
@@ -87,7 +88,7 @@
                             <a class="nav-link text-light dropdown-toggle mr-3 mr-lg-0 mgl " id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret text-light">{{ Auth::user()->name }}</span>
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="#navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="/user/profile/{{auth()->id()}}">
                                     Meu Perfil
                                 </a>
