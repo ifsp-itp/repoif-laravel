@@ -68,7 +68,7 @@ class Yousent extends Command
             //verifica se éum video [type igual a 2]
             if($upload->type == 2){
                 //caminho do arquivo presente dentro de storage/files
-                foreach (File::files(env('CRON_YOUTUBE_PATH')) as $value) {
+                foreach (File::files("storage/files") as $value) {
                     //acha video na pasta
                     if($value->getFilename() == $upload->project){
                         $file = $value;
@@ -80,7 +80,7 @@ class Yousent extends Command
                     $video = Youtube::upload($file, [
                         'title'       => $upload->title,
                         'description' => $upload->description,
-                        'tags'        => ['foo', 'bar', 'baz'],
+                        //'tags'        => ['foo', 'bar', 'baz'],
                         'category_id' => $upload->type
                     ]);
                     //busca dados do youtube
@@ -97,14 +97,11 @@ class Yousent extends Command
                     echo "video ( ".$nameFile." ) enviado sucesso!!!\n";
                     
                     //update video
-                    $naoEnviados = Project::where(
-                        'sent', 0)->get();
+                    $naoEnviados = Project::where('sent', 0)->get();
                     $contador = $naoEnviados->count();
                 } 
                 catch(Exception $e)
                 {
-                    dd($e);
-                    
                     //quando não for mais possivel enviar videos
                     //mostra mensagem
                     echo "A Fila não pode continuar uploads \n";
