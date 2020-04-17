@@ -4,9 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Project;
-use Dawson\Youtube\Facades\Youtube;
-use Exception;
+
 
 
 class Kernel extends ConsoleKernel
@@ -17,7 +15,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\Yousent',//classe do comando abaixo
+        'App\Console\Commands\Yousent',//chama a classe do comando abaixo
     ];
 
     /**
@@ -28,8 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //O camando sent:video só executará o horario dentro do metodo dailyAt()
-        $schedule->command("yousent:job")->dailyAt('24:01');
+        //O camando yousent:job é executado quando são exatamente 24:00
+        $schedule->command("yousent:job")->dailyAt('24:00');
 
     }
 
