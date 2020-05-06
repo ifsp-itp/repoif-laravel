@@ -3,7 +3,7 @@
 @section('content')
 <div class="card-body">
     <div class="container">
-        <fieldset class="fildcontainer">
+        <div class="card-body fildcontainer">
             <form method="post" id="formProject" action="/projects" enctype="multipart/form-data" class="lef">
                     @csrf
 
@@ -11,7 +11,7 @@
                         <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Titulo') }}</label>
 
                         <div class="col-md-6">
-                            <input type="text" name="title" maxlength="34" class="my-2 inputformact">
+                            <input type="text" name="title" maxlength="34" class="my-2 form-control inputformact">
 
                             @error('title')
                                 <span class="invalid-feedback" role="alert">
@@ -25,7 +25,7 @@
                         <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Descrição do projeto') }}</label>
 
                         <div class="col-md-6">
-                            <textarea name="description"></textarea>
+                            <textarea class="form-control" name="description"></textarea>
 
                             @error('description')
                                 <span class="invalid-feedback" role="alert">
@@ -42,14 +42,14 @@
                             <select name="type">
                                 <option value="1">Foto</option>
                                 <option value="2">Vídeo</option>
-                                <option value="3" data-toggle="tooltip" title="Por favor caso seu arquivo for um site envie em formato zip e deixe sua pagína principal nomeada como index">Código
+                                <option value="3" data-toggle="tooltip" title="Por favor caso seu arquivo for um site envie em formato zip e deixe sua pagína principal nomeada como index">Arquivos e Sites
                             </select>
                         </div>
                     </div>
                     <div class="row helper">
                         <section>
                             <strong>
-                                <p class="center">Por favor caso seu arquivo for um site envie em formato zip <br>e deixe sua pagína principal nomeada como index</p>
+                                <p class=" center center-responsive" >Por favor caso seu arquivo for um site envie em formato zip <br>e deixe sua pagína principal nomeada como index</p>
                             </strong>                            
                         </section>
                     </div>
@@ -57,11 +57,11 @@
                     <div class="form-group row">
                         <label for="file" class="col-md-4 col-form-label text-md-right">{{ __('Selecionar arquivo: ') }}</label>
                         <div class="col-md-6">
-                            <input type="file" name="file" id="file">
+                            <input type="file" class="form-control" name="file" id="file">
                         </div>
                         <div class="container center">
-                            <div class="progress w-50 align-content-center">
-                                <div class="bar progress-bar progress-bar-striped progress-bar-animated"></div >
+                            <div class="progress form-control w-loading-100 align-content-center">
+                                <div class="bar progress-bar progress-bar-striped progress-bar-animated"></div>
                                 <div class="percent"></div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                         </div>
                     </div>                     
                 </form>
-            </fieldset>
+</div>
         
 </div>
 <script type="text/javascript">

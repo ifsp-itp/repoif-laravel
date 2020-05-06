@@ -7,9 +7,15 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+/*properties*/
 body {
     background-color: white;
     min-width: 80px;
+}
+
+.flex{
+    display: flex; 
+    flex-wrap: wrap;
 }
 .nav-color{
     background-color: red;
@@ -29,23 +35,27 @@ body {
 .align-content-center{
     margin: 4px auto 4px 170px;
 }
-.helper{
-    margin: auto auto auto 200px;
+.center{
     text-align: center;
 }
+.helper{
+    margin: auto auto auto 150px;
+    text-align: center;
+}
+/*forms upload*/
 .inputformact{
     margin: 2px auto 2px auto;
     padding: 2px auto 2px auto;
     border-color: 1px solid gray;
 }
+/*image*/
 .imgprofile{
    
     width: 270px;
     height: auto;
 }
-.center{
-    text-align: center;
-}
+
+/*process upload*/
 .progress { 
      position:relative; width:100%;
      border: 1px solid #7F98B2; 
@@ -65,7 +75,7 @@ body {
     left:48%;
     color: #7F98B2;
 }
-
+/*btn search projects*/
 
 .btn-search{
     border-color: #c8f8c8;
@@ -73,17 +83,137 @@ body {
     font: bold;
     color: white;
 }
+/*format code web file*/
+.mincodeweb{
+    border: 2px solid rbga(255,0,0,.5);
+    border-radius:7px;
+    min-height: 550px;
+}
+.minCode{
+    min-height: 550px;
+}
+
+/*user photo*/
+
+ .userThumb{
+ 
+     width: 45px;
+     height: 45px;
+     border-radius: 10px;
+     margin: 7px auto auto 3px;
+     padding: 5px 5px 5px 5px;
+     border: 2px solid rgba(0, 200, 255, 0.53);
+ }
+.userThumb:hover{
+    border: 2px solid rgb(0, 187, 255);
+}
+
+/*file*/
 #file{
     padding: 5px 5px 5px 5px;
     margin: 5px auto 5px auto;
 }
 .file{
  
-   border-radius: 10px;
-   width: 380px;
-   height: 60px;                                                                                      
-}
+    border-radius: 10px;
+    width: 380px;
+    height: 60px;                                                                                      
+ }
 .file:hover{
     background-color: rgba(70, 63, 63, 0.7);                                                                                    
  }
+ 
+ /* process bar width*/
+ .w-loading-100{
+    width: 600px;
+    margin-left: 25px;
+} 
+ /* efeito imagens do upload de arquivos */
+figure.efect figcaption {
+    position: absolute;
+    text-align: center;
+    top: 25%;
+    left: 2%;
+    align-items: center;
+}
+
+/* coment video medias */
+.comentfixed{
+    border: border-box;
+    padding: .1px auto .1px auto;
+    margin-top: 0px;    
+}
+/*video style*/
+.posvideo{
+     margin: 0px auto 0px auto;
+     padding: 0px;
+     border: border-box;
+}
+
+.videonorm{
+    height: auto; 
+    padding: 10px auto 0px auto;
+    background-color: gray;
+}
+
+/*responsive*/
+@media (max-width:779px){
+    .lef {
+        margin: auto auto auto 20px;
+    }
+    .helper{
+        margin: auto auto auto 40px;
+        text-align: center;
+    }
+    p.center-responsive{
+        padding: 2px 2px 2px 2px;
+        text-align: center;
+        border-color: rgba(207, 197, 197, 0.074);
+    }
+    .w-loading-100{
+        width: 100%;
+        margin-right: 15px;
+       
+    } 
+}
+@media (max-width:575px) {
+    .block-size{
+        margin-left: 0px;
+        min-width: 99%;
+        width: auto;
+        max-width: 100%;
+    }
+}
+@media (min-width:575px) and (max-width:670px){
+   
+        figure.efect figcaption {
+            top: 16%;
+            left: 2%;  
+        }
+    
+}
+@media (max-width:350px){
+    figure.efect figcaption {
+       display: none; 
+    }
+    .block-size{
+        margin-left: 0px;
+        min-width: 89%;
+        width: auto;
+        max-width: 91%;
+    }
+    
+
+}
+
+@media (max-width: 150px){
+    * {
+        display: none;
+    }
+}
+@media (max-height: 80px){
+    * {
+        display: none;
+    }
+}
   

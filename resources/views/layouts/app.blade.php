@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="/storage/icons/logoif.png" type="image/x-icon" />
 
     <!-- CSRF Token -->
@@ -26,6 +26,7 @@
     <script src="https://kit.fontawesome.com/f2a0c0f26f.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -41,7 +42,7 @@
                 <!--menu dropdown-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
                     <div type="context center">
-                      <p class="h3 pt-3 bg-transparent text-light">menu</p> 
+                      <p class="h3 pt-3 mr-4 bg-transparent text-light">menu</p> 
                     </div>
                 </button>
 
@@ -57,7 +58,7 @@
                             <a class="nav-link text-light" href="{{ url('/projects/videos') }}">Vídeos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ url('/projects/codes') }}">Scripts</a>
+                            <a class="nav-link text-light" href="{{ url('/projects/codes') }}">Arquivos e Sites</a>
                         </li>
 
                         <li class="nav-item">

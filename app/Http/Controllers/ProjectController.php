@@ -9,13 +9,20 @@ use Validator;
 use App\Comment;
 use App\Project;
 
-use ZanySoft\Zip\Zip;
+use App\UploadDaily;
 
+use ZanySoft\Zip\Zip;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Policies\ProjectPolicy;
 use Dawson\Youtube\Facades\Youtube;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\ServiceProvider;
+use Symfony\Component\Finder\SplFileInfo;
+use \Symfony\Component\HttpFoundation\File\UploadedFile as Video;
+
 
 /*
 
@@ -34,14 +41,20 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() //listar todos
+    public function index($teste = null) //listar todos
     {
+        print_r($teste);
 
         $projects = Project::all();
         return view('project.list')->with('projects', $projects);
     }
 
-    //PESQUISAR PROJETOS
+    /**
+     * function()
+     * SEARCH PROJETOS
+     * @param Request $request
+     * @return void
+     */
     public function search(Request $request)
     {
         $projects = Project::search($request->search);
@@ -52,17 +65,24 @@ class ProjectController extends Controller
         ]);
     }
 
-    //NOVOS
+    /**
+     * NOVOS PROJECTS
+     *
+     * @return void
+     */
     public function newProjects()
     {
     
         $projects = Project::all()->sortByDesc("id");
         return view('project.list')->with('projects', $projects);
     }
-
-    //POR TIPO
-
-    //FOTOS
+   /**
+    * Undocumented function
+    * POR TIPO
+    * FOTOS
+    * @return void
+    */
+  
     public function photosProjects()
     {
         $projects = Project::where(
@@ -109,13 +129,50 @@ class ProjectController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * function file_storage_private
+     * $path_file converted path
      */
+
+
+     private function file_storage_private($path_file = ''){
+        if($path_file != ''){
+            return  new Video(storage_path().'\app\public\files'.'\\'."$path_file", "$path_file", 'video/mp4', 0, false);
+        }else{
+            return false;
+        }
+     }
+     /**
+      * documented function upload
+      *
+      *
+      * @param [type] $file
+      * @param array $values [titulo, tags, channel]
+      * @return void
+      */
+
     public function store(Request $request) //salvar o projeto
     {
+
+      $upload = new UploadDaily();
+
+      $resul =  $upload->upload(request('title'), $request->file('file'));
+        
+      $project = Project::create([
+        'user_id' => auth()->id(),
+        'title' => request('title'),
+        'description' => request('description'),
+        'type' => requehjyst('type'),
+        'download' => $resul['id'],
+        'date' => $actDate,
+        'extension' => 'Video',
+        'project' => $resul['id'],
+        'sent' => $enviado,
+        'views' => 0,
+        'thumbnailURL' => $thumbnailURL
+
+        ])->save();
+
+
 
         $nameFile = null;
         $download = null;
@@ -127,13 +184,14 @@ class ProjectController extends Controller
         if($tipo == '2') {
 
                 try {
-
+                 
                     $video = Youtube::upload($request->file('file'), [
                         'title'       => request('title'),
                         'description' => request('description'),
-                        //'tags'        => request('tags'),
+                        //'tags'        => ['foo', 'bar', 'baz'],
                         'category_id' => request('type')
                     ]);
+               
 
                     $snippet = $video->getSnippet();
                     $thumbnailURL = $snippet->thumbnails->high->url;
@@ -148,6 +206,7 @@ class ProjectController extends Controller
                     'type' => request('type'),
                     'download' => $download,
                     'date' => $actDate,
+                    'extension' => 'Video',
                     'project' => $nameFile,
                     'sent' => $enviado,
                     'views' => 0,
@@ -155,8 +214,13 @@ class ProjectController extends Controller
 
                     ])->save();
 
-                    } catch(Exception $e) {
+                    return response()->json(['success' => 'sucesso no upload do video para o  youtube!!!']);
 
+
+
+                    } catch(Exception $e) {
+                   
+                
                         $enviado = 0;
 
                         if ($request->hasFile('file') && $request->file('file')->isValid()) {
@@ -187,6 +251,7 @@ class ProjectController extends Controller
                         'description' => request('description'),
                         'type' => request('type'),
                         'download' => $download,
+                        'extension' => 'Video',
                         'date' => $actDate,
                         'project' => $nameFile,
                         'sent' => $enviado,
@@ -194,52 +259,48 @@ class ProjectController extends Controller
                         'thumbnailURL' => $thumbnailURL
 
                     ])->save();
-            } 
 
+                return response()->json(['success'  => 'o upload foi  realizado mas não foi possivel para o youtube']);
+            } 
+ 
             } else {
+                
                 try{
-                if($tipo =="3"){
+                if($tipo =="3"){//identifica se é um arquivo
                         
-                        if($request->file->extension() == "zip"){
-                            if(Storage::makeDirectory("web")){
-                                if ($request->hasFile('file') && $request->file('file')->isValid()) {
-                                    // Define um aleatório para o arquivo baseado no timestamps atual
-                                    $name = uniqid(date('HisYmd'));
+                        if($request->file->extension() == "zip"){//faz teste para saber se este arquivo é realmente um ZIP
+                            if(Storage::makeDirectory("web")){//cria pasta chamada web para armazenar os uploads dos sites
+                                if ($request->hasFile('file') && $request->file('file')->isValid()) {//testar se arqquivo é valido
+                                   
+                                    $name = uniqid(date('HisYmd'));//Define um aleatório para o arquivo baseado no timestamps atual
                              
-                                    // Recupera a extensão do arquivo
-                                    $extension = $request->file->extension();
-                                    // Define finalmente o nome
-                                    $nameFile = "{$name}.{$extension}";
+                                    $extension = $request->file->extension();// Recupera a extensão do arquivo
+                                  
+                                    $nameFile = "{$name}.{$extension}"; // Define finalmente o nome
     
-                                    // Faz o upload:
-                                    $isindex = false;
-                                    $upload = $request->file->storeAs('files', $nameFile);
-                                   //percorre pasta procurando index.html se achar ele sai do loop com o break
+                                   
+                                
+                                    $upload = $request->file->storeAs('files', $nameFile);// Faz o upload:
+
+
+                                   //procura no zip se existe o arquivo index.html que é a pagina principal do site
+								   $isindex = false;//inicia variavel $isindex com valor falso
                                    foreach(Zip::open('storage/files/'.$nameFile)->listFiles() as $item){
                                             if("index.html" == $item){
                                                 $isindex = true;
                                                 break;
+                                                //caso ele achar ele armazena valor verdadeiro dentro da variavel  $isindex caso não achar ela continua como falso   
                                             }
                                    }
-                                   if($isindex == true){
-                                    if(Zip::open('storage/files/'.$nameFile)->extract("storage/web/$name")){
-                                        $path = "/storage/web/$name";
-                                        //cria pasta code caso existir ele retorna true mesmo assim
-                                        if(Storage::makeDirectory("code")){
-                                            //copia index.html para code renomeando para index.txt
-                                            if(Storage::copy("web/$name/index.html", "code/$name/index.txt")){
-                                            //capiturando path do codigo
-                                                $path_code = "/storage/code/$name";
-                                            }
-                                        }
-                                      
-                                      
-                                        $status = true;
-                                    }else{
-                                        $status = false;
-                                    }
-                                    //Storage::delete("files/$nameFile");
-                                    // Se tiver funcionado o arquivo foi armazenado em storage/app/public/files/nomedinamicoarquivo.extensao
+                             
+                                   
+                    if($isindex == true){  //se a variavel $isindex for igual a true ou seja se o arquivo index existir
+                            if(Zip::open('storage/files/'.$nameFile)->extract("storage/web/$name")){  //extrai o arquivo zip e adiciona a pasta web e verifica se foi extraido com sucesso
+                                    $path = "/storage/web/$name"; //salva caminho do site dentro da variavel $path 
+                            }
+                                  
+                        //o arquivo foi armazenado em storage/app/public/files/nome-dinamico-do-arquivo.extensao
+                        //E o site dentro de storage/app/public/web/nome-dinamico-da-pasta/arquivos-do-site
                              
                                     // Verifica se NÃO deu certo o upload (Redireciona de volta)
                                     if ( !$upload )
@@ -257,7 +318,7 @@ class ProjectController extends Controller
                                         'type' => request('type'),
                                         'download' => $download,
                                         'path_web' => $path,
-                                        'path_code' => $path_code,
+                                        'extension' => 'Site WEB',
                                         'file_type' => 0,
                                         'date' => $actDate,
                                         'project' => $nameFile,
@@ -265,10 +326,33 @@ class ProjectController extends Controller
                                         'thumbnailURL' => $thumbnailURL
                                         
                                     ])->save();
-                                    return response()->json(['success'=> "Sucesso, seu projeto foi enviado !!!"]);
+                                    return response()->json(['success'=> "Sucesso, seu site foi enviado !!!"]);
 
                                    }else{
-                                    return response()->json(['success'=> "falha ao enviar o projeto arquivo index.html não encontrado !!!"]);
+
+
+                                    if ( !$upload )
+                                        return redirect()
+                                                ->back()
+                                                ->with('error', 'Falha ao fazer upload')
+                                                ->withInput();
+                                    $download = $nameFile;
+
+                                    $project = Project::create([
+                                        'user_id' => auth()->id(),
+                                        'title' => request('title'),
+                                        'description' => request('description'),
+                                        'type' => request('type'),
+                                        'download' => $download,
+                                        'zip_default' => 1,                                                                                  
+                                        'extension' => $request->file->extension(),
+                                        'date' => $actDate,
+                                        'project' => $nameFile,
+                                        'views' => 0,
+                                        'thumbnailURL' => $thumbnailURL
+                                        
+                                    ])->save();
+                                    return response()->json(['success'=> "zip normal detectado, upload feito com sucesso!!!"]);
 
                                    }
                                     
@@ -278,51 +362,96 @@ class ProjectController extends Controller
                             }
                       
                     }
+                    }else{
+                        if ($request->hasFile('file') && $request->file('file')->isValid()) {
+                            // Define um aleatório para o arquivo baseado no timestamps atual
+                            $name = uniqid(date('HisYmd'));
+                     
+                            // Recupera a extensão do arquivo
+                            $extension = $request->file->extension();
+                            // Define finalmente o nome
+                            $nameFile = "{$name}.{$extension}";
+
+                            // Faz o upload:
+                            $isindex = false;
+                            $upload = $request->file->storeAs('files', $nameFile);
+
+                            if ( !$upload )
+                            return redirect()
+                                    ->back()
+                                    ->with('error', 'Falha ao fazer upload')
+                                    ->withInput();
+                            $download = $nameFile;
+                            
+                            $project = Project::create([
+                                'user_id' => auth()->id(),
+                                'title' => request('title'),
+                                'description' => request('description'),
+                                'type' => request('type'),
+                                'download' => $download,
+                                'zip_default' => 1,                                                                
+                                'extension' => $request->file->extension(),
+                                'date' => $actDate,
+                                'project' => $nameFile,
+                                'views' => 0,
+                                'thumbnailURL' => $thumbnailURL
+                                
+                            ])->save();
+                            
+                        }else{
+                            return response()->json(['success'=> "Arquivo invalido!!!"]);
+
+                        }
                     }
                     
-            }
-
+            }elseif($tipo == '1'){
                 if ($request->hasFile('file') && $request->file('file')->isValid()) {
-                // Define um aleatório para o arquivo baseado no timestamps atual
-                $name = uniqid(date('HisYmd'));
-         
-                // Recupera a extensão do arquivo
-                $extension = $request->file->extension();
-                // Define finalmente o nome
-                $nameFile = "{$name}.{$extension}";
-         
-                // Faz o upload:
-                $upload = $request->file->storeAs('files', $nameFile);
-                // Se tiver funcionado o arquivo foi armazenado em storage/app/public/files/nomedinamicoarquivo.extensao
-         
-                // Verifica se NÃO deu certo o upload (Redireciona de volta)
-                if ( !$upload )
-                    return redirect()
-                                ->back()
-                                ->with('error', 'Falha ao fazer upload')
-                                ->withInput();
-                $download = $nameFile;
-                                 
-                               
-                $project = Project::create([
-                    'user_id' => auth()->id(),
-                    'title' => request('title'),
-                    'description' => request('description'),
-                    'type' => request('type'),
-                    'download' => $download,
-                    'file_type' => 1,
-                    'date' => $actDate,
-                    'project' => $nameFile,
-                    'views' => 0,
-                    'thumbnailURL' => $thumbnailURL
-                    
-                ])->save();
-            }else{
-                return response()->json(['success'=>'Não é possivel descompactar arquivos rar mude para zip']);
+                    // Define um aleatório para o arquivo baseado no timestamps atual
+                    $name = uniqid(date('HisYmd'));
+             
+                    // Recupera a extensão do arquivo
+                    $extension = $request->file->extension();
+                    // Define finalmente o nome
+                    $nameFile = "{$name}.{$extension}";
+             
+                    // Faz o upload:
+                    $upload = $request->file->storeAs('files', $nameFile);
+                    // Se tiver funcionado o arquivo foi armazenado em storage/app/public/files/nomedinamicoarquivo.extensao
+             
+                    // Verifica se NÃO deu certo o upload (Redireciona de volta)
+                    if ( !$upload )
+                        return redirect()
+                                    ->back()
+                                    ->with('error', 'Falha ao fazer upload')
+                                    ->withInput();
+                    $download = $nameFile;
+                                     
+                                   
+                    $project = Project::create([
+                        'user_id' => auth()->id(),
+                        'title' => request('title'),
+                        'description' => request('description'),
+                        'type' => request('type'),
+                        'download' => $download,
+                        'file_type' => 1,
+                        'extension' => 'Imagem',
+                        'date' => $actDate,
+                        'project' => $nameFile,
+                        'views' => 0,
+                        'thumbnailURL' => $thumbnailURL
+                        
+                    ])->save();
+                    return response()->json(['success'=>'postagem feita com sucesso!!!']);
+                }else{
+                    return response()->json(['success'=>'imagem não suportada']);
+                }
+    
             }
 
+  
 
             }catch(Exception $ex){
+                dd($ex);
                 return response()->json(['success' => 'Arquivo não suportado']);
 
             }
@@ -407,9 +536,12 @@ class ProjectController extends Controller
      */
     public function destroy($id) //deletar o projeto
     {
+     
+      
 
+       
 
-                /**
+        /**
          * use Facade Storage
          * method delete image
          */
@@ -427,7 +559,9 @@ class ProjectController extends Controller
                 $like->delete();
             }
 
-            //deleta imagem
+           
+
+            //deleta
             Storage::delete('files/'. Project::find($id)->project);
             //deleta projeto com id informado
             Project::find($id)->delete();

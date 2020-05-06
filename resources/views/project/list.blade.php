@@ -3,10 +3,10 @@
 @section('content')
 
 <div id="background">
-	<div class="card card-deck" style="display: flex; flex-wrap: wrap;">
+	<div class="card flex card-deck">
 
 		@foreach ($projects as $project) 
-			<div class="block-size card mb-3 cover">
+			<div class="block-size card mb-3 cover card-mutator">
 				@if($project->type == 1)
 			  	<a href="/projects/show/{{$project->id}}" class="border-card-1 project-icon">
 			  		<img src="/storage/files/{{$project->project}}" class="cover card-img-top" id="imgCardRI" alt="...">
@@ -18,27 +18,45 @@
 			    	<img src="{{$project->thumbnailURL}}" class="cover card-img-top" id="imgCardRI" alt="...">
 			    
 			    @elseif($project->type == 3)
-			    <a href="/projects/show/{{$project->id}}" class="border-card-3 project-icon">
-			    	<img src="/storage/icons/code.jpg" class="cover card-img-top" id="imgCardRI" alt="...">
+					@if($project->zip_default == 1)
+
+					<a href="/projects/show/{{$project->id}}" class="border-card-3 project-icon">
+						<figure class="efect">
+						<img src="/storage/icons/docStyle.jpg" class="cover card-img-top" alt="">
+							<figcaption>
+								<img src="/storage/icons/docSimb.png" alt="arquivos normais">
+							</figcaption>
+							
+							
+					@else
+					<a href="/projects/show/{{$project->id}}" class="border-card-3 project-icon">
+						<figure class="efect">
+							<img src="/storage/icons/siteStyle2.jpg" class="cover card-img-top" alt="">
+							<figcaption>
+								<img src="/storage/icons/html-icon.png" alt="codigo html css javascript">
+								
+							</figcaption>	
+					@endif	
+						</figure>
 			 	@endif
 			    </a>
 			    
 			    <div class="card-body">
 
-			      <div class="profileThumbHome fl">
+			      <div class="profileThumbHome pt-2 fl">
 			      	<a href="/projects/userProject/{{$project->user->id}}">
 				      	@if($project->user->image == null)
-				  		<img width="25px" height="25px" src="/storage/icons/user.png" class="userThumb">
+				  			<img src="/storage/icons/user.png" class="userThumb">
 				  		@else
-				  		<img src="/storage/users/{{$project->user->image}}" class="userThumb">
+				  			<img src="/storage/users/{{$project->user->image}}" class="userThumb">
 				  		@endif
 				  	</a>
 			      </div>
 
 			      <div class="fl">
-			      	<span class="projectNameControll">
+			      	<h3 class="projectNameControll">
 			      		{{$project->title}}
-			      	</span>
+					</h3>
 
 			      	<br />
 
@@ -46,7 +64,11 @@
 				      	<span class="nameControll">
 				      		{{$project->user->name}}
 				      	</span>
-				    </a>
+					</a>
+					
+					<div class="my-2">
+						<h4 class="mx-1">{{ $project->extension }}</h4>
+					</div>
 			      </div>
 
 			    </div>

@@ -20,11 +20,12 @@ class CreateProjectsTable extends Migration
             $table->string('project');
             $table->string('download')->nullable();
             $table->text('description');
+            $table->string('extension')->nullable();
             $table->integer('sent')->nullable();
             $table->integer('type');
             $table->integer('file_type')->nullable();
+            $table->integer('zip_default')->nullable();
             $table->date('date');
-            $table->text('path_code')->nullable();
             $table->text('path_web')->nullable();
             $table->integer('views');
             $table->timestamps();

@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +14,7 @@
 */
 
 Route::get('/', 'ProjectController@index');
+Route::get('/teste', 'ProjectController@teste');
 
 //acesso sem logar
 Route::get('/projects', 'ProjectController@index');
@@ -28,7 +31,7 @@ Route::get('/user/profile/{id}', 'UserController@profile');
 
 //FACE
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
-Route::get('/callback/{provider}', 'SocialController@callback');
+Route::get('/callback/facebook', 'SocialController@callback');
 
 
 //login para acessar
@@ -37,6 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
     //projeto
 	Route::get('/projects/create', 'ProjectController@create');
 	Route::post('/projects', 'ProjectController@store');
+
 	Route::get('/projects/edit/{id}', 'ProjectController@edit');
 	Route::put('/projects/show/{id}', 'ProjectController@update');
 	Route::get('/projects/destroy/{id}', 'ProjectController@destroy');
@@ -56,7 +60,10 @@ Route::group(['middleware' => ['auth']], function () {
 	//usuário
 	Route::get('/user/profile/', 'UserController@profile');
     Route::get('/user/edit/{id}', 'UserController@edit');
-    Route::put('/user/profile/{id}', 'UserController@update')->name('user.update');
+	Route::put('/user/profile/{id}', 'UserController@update')->name('user.update');
+	
+	//api github
+	Route::get('/git/post', 'GithubController@getRepositories')->name('github.get');
 
 });
 
