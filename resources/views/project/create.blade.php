@@ -3,12 +3,12 @@
 @section('content')
 <div class="card-body">
     <div class="container">
-        <div class="card-body fildcontainer">
+        <div class="card-body fildcontainer" style="border: border-box; margin-left: 0px; ">
             <form method="post" id="formProject" action="/projects" enctype="multipart/form-data" class="lef">
                     @csrf
 
                     <div class="form-group row">
-                        <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Titulo') }}</label>
+                        <label for="title" class="col-md-4 col-form-label py-2 text-md-right">{{ __('Titulo') }}</label>
 
                         <div class="col-md-6">
                             <input type="text" name="title" maxlength="34" class="my-2 form-control inputformact">
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Tipo do projeto') }}</label>
+                        <label for="type" class="col-md-4 mt-0 pt-0 col-form-label text-md-right">{{ __('Tipo do projeto') }}</label>
 
                         <div class="col-md-6">
                             <select name="type">
@@ -57,10 +57,10 @@
                     <div class="form-group row">
                         <label for="file" class="col-md-4 col-form-label text-md-right">{{ __('Selecionar arquivo: ') }}</label>
                         <div class="col-md-6">
-                            <input type="file" class="form-control" name="file" id="file">
+                            <input type="file" class="form-control px-1 py-1 mx-1" name="file" id="file">
                         </div>
-                        <div class="container center">
-                            <div class="progress form-control w-loading-100 align-content-center">
+                        <div style="display: relative; border: border-box; margin-left: 0px; padding:0px 10px 0px 0px;" class="container center">
+                            <div style="display: absolute; width: 97%; padding-left: 0%;" class="progress form-control w-loading-100 align-content-center">
                                 <div class="bar progress-bar progress-bar-striped progress-bar-animated"></div>
                                 <div class="percent"></div>
                             </div>

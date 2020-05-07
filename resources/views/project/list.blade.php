@@ -31,13 +31,14 @@
 					@else
 					<a href="/projects/show/{{$project->id}}" class="border-card-3 project-icon">
 						<figure class="efect">
-							<img src="/storage/icons/siteStyle2.jpg" class="cover card-img-top" alt="">
+							<img src="/storage/icons/siteStyle.jpg" class="cover subscreen card-img-top" alt="">
 							<figcaption>
 								<img src="/storage/icons/html-icon.png" alt="codigo html css javascript">
 								
 							</figcaption>	
 					@endif	
 						</figure>
+				
 			 	@endif
 			    </a>
 			    
@@ -46,7 +47,7 @@
 			      <div class="profileThumbHome pt-2 fl">
 			      	<a href="/projects/userProject/{{$project->user->id}}">
 				      	@if($project->user->image == null)
-				  			<img src="/storage/icons/user.png" class="userThumb">
+				  			<img src="/storage/users/user.png" class="userThumb">
 				  		@else
 				  			<img src="/storage/users/{{$project->user->image}}" class="userThumb">
 				  		@endif

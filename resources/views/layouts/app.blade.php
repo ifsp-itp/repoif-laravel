@@ -36,13 +36,12 @@
             <nav class="navbar navbar-expand-lg nav-color">
                 <a class="navbar-brand text-light mr-auto" href="{{ url('/projects') }}">
                     REPOIF
-
                 </a>
                 
                 <!--menu dropdown-->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                <button class="navbar-toggler mr-4" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
                     <div type="context center">
-                      <p class="h3 pt-3 mr-4 bg-transparent text-light">menu</p> 
+                      <p class="h2 py-2 mr-4 bg-transparent text-light">menu</p> 
                     </div>
                 </button>
 

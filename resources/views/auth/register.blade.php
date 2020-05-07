@@ -79,13 +79,13 @@
                             </div>
                         </div>
                         <div class="row py-2 my-2">
-                            <input type="file" name="userimage" onChange="teste()" id="validImage">
+                            <input type="file" class="form-control" name="userimage" onChange="validPhoto()" id="validImage">
                         </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
 
-                                <button type="submit" id="valid" class="btn btn-success">
+                                <button type="submit" aria-pressed="false" id="valid" class="btn btn-success">
                                     {{ __('Register') }}
                                 </button>
                             </div>
@@ -101,7 +101,7 @@
     </div>
 </div>
 <script>
-    function teste() {
+    function validPhoto() {
         var imageinput = window.document.getElementById('validImage')
         if(imageinput != ""){
             var num = imageinput.value.length
@@ -112,18 +112,21 @@
  
             var image =  imageinput.value.slice(newnovo, num)
 
+            image = image..toLowerCase()
+
             if(image == '.jpg'){
-                document.getElementById('valid').removeAttribute('class', 'd-none')
+                document.getElementById('valid').removeAttribute('class',  'btn btn-success disabled disable')
                 document.getElementById('valid').setAttribute('class', 'btn btn-success')
             }else if(image == '.png'){
-                document.getElementById('valid').removeAttribute('class', 'd-none')
+                document.getElementById('valid').removeAttribute('class', 'disabled')
+                document.getElementById('valid').removeAttribute('class', 'disable')
                 document.getElementById('valid').setAttribute('class', 'btn btn-success')
             }else if(imageo == '.jpeg'){
-                document.getElementById('valid').removeAttribute('class', 'd-none')
+                document.getElementById('valid').removeAttribute('class', 'btn btn-success disabled disable')
                 document.getElementById('valid').setAttribute('class', 'btn btn-success')
               
             }else{
-                document.getElementById('valid').setAttribute('class', 'd-none')
+                document.getElementById('valid').setAttribute('class', 'btn btn-success disabled disable')
                 alert('informe uma extensão valida!!!')
             }
         }

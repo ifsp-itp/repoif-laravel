@@ -24,7 +24,7 @@
             @if($project->zip_default == 1)
                     Documento normal
             @elseif($project->file_type == 0)
-                    <iframe class="codeExib mincodeweb w-100 h-50" src="{{$project->path_web}}/index.html"></iframe>
+                    <iframe id="siteframe" class="codeExib mincodeweb w-100 h-50" src="{{$project->path_web}}/index.html"></iframe>
             @else
                     <iframe class="codeExib minCode w-100 h-50" src="/storage/files/{{ $project->download }}"></iframe>
                 
@@ -41,7 +41,7 @@
                         <th scope="col" colspan="2">
                             <span>
                                 @if($comment->user->image == null)
-                                <img src="/storage/icons/user.png" class="userThumb">
+                                <img src="/storage/users/user.png" class="userThumb">
                                 @else
                                 <img src="/storage/{{$project->user->image}}" class="userThumb">
                                 @endif
@@ -58,8 +58,6 @@
 
                     </code>
 
-
-                    +
                 </thead>
                 <tbody>
                     <tr>
@@ -145,8 +143,6 @@
 
     <div class="fl mgl dvShow dvDados">
         <h4> Dados </h4>
-        <div id="date">ola</div>
-
         <div id="description">
             <i class="fa fa-eye largura"> {{$project->views}} pessoas visualizaram isso</i>
             <i class="fa fa-heart largura"> {{$project->likes->count()}} pessoas gostaram disso</i>
@@ -155,14 +151,14 @@
                 @method('POST')
                 @csrf
                 <br>
-                <button class="btn btn-outline-success btn-sm fl " name="idProjeto">
+                <button class="btn  my-2 btn-outline-success btn-sm fl " name="idProjeto">
                     <i class="fa fa-thumbs-up"> {{$temLike}}</i>
                 </button>
             </form>
 
             @if($project->type != '2')
-            <a href="/download/{{$project->download}}" class="fl btnLD " style="margin-right: 13%;">
-                <button type="button" class="btn btn-outline-success btn-sm ">
+            <a href="/download/{{$project->download}}" class="flbtnLD " style="margin-right: 13%;">
+                <button type="button" class="btn my-2 btn-outline-success btn-sm ">
                     <i class="fa fa-cloud-download"> Download</i>
                 </button>
             </a>
@@ -177,10 +173,9 @@
         <form action="/coments/{{$project->id}}" method="POST">
             @method('POST')
             @csrf
-            <textarea name="body" id="form7" class="md-textarea form-control txtPerson"
-                style="height:200px; font-size: 20pt;">Deixe seu comentário!
+            <textarea name="body" id="form7" placeholder="Deixe seu comentário!" class="md-textarea form-control txtPerson"  value="Deixe seu comentário!" style="height:200px; font-size: 20pt;" required>
 			</textarea>
-            <button type="submit" class="btn btn-outline-success fr"> Comentar </button>
+            <button type="submit" class="btn btn-outline-success fr ml-2 my-5 mx-2"> Comentar </button>
         </form>
     </div>
 

@@ -153,24 +153,7 @@ class ProjectController extends Controller
     public function store(Request $request) //salvar o projeto
     {
 
-      $upload = new UploadDaily();
-
-      $resul =  $upload->upload(request('title'), $request->file('file'));
-        
-      $project = Project::create([
-        'user_id' => auth()->id(),
-        'title' => request('title'),
-        'description' => request('description'),
-        'type' => requehjyst('type'),
-        'download' => $resul['id'],
-        'date' => $actDate,
-        'extension' => 'Video',
-        'project' => $resul['id'],
-        'sent' => $enviado,
-        'views' => 0,
-        'thumbnailURL' => $thumbnailURL
-
-        ])->save();
+  
 
 
 
@@ -184,7 +167,29 @@ class ProjectController extends Controller
         if($tipo == '2') {
 
                 try {
-                 
+                    //dailymotion
+                    $upload = new UploadDaily();
+
+                    $resul =  $upload->upload(request('title'), $request->file('file'));
+                    dd($resul);
+                    
+                    $project = Project::create([
+                      'user_id' => auth()->id(),
+                      'title' => request('title'),
+                      'description' => request('description'),
+                      'type' => requehjyst('type'),
+                      'download' => $resul['id'],
+                      'date' => $actDate,
+                      'extension' => 'Video',
+                      'project' => $resul['id'],
+                      'sent' => $enviado,
+                      'views' => 0,
+                      'thumbnailURL' => $thumbnailURL
+              
+                      ])->save();
+
+
+                    //youtube
                     $video = Youtube::upload($request->file('file'), [
                         'title'       => request('title'),
                         'description' => request('description'),

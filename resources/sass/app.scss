@@ -20,6 +20,7 @@ body {
 .nav-color{
     background-color: red;
 }
+
 .block-size{
     min-width: 44%;
     width: auto;
@@ -37,7 +38,9 @@ body {
 }
 .center{
     text-align: center;
+    
 }
+
 .helper{
     margin: auto auto auto 150px;
     text-align: center;
@@ -137,6 +140,13 @@ figure.efect figcaption {
     align-items: center;
 }
 
+
+/* from disable*/
+.disable{
+    pointer-events: none;
+}
+
+
 /* coment video medias */
 .comentfixed{
     border: border-box;
@@ -156,10 +166,22 @@ figure.efect figcaption {
     background-color: gray;
 }
 
+
+
+ #siteframe::-webkit-scrollbar{
+    display: none;
+    
+
+}
+#siteframe::-moz-scrollbar{
+    display: none;
+
+}
+
 /*responsive*/
 @media (max-width:779px){
     .lef {
-        margin: auto auto auto 20px;
+        margin: auto auto auto 10px;
     }
     .helper{
         margin: auto auto auto 40px;
@@ -171,8 +193,9 @@ figure.efect figcaption {
         border-color: rgba(207, 197, 197, 0.074);
     }
     .w-loading-100{
-        width: 100%;
-        margin-right: 15px;
+        width: 96%;
+        margin: auto 2% auto 2%;
+        
        
     } 
 }
@@ -182,6 +205,12 @@ figure.efect figcaption {
         min-width: 99%;
         width: auto;
         max-width: 100%;
+    }
+    .w-loading-100{
+        width: 93%;
+        margin: auto 5% auto 2%;
+        
+       
     }
 }
 @media (min-width:575px) and (max-width:670px){
@@ -202,6 +231,7 @@ figure.efect figcaption {
         width: auto;
         max-width: 91%;
     }
+  
     
 
 }

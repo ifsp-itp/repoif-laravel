@@ -11,7 +11,7 @@
                         <div class="profile-img">
 
                             @if($user->image == NULL)
-                            <img src="/storage/users/profile.jpg" alt=""/>
+                            <img src="/storage/users/user.png" alt=""/>
                             @elseif($user->provider == "facebook")
                             <img src="{{$user->image}}" alt=""/>
                             @else
