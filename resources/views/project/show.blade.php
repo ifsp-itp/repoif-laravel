@@ -12,22 +12,16 @@
     @elseif($project->type == '2' && $project->sent == '0')
         <div class="w-100 posvideo">
             <video class="w-100 videonorm" src="/storage/files/{{$project->project}}"
-                controls="controls"></video>
+                controls="controls">
+                video não suportado
+            </video>
         </div>
 
     @elseif($project->type == '1')
-        <img src="/storage/files/{{$project->project}}" class="img-resposive w-100 imgdefine">
-
-  
-                
+        <img src="/storage/files/{{$project->project}}" class="img-resposive w-100 imgdefine">          
     @else
-            @if($project->zip_default == 1)
-                    Documento normal
-            @elseif($project->file_type == 0)
+            @if($project->file_type == 0)
                     <iframe id="siteframe" class="codeExib mincodeweb w-100 h-50" src="{{$project->path_web}}/index.html"></iframe>
-            @else
-                    <iframe class="codeExib minCode w-100 h-50" src="/storage/files/{{ $project->download }}"></iframe>
-                
             @endif
     @endif
 

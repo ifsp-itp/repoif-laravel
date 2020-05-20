@@ -19,6 +19,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script src="{{ asset('ajax/jquery.js') }}"></script>
+    <script src="{{ asset('ajax/form/jquery.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -57,7 +59,7 @@
                             <a class="nav-link text-light" href="{{ url('/projects/videos') }}">Vídeos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ url('/projects/codes') }}">Arquivos e Sites</a>
+                            <a class="nav-link text-light" href="{{ url('/projects/codes') }}">Scripts</a>
                         </li>
 
                         <li class="nav-item">
@@ -121,5 +123,6 @@
                 @yield('content')
             </main>
     </div>
+    
 </body>
 </html>

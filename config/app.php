@@ -164,6 +164,7 @@ return [
         Dawson\Youtube\YoutubeServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         ZanySoft\Zip\ZipServiceProvider::class,
+        App\Providers\UploadServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -231,6 +232,7 @@ return [
         'Youtube' => Dawson\Youtube\Facades\Youtube::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Zip' => ZanySoft\Zip\ZipFacade::class,
+        'Upload' => App\Facades\Upload::class,
 
     ],
 

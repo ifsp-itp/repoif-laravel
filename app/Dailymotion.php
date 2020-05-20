@@ -86,13 +86,13 @@ class Dailymotion
      * Maximum number of seconds allowed for each HTTP request to complete.
      * @var int
      */
-    public $timeout = 10;
+    public $timeout = 800;
 
     /**
      * Maximum number of seconds to wait for connection establishment of HTTP requests.
      * @var int
      */
-    public $connectionTimeout = 60;
+    public $connectionTimeout = 960;
 
     /**
      * An HTTP proxy to tunnel HTTP requests through (format: `hostname[:port]`).
@@ -320,6 +320,7 @@ class Dailymotion
      */
     public function uploadFile($filePath, $forceHostname = null, &$progressUrl = null, $callbackUrl = null)
     {
+      
         $params = array();
         if (!empty($callbackUrl))
         {

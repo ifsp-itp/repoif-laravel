@@ -3,59 +3,118 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Project;
+use ZanySoft\Zip\Zip;
 use GuzzleHttp\Client;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use \Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class GithubExemploController extends BaseController
+class GithubController extends Controller
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public function getRepositories($repository)
+    public function indexRepositories()
     {
-        if(env("USER_GITHUB") != ""){
-            $user = "repos/".env("USER_GITHUB");
-        }else{
-            dd(['error'=>'erro na variavel de ambiente']);
-        }
-       
-        $repo = "/".$repository;
-        if($repo != '' && $user != ''){
-            try{
-                $repository = "https://api.github.com";
-                $client = new Client(['base_uri' => $repository, 'timeout' => 30.0]);
-                $response = $client->request('GET', "$user$repo");
-                $data = json_decode($response->getBody()->getContents());
-                echo "<pre>";
-                print_r($data);
-                echo "</pre>";
-                
-               
-                echo "<h1>GitHub</h1>";
-                echo "<figure>";
-                echo "<img src='".$data->owner->avatar_url."' alt='teste'>";
-                echo "<figcaption>";
-                    echo "";
-                echo"</figcaption>";
-                    
-              
-              
-
-            }catch(Exception $ex){
-                echo "foi excedido o tempo de conexão com o github";
-            }
-           
-
-         
-
-
-            //dd($response);
-           
+        return view('github.github');
     }
+
+    public function getRepositories(Request $repository)
+    { 
+    try{
+        if(Storage::makeDirectory("tmp")){
+            if(($repository->user != "") && ($repository->repos != "")){
+                $actDate = date('Y-m-d');
+                $user = "repos/".$repository->user;
+                $repo = "/".$repository->repos;
+                $description = $repository->description;
+                $repos = $repository->repos;
+                $use = $repository->user;
+        
+                //download
+                $url = "https://github.com/".$repository->user."/".$repository->repos."/archive/master.zip";
+                $info = pathinfo($url);
+                $contents = file_get_contents($url);
+                $file = public_path('storage\tmp\\').$info['basename'];
+                file_put_contents($file, $contents);
+                $upload_file = new UploadedFile($file, $info['basename']);
+        
+                //processo integração
+                //validação do site
+                $hash = uniqid(date('HisYmd'));
+                $zipname = 'master'.$hash.'.zip';
+                $iszip = Storage::move('tmp/master.zip', 'files/'.$zipname);
+               if($iszip){
+                foreach(Zip::open('storage/'.'files/'.$zipname)->listFiles() as $file){
+                    $teste[] =  explode('/' , $file);
+                }
+                 $isExists = false;
+                foreach($teste as $index){
+                    if(!empty($index[1])){
+                    if($index[1] == "index.html"){
+                        $isExists = true;
+                    }
+                    }
+                }
+             
+                   
+                if($isExists == true){  //se a variavel $isindex for igual a true ou seja se o arquivo index existir
+                    if(Zip::open('storage/'.'files/'.$zipname)->extract("storage/web/$zipname")){  //extrai o arquivo zip e adiciona a pasta web e verifica se foi extraido com sucesso
+                            $path = "/storage/web/$zipname/$repository->repos-master"; //salva caminho do site dentro da variavel $path 
+                    }
+        
+                    $repository = "";
+                    
+                    $repository = "http://api.github.com";
+                    $client = new Client(['base_uri' => $repository, 'timeout' => 100000000000000000000000000.0]);
+                    $response = $client->request('GET', "$user$repo");
+                    $data = json_decode($response->getBody()->getContents());
+          
+                    //path download
+                    $download = 'storage/'.'files/'.$zipname;
+                                     
+                                   
+                        $project = Project::create([
+                            'user_id' => auth()->id(),
+                            'title' => $repos,
+                            'description' => $description,
+                            'type' => 3,
+                            'download' => $download,
+                            'path_web' => $path,
+                            'extension' => 'Site WEB GitHub',
+                            'file_type' => 0,
+                            'date' => $actDate,
+                            'project' => $download,
+                            'views' => 0
+                            
+                        ])->save();
+                        return view('github.github',['success'=> "Sucesso, seu site foi enviado !!!", 
+                                                'repos' => [
+                                                    'repository' => $data->owner->avatar_url,
+                                                    'user' => $use
+                                                           ]
+                                                ]);
+        
+                   }else{
+                        Storage::delete('files/'. $zipname);
+        
+                        return view('github.github', ['success'=> " Arquivo index não encontrado!!!"]);
+        
+                   }
+        
+               }
+        
+            }else{
+                return view('github.github', ['success'=>'campos não informados!!!']);
+            }  
+        }
+    }catch(Exception $ex){
+        return view('github.github', ['success'=>'erro no carregamento do repositorio ou o repositorio é privado']);
+        
+    }
+
+    
 
 }
 }

@@ -12,5 +12,9 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+
+   .scripts('node_modules/jquery/dist/jquery.js' , 'public/ajax/jquery.js')
+   
+   .scripts('node_modules/form-master/dist/jquery.form.min.js', 'public/ajax/form/jquery.js')
    .sass('resources/sass/app.scss', 'public/css')
    .sass('resources/sass/modify.scss','public/style/modify.css');

@@ -3,7 +3,12 @@ namespace App;
 
 use App\Dailymotion;
 use Illuminate\Support\Str;
+use App\DailymotionTransportException;
 
+/**
+ * @beforeClass
+ * classe de upload para o  dailymotion
+ */
 class UploadDaily{
     // Account settings
     private $apiKey;
@@ -22,32 +27,82 @@ class UploadDaily{
         'manage_videos',
         );
         
-        $this->setApiKey(env('CLIENT_DAILY'));
-        $this->setApiSecret(env('SECRET_DAILY'));
-        $this->setTestUser(env('USER_DAILY'));
-        $this->setTestPassword(env('PASSWORD_DAILY'));
+        $this->setApiKey(env('CLIENT_DAILY', null));
+        $this->setApiSecret(env('SECRET_DAILY', null));
+        $this->setTestUser(env('USER_DAILY', null));
+        $this->setTestPassword(env('PASSWORD_DAILY', null));
 
 
     
 
     }
     // Dailymotion object instanciation
+    /**
+     * @method mixed upload()
+     * @param mixed $title titulo do video
+     * @param mixed $file arquivo para upload
+     * faz upload usando SDK Dailymotion
+     */
+    public function upload($title = "", $file = "") : array
+    {
+        //validação dos parametros
+        if($title == "" || $file == ""){
+            return ['error'=> 'não foi informado todos os parametros obrgatorios', 'status' => true];
+        }
+     
+        try{
+                //instacia da classe do SDK
+                $api = new Dailymotion();
+                
+                //tempo de envio
+                $this->time($api, 10000);
 
-    public function upload($title = "", $file = ""){
-        $api = new Dailymotion();
+                //token api
+                $api->setGrantType(
+                    Dailymotion::GRANT_TYPE_PASSWORD,
+                    $this->getApiKey(),
+                    $this->getApiSecret(),
+                    $this->scopes,
+                    array(
+                        'username' => $this->getTestUser(),
+                        'password' => $this->getTestPassword(),
+                    )
+                );
+                //formatação e fatiamento do caminho
+                $res = $this->path($file);
+                //upload video
+                $url = $api->uploadFile($res);
+                $result = $api->post(
+                    '/videos',
+                    array(
+                        'url'       => $url,
+                        'title'     => $title,
+                        'tags'      => 'dailymotion,api,sdk',
+                        'channel'   => 'videogames',
+                        'published' => true,
+                    )
+                );
+                //retornando o video
+                /**'
+                 * @return  array(video, status)
+                 */
+                return ['video' => $result, 'status' => true];
+        }catch(DailymotionTransportException $ex){
+            return ['error'=>  ['error', 'arquivo grande demorando enviar', 'status' => true]];
+        }catch(Exception $ex){
+            return ['error'=>  ['error', 'erro de analize do arquivo', 'status' => true]];
+        }finally{
+            dd($result);
+        }
+    }
 
-        $api->setGrantType(
-            Dailymotion::GRANT_TYPE_PASSWORD,
-            $this->getApiKey(),
-            $this->getApiSecret(),
-            $this->scopes,
-            array(
-                'username' => $this->getTestUser(),
-                'password' => $this->getTestPassword(),
-            )
-        );
 
-
+    private function time($object, $time) : void{
+        $object->timeout = $time;
+        $object->connectionTimeout = $time;
+    }
+    private function path($file): string
+    {
         $slice =  Str::replaceFirst('\\','//' ,$file);
         $teste = explode("\\", $slice);
         $final =  count($teste) - 1;
@@ -61,22 +116,9 @@ class UploadDaily{
             }
             $resul += 1;      
         }
-
-        $url = $api->uploadFile($res);
-
-        $result = $api->post(
-            '/videos',
-            array(
-                'url'       => $url,
-                'title'     => $title,
-                'tags'      => 'dailymotion,api,sdk',
-                'channel'   => 'videogames',
-                'published' => true,
-            )
-        );
-        return $result;
+        return $res;
     }
-    private function getApiKey() {
+   private function getApiKey() {
         return $this->apiKey;
     }
 
@@ -110,3 +152,5 @@ class UploadDaily{
 
 
 }
+
+

@@ -9,36 +9,23 @@
 			<div class="block-size card mb-3 cover card-mutator">
 				@if($project->type == 1)
 			  	<a href="/projects/show/{{$project->id}}" class="border-card-1 project-icon">
-			  		<img src="/storage/files/{{$project->project}}" class="cover card-img-top" id="imgCardRI" alt="...">
+			  		<img src="/storage/files/{{$project->project}}" class="cover card-img-top" id="imgCardRI" alt="foto de apresentação dos sites">
 			  	@elseif($project->type == 2 && $project->sent == '0')
 			  	<a href="/projects/show/{{$project->id}}" class="border-card-2 project-icon">
-			    	<img src="/storage/icons/videoThumb.png" class="cover card-img-top" id="imgCardRI" alt="...">
+			    	<img src="/storage/icons/videoThumb.png" class="cover card-img-top" id="imgCardRI" alt="caminho do arquivo de apresentação dos videos">
 			  	@elseif($project->type == 2 && $project->sent == '1')
 			  	<a href="/projects/show/{{$project->id}}" class="border-card-2 project-icon">
-			    	<img src="{{$project->thumbnailURL}}" class="cover card-img-top" id="imgCardRI" alt="...">
+			    	<img src="{{$project->thumbnailURL}}" class="cover card-img-top" id="imgCardRI" alt="caminho do arquivo de imagem">
 			    
 			    @elseif($project->type == 3)
-					@if($project->zip_default == 1)
-
-					<a href="/projects/show/{{$project->id}}" class="border-card-3 project-icon">
-						<figure class="efect">
-						<img src="/storage/icons/docStyle.jpg" class="cover card-img-top" alt="">
-							<figcaption>
-								<img src="/storage/icons/docSimb.png" alt="arquivos normais">
-							</figcaption>
-							
-							
-					@else
+				
 					<a href="/projects/show/{{$project->id}}" class="border-card-3 project-icon">
 						<figure class="efect">
 							<img src="/storage/icons/siteStyle.jpg" class="cover subscreen card-img-top" alt="">
 							<figcaption>
 								<img src="/storage/icons/html-icon.png" alt="codigo html css javascript">
-								
 							</figcaption>	
-					@endif	
 						</figure>
-				
 			 	@endif
 			    </a>
 			    
@@ -47,9 +34,9 @@
 			      <div class="profileThumbHome pt-2 fl">
 			      	<a href="/projects/userProject/{{$project->user->id}}">
 				      	@if($project->user->image == null)
-				  			<img src="/storage/users/user.png" class="userThumb">
+				  			<img src="/storage/users/user.png" class="userThumb" alt="foto default para usuarios">
 				  		@else
-				  			<img src="/storage/users/{{$project->user->image}}" class="userThumb">
+				  			<img src="/storage/{{$project->user->image}}" class="userThumb" alt="imagem do usuário">
 				  		@endif
 				  	</a>
 			      </div>
@@ -88,11 +75,11 @@
 			      </span>
 
 			      @if ($project->type == 1)
-			      <i class="far fa-images fr fontList1"></i>
+			      	<i class="far fa-images fr fontList1"></i>
 			      @elseif ($project->type == 2)
-			      <i class="fab fa-youtube fr fontList2"></i>
+			      	<i class="fab fa-youtube fr fontList2"></i>
 			      @elseif ($project->type == 3)
-			      <i class="fas fa-code fr fontList3"></i>
+			      	<i class="fas fa-code fr fontList3"></i>
 			      @endif
 
 			    </div>

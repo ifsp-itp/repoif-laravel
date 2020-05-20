@@ -8,10 +8,9 @@ use Exception;
 use Validator;
 use App\Comment;
 use App\Project;
-
 use App\UploadDaily;
-
 use ZanySoft\Zip\Zip;
+use App\Facades\Upload;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Policies\ProjectPolicy;
@@ -128,6 +127,9 @@ class ProjectController extends Controller
         return view('project.create');
     }
 
+    public function facade(){
+        
+    }
     /**
      * function file_storage_private
      * $path_file converted path
@@ -153,7 +155,6 @@ class ProjectController extends Controller
     public function store(Request $request) //salvar o projeto
     {
 
-  
 
 
 
@@ -167,17 +168,17 @@ class ProjectController extends Controller
         if($tipo == '2') {
 
                 try {
-                    //dailymotion
-                    $upload = new UploadDaily();
+                      //dailymotion
+                    $resul =   Upload::upload(request('title'), $request->file('file'));
+                   
+      
+                    $enviado = 1;
 
-                    $resul =  $upload->upload(request('title'), $request->file('file'));
-                    dd($resul);
-                    
                     $project = Project::create([
                       'user_id' => auth()->id(),
                       'title' => request('title'),
                       'description' => request('description'),
-                      'type' => requehjyst('type'),
+                      'type' => request('type'),
                       'download' => $resul['id'],
                       'date' => $actDate,
                       'extension' => 'Video',
@@ -190,36 +191,36 @@ class ProjectController extends Controller
 
 
                     //youtube
-                    $video = Youtube::upload($request->file('file'), [
-                        'title'       => request('title'),
-                        'description' => request('description'),
+                    //$video = Youtube::upload($request->file('file'), [
+                      //  'title'       => request('title'),
+                       // 'description' => request('description'),
                         //'tags'        => ['foo', 'bar', 'baz'],
-                        'category_id' => request('type')
-                    ]);
+                      //  'category_id' => request('type')
+                    //]);
                
 
-                    $snippet = $video->getSnippet();
-                    $thumbnailURL = $snippet->thumbnails->high->url;
-                    $enviado = 1;
+                    //$snippet = $video->getSnippet();
+                    //$thumbnailURL = $snippet->thumbnails->high->url;
+                    //$enviado = 1;
 
-                    $nameFile = $video->getVideoId();
+                    //$nameFile = $video->getVideoId();
 
-                    $project = Project::create([
-                    'user_id' => auth()->id(),
-                    'title' => request('title'),
-                    'description' => request('description'),
-                    'type' => request('type'),
-                    'download' => $download,
-                    'date' => $actDate,
-                    'extension' => 'Video',
-                    'project' => $nameFile,
-                    'sent' => $enviado,
-                    'views' => 0,
-                    'thumbnailURL' => $thumbnailURL
+                    //$project = Project::create([
+                    //'user_id' => auth()->id(),
+                    //'title' => request('title'),
+                    //'description' => request('description'),
+                    //'type' => request('type'),
+                    //'download' => $download,
+                    //'date' => $actDate,
+                    //'extension' => 'Video',
+                    //'project' => $nameFile,
+                    //'sent' => $enviado,
+                    //'views' => 0,
+                    //'thumbnailURL' => $thumbnailURL
 
-                    ])->save();
+                    //])->save();
 
-                    return response()->json(['success' => 'sucesso no upload do video para o  youtube!!!']);
+                    return response()->json(['success' => 'sucesso no upload do video para o  dailymotion!!!']);
 
 
 
@@ -282,11 +283,8 @@ class ProjectController extends Controller
                                     $extension = $request->file->extension();// Recupera a extensão do arquivo
                                   
                                     $nameFile = "{$name}.{$extension}"; // Define finalmente o nome
-    
-                                   
-                                
-                                    $upload = $request->file->storeAs('files', $nameFile);// Faz o upload:
 
+                                    $upload = $request->file->storeAs('files', $nameFile);// Faz o upload:
 
                                    //procura no zip se existe o arquivo index.html que é a pagina principal do site
 								   $isindex = false;//inicia variavel $isindex com valor falso
@@ -316,48 +314,27 @@ class ProjectController extends Controller
                                     $download = $nameFile;
                                                      
                                                    
-                                    $project = Project::create([
-                                        'user_id' => auth()->id(),
-                                        'title' => request('title'),
-                                        'description' => request('description'),
-                                        'type' => request('type'),
-                                        'download' => $download,
-                                        'path_web' => $path,
-                                        'extension' => 'Site WEB',
-                                        'file_type' => 0,
-                                        'date' => $actDate,
-                                        'project' => $nameFile,
-                                        'views' => 0,
-                                        'thumbnailURL' => $thumbnailURL
-                                        
-                                    ])->save();
-                                    return response()->json(['success'=> "Sucesso, seu site foi enviado !!!"]);
+                                        $project = Project::create([
+                                            'user_id' => auth()->id(),
+                                            'title' => request('title'),
+                                            'description' => request('description'),
+                                            'type' => request('type'),
+                                            'download' => $download,
+                                            'path_web' => $path,
+                                            'extension' => 'Site WEB',
+                                            'file_type' => 0,
+                                            'date' => $actDate,
+                                            'project' => $nameFile,
+                                            'views' => 0,
+                                            'thumbnailURL' => $thumbnailURL
+                                            
+                                        ])->save();
+                                        return response()->json(['success'=> "Sucesso, seu site foi enviado !!!"]);
 
                                    }else{
+                                        Storage::delete('files/'. $nameFile);
 
-
-                                    if ( !$upload )
-                                        return redirect()
-                                                ->back()
-                                                ->with('error', 'Falha ao fazer upload')
-                                                ->withInput();
-                                    $download = $nameFile;
-
-                                    $project = Project::create([
-                                        'user_id' => auth()->id(),
-                                        'title' => request('title'),
-                                        'description' => request('description'),
-                                        'type' => request('type'),
-                                        'download' => $download,
-                                        'zip_default' => 1,                                                                                  
-                                        'extension' => $request->file->extension(),
-                                        'date' => $actDate,
-                                        'project' => $nameFile,
-                                        'views' => 0,
-                                        'thumbnailURL' => $thumbnailURL
-                                        
-                                    ])->save();
-                                    return response()->json(['success'=> "zip normal detectado, upload feito com sucesso!!!"]);
+                                        return response()->json(['success'=> " Arquivo index não encontrado!!!"]);
 
                                    }
                                     
@@ -368,45 +345,7 @@ class ProjectController extends Controller
                       
                     }
                     }else{
-                        if ($request->hasFile('file') && $request->file('file')->isValid()) {
-                            // Define um aleatório para o arquivo baseado no timestamps atual
-                            $name = uniqid(date('HisYmd'));
-                     
-                            // Recupera a extensão do arquivo
-                            $extension = $request->file->extension();
-                            // Define finalmente o nome
-                            $nameFile = "{$name}.{$extension}";
-
-                            // Faz o upload:
-                            $isindex = false;
-                            $upload = $request->file->storeAs('files', $nameFile);
-
-                            if ( !$upload )
-                            return redirect()
-                                    ->back()
-                                    ->with('error', 'Falha ao fazer upload')
-                                    ->withInput();
-                            $download = $nameFile;
-                            
-                            $project = Project::create([
-                                'user_id' => auth()->id(),
-                                'title' => request('title'),
-                                'description' => request('description'),
-                                'type' => request('type'),
-                                'download' => $download,
-                                'zip_default' => 1,                                                                
-                                'extension' => $request->file->extension(),
-                                'date' => $actDate,
-                                'project' => $nameFile,
-                                'views' => 0,
-                                'thumbnailURL' => $thumbnailURL
-                                
-                            ])->save();
-                            
-                        }else{
                             return response()->json(['success'=> "Arquivo invalido!!!"]);
-
-                        }
                     }
                     
             }elseif($tipo == '1'){
@@ -456,15 +395,11 @@ class ProjectController extends Controller
   
 
             }catch(Exception $ex){
-                dd($ex);
+              
                 return response()->json(['success' => 'Arquivo não suportado']);
 
             }
 
-                      
-              
-
-    
     return response()->json(['success'=>'Projeto enviado com sucesso.']);
     
 }

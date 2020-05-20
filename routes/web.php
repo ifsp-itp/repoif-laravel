@@ -14,7 +14,7 @@
 */
 
 Route::get('/', 'ProjectController@index');
-Route::get('/teste', 'ProjectController@teste');
+Route::get('/teste', 'ProjectController@facade');
 
 //acesso sem logar
 Route::get('/projects', 'ProjectController@index');
@@ -57,13 +57,15 @@ Route::group(['middleware' => ['auth']], function () {
 	return response()->download(storage_path("app/public/files/".$file));
 	});
 
+
 	//usuário
 	Route::get('/user/profile/', 'UserController@profile');
     Route::get('/user/edit/{id}', 'UserController@edit');
 	Route::put('/user/profile/{id}', 'UserController@update')->name('user.update');
 	
 	//api github
-	Route::get('/git/post', 'GithubController@getRepositories')->name('github.get');
+	Route::get('/git/get', 'GithubController@indexRepositories')->name('github.index');
+	Route::post('/git/post', 'GithubController@getRepositories')->name('github.get');
 
 });
 
