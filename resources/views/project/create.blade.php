@@ -47,14 +47,14 @@
                 </a>
                 
                 <!--menu dropdown-->
-                <button class="navbar-toggler mr-4" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                <button id="btn-menu" onClick="menu()" class="navbar-toggler mr-4" type="button" aria-expanded="false" data-toggle="collapse" data-target="#header-nav">
                     <div type="context center">
                       <p class="h2 py-2 mr-4 bg-transparent text-light">menu</p> 
                     </div>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto mgl">
+                <div class="collapse navbar-collapse"  id="header-nav">
+                    <ul class="flex navbar-nav  mr-auto mgl">
                         <li class="nav-item">
                             <a class="nav-link text-light" href="{{ url('/projects/news') }}">Ultimos envios</a>
                         </li>
@@ -256,6 +256,9 @@
     });
      
     })();
+ 
+
+
 </script>
         </main>
 </div>

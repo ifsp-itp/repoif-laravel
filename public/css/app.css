@@ -11052,6 +11052,10 @@ figure.efect figcaption {
 /*responsive*/
 
 @media (max-width: 779px) {
+  #header-nav {
+    display: none;
+  }
+
   .lef {
     margin: auto auto auto 10px;
   }
@@ -11117,5 +11121,11 @@ figure.efect figcaption {
   * {
     display: none;
   }
+}
+
+li {
+  list-style-type: none;
+  text-decoration: none;
+  text-transform: none;
 }
 

@@ -7,6 +7,8 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+
+
 /*properties*/
 body {
     background-color: white;
@@ -149,6 +151,7 @@ figure.efect figcaption {
 
 
 
+
  #siteframe::-webkit-scrollbar{
     display: none;
     
@@ -161,6 +164,9 @@ figure.efect figcaption {
 
 /*responsive*/
 @media (max-width:779px){
+    #header-nav{
+        display: none;
+    } 
     .lef {
         margin: auto auto auto 10px;
     }
@@ -181,6 +187,7 @@ figure.efect figcaption {
     } 
 }
 @media (max-width:575px) {
+
     .block-size{
         margin-left: 0px;
         min-width: 99%;
@@ -200,6 +207,7 @@ figure.efect figcaption {
             top: 16%;
             left: 2%;  
         }
+
     
 }
 @media (max-width:350px){
@@ -228,3 +236,8 @@ figure.efect figcaption {
     }
 }
   
+li{
+    list-style-type: none;
+    text-decoration: none;
+    text-transform: none;
+}
