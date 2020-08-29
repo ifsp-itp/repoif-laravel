@@ -68,13 +68,14 @@ class Yousent extends Command
                 }
              try {
                     //envia informações do banco
-                    $resul = new UploadDaily($upload->title, $file);
-
+                    $resul = new UploadDaily();
+                    $data = $resul->upload($upload->title, $file);
+                    $resul = $data;
                     $enviado = 1;
                     $nowDate = date('Y-m-d');
                     $project = $upload->update([
                         'sent' => $enviado,
-                        'project' => $resul['id'],
+                        'project' => $resul['video']['id'],
                         'type' => 2,
                         'extension' => 'Video',
                         'date' => $nowDate
@@ -98,6 +99,7 @@ class Yousent extends Command
                 } 
                 catch(Exception $e)
                 {
+                    dd($e);
                     //quando não for mais possivel enviar videos
                     //mostra mensagem
                     echo "A Fila não pode continuar uploads \n";

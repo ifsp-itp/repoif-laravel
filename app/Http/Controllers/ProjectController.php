@@ -155,7 +155,7 @@ class ProjectController extends Controller
     public function store(Request $request) //salvar o projeto
     {
 
-        dd($request);
+       
 
 
         $nameFile = null;
