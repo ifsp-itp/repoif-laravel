@@ -13,7 +13,7 @@
     <title>REPOIF</title>
 
     <!-- Scripts -->
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script>-->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     
     <!-- Progress Bar -->
    
@@ -41,19 +41,21 @@
 </head>
 <body>
     <div id="app">
-    <nav class="navbar navbar-expand-lg nav-color">
+    <nav class="navbar navbar-expand-xl nav-color">
                 <a class="navbar-brand text-light mr-auto" href="{{ url('/projects') }}">
                     REPOIF
                 </a>
                 
                 <!--menu dropdown-->
                 <button id="btn-menu" onClick="menu()" class="navbar-toggler mr-4" type="button" aria-expanded="false" data-toggle="collapse" data-target="#header-nav">
-                    <div type="context center">
-                      <p class="h2 py-2 mr-4 bg-transparent text-light">menu</p> 
+                <div type="context center">
+                      <p class="h2 py-2 mr-4 icon-button text-light">
+                          <img src="/storage/icons/icon-menu.png" width="20" height="20" alt="menu">
+                      </p> 
                     </div>
                 </button>
 
-                <div class="collapse navbar-collapse"  id="header-nav">
+                <div class="collapse navbar-collapse response"  id="header-nav">
                     <ul class="flex navbar-nav  mr-auto mgl">
                         <li class="nav-item">
                             <a class="nav-link text-light" href="{{ url('/projects/news') }}">Ultimos envios</a>
@@ -95,11 +97,11 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                             <a class="nav-link text-light dropdown-toggle mr-3 mr-lg-0 mgl " id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret text-light">{{ Auth::user()->name }}</span>
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="#navbarDropdownMenuLink" id="drop">
                                 <a class="dropdown-item" href="/user/profile/{{auth()->id()}}">
                                     Meu Perfil
                                 </a>
@@ -120,7 +122,79 @@
                 </ul>
 
                 </div>
-            </nav>
+        </nav>
+        <div class="lista">
+    <ul class="menu">
+		<div>
+			
+					
+				    <ul class="navbar-nav mr-auto mgl">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ url('/projects/news') }}">Ultimos envios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ url('/projects/photos') }}">Fotos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ url('/projects/videos') }}">Vídeos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ url('/projects/codes') }}">Scripts</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ url('/projects/create') }}">
+                                <span  class="teste">
+                                    CRIAR
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+				</div>
+				<div>
+                    <ul class="navbar-nav flex-row mr-lg-0">
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Entrar') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar') }}</a>
+                            </li>
+                        @endif
+                    @else
+                    <li class="nav-item dropdown">
+                            <a class="nav-link text-light dropdown-toggle mr-3 mr-lg-0 mgl " id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret text-light">{{ Auth::user()->name }}</span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="#navbarDropdownMenuLink" id="drop2">
+                                <a class="dropdown-item" href="/user/profile/{{auth()->id()}}">
+                                    Meu Perfil
+                                </a>
+
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Sair') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
+				
+		
+		    </div>
+        </ul>	
+	</div>
+                <!--fim dropdown-->
+
+
        
 
         <div class="container-fluid">
@@ -133,7 +207,7 @@
                 <div class="card-header">Criar Projeto</div>
 
                 <div class="card-body">
-                    <form method="post" id="formProject" action="/projects" enctype="multipart/form-data" class="lef">
+                    <form method="post" id="formProject" action="/projects" enctype="multipart/form-data" class="lef form-group">
 
                         @csrf
 
@@ -141,7 +215,7 @@
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Titulo') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="title" maxlength="34">
+                                <input type="text" name="title" maxlength="34" class="form-control">
 
                                 @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -155,7 +229,7 @@
                             <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Descrição do projeto') }}</label>
 
                             <div class="col-md-6">
-                                <textarea name="description"></textarea>
+                                <textarea name="description" class="form-control"></textarea>
 
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
@@ -169,7 +243,7 @@
                             <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Tipo do projeto') }}</label>
 
                             <div class="col-md-6">
-                                <select name="type">
+                                <select name="type" class="form-control">
                                   <option value="1">Foto</option>
                                   <option value="2">Vídeo</option>
                                   <option value="3">Código</option>
@@ -183,7 +257,7 @@
                         <div class="form-group row">
                             <label for="file" class="col-md-4 col-form-label text-md-right">{{ __('Selecionar arquivo: ') }}</label>
                             <div class="col-md-6">
-                              <input type="file" name="file" id="file">
+                              <input type="file" name="file" id="file" class="form-control" style="background-color: rgba(156, 156, 156, 0.125555);">
                             </div>
 
                              <div class="progress">
@@ -211,7 +285,6 @@
     </div>
 </div>
 
-          
 
 <script type="text/javascript">
  
@@ -256,13 +329,11 @@
     });
      
     })();
- 
-
-
 </script>
+
         </main>
 </div>
-
+<script src="{{ asset('menu/menu.js') }}"></script>
 </body>
 </html>
 

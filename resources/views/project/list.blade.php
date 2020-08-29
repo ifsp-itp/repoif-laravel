@@ -23,7 +23,7 @@
 						<figure class="efect">
 							<img src="/storage/icons/siteStyle.jpg" class="cover subscreen card-img-top" alt="">
 							<figcaption>
-								<img src="/storage/icons/html-icon.png" alt="codigo html css javascript">
+								<img width="100" height="70" src="/storage/icons/html.png" alt="codigo html css javascript">
 							</figcaption>	
 						</figure>
 			 	@endif

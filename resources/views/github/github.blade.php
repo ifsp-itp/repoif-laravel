@@ -41,7 +41,12 @@
                             {{ $success }}
                         </div>
                     @else
-                        repositorio
+                        <figure>
+                            <img class="ml-2 cover" src="{{ asset('storage/icons/github.png') }}" alt="">
+                            <figcaption>
+                                <h4 class="h3 pl-4">Repositorio GitHub</h4>
+                            </figcaption>
+                        </figure>
                     @endif
                 </figure>
             </div>

@@ -155,7 +155,7 @@ class ProjectController extends Controller
     public function store(Request $request) //salvar o projeto
     {
 
-
+        dd($request);
 
 
         $nameFile = null;
@@ -168,8 +168,9 @@ class ProjectController extends Controller
         if($tipo == '2') {
 
                 try {
-                      //dailymotion
-                    $resul =   Upload::upload(request('title'), $request->file('file'));
+                    //dailymotion
+                    $upload = new UploadDaily();
+                    $resul =   $upload->upload(request('title'), $request->file('file'));
                    
       
                     $enviado = 1;
@@ -179,10 +180,10 @@ class ProjectController extends Controller
                       'title' => request('title'),
                       'description' => request('description'),
                       'type' => request('type'),
-                      'download' => $resul['id'],
+                      'download' => $resul['video']['id'],
                       'date' => $actDate,
                       'extension' => 'Video',
-                      'project' => $resul['id'],
+                      'project' => $resul['video']['id'],
                       'sent' => $enviado,
                       'views' => 0,
                       'thumbnailURL' => $thumbnailURL
@@ -229,7 +230,7 @@ class ProjectController extends Controller
                 
                         $enviado = 0;
 
-                        if ($request->hasFile('file') && $request->file('file')->isValid()) {
+                    if ($request->hasFile('file') && $request->file('file')->isValid()) {
                         // Define um aleatório para o arquivo baseado no timestamps atual
                         $name = uniqid(date('HisYmd'));
                  
@@ -266,7 +267,7 @@ class ProjectController extends Controller
 
                     ])->save();
 
-                return response()->json(['success'  => 'o upload foi  realizado mas não foi possivel para o youtube']);
+                return response()->json(['success'  => 'o upload foi realizado mas não foi possivel para o dailymotion']);
             } 
  
             } else {
@@ -290,6 +291,7 @@ class ProjectController extends Controller
 								   $isindex = false;//inicia variavel $isindex com valor falso
                                    foreach(Zip::open('storage/files/'.$nameFile)->listFiles() as $item){
                                             if("index.html" == $item){
+                                                
                                                 $isindex = true;
                                                 break;
                                                 //caso ele achar ele armazena valor verdadeiro dentro da variavel  $isindex caso não achar ela continua como falso   
@@ -336,20 +338,16 @@ class ProjectController extends Controller
 
                                         return response()->json(['success'=> " Arquivo index não encontrado!!!"]);
 
-                                   }
-                                    
-                                    
-    
-                                
+                                   }   
                             }
                       
-                    }
+                        }
                     }else{
                             return response()->json(['success'=> "Arquivo invalido!!!"]);
                     }
-                    
             }elseif($tipo == '1'){
-                if ($request->hasFile('file') && $request->file('file')->isValid()) {
+                    if ($request->hasFile('file') && $request->file('file')->isValid()) 
+                    {
                     // Define um aleatório para o arquivo baseado no timestamps atual
                     $name = uniqid(date('HisYmd'));
              
@@ -391,18 +389,13 @@ class ProjectController extends Controller
                 }
     
             }
+        }catch(Exception $ex){
+            
+            return response()->json(['success' => 'Arquivo não suportado']);
 
-  
-
-            }catch(Exception $ex){
-              
-                return response()->json(['success' => 'Arquivo não suportado']);
-
-            }
-
-    return response()->json(['success'=>'Projeto enviado com sucesso.']);
-    
-}
+        }
+            return response()->json(['success'=>'Projeto enviado com sucesso.']);
+    }
 }
 
     /**

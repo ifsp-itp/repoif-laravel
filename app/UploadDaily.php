@@ -20,18 +20,19 @@ class UploadDaily{
 
     private $scopes;
 
-    public function __construct() {
+    public function __construct($title, $path) {
         $this->scopes = array(
         'userinfo',
         'feed',
         'manage_videos',
         );
-        
+        echo "Bem vindo ao dailymotion\n";
         $this->setApiKey(env('CLIENT_DAILY', null));
         $this->setApiSecret(env('SECRET_DAILY', null));
         $this->setTestUser(env('USER_DAILY', null));
         $this->setTestPassword(env('PASSWORD_DAILY', null));
 
+        $this->upload($title, $path);
 
     
 
@@ -43,20 +44,22 @@ class UploadDaily{
      * @param mixed $file arquivo para upload
      * faz upload usando SDK Dailymotion
      */
-    public function upload($title = "", $file = "") : array
+    public function upload($title = "", $file = "")
     {
+        echo "\n\niniciando...";
         //validação dos parametros
         if($title == "" || $file == ""){
             return ['error'=> 'não foi informado todos os parametros obrgatorios', 'status' => true];
         }
      
         try{
+                echo "\n\nacessando dailymotion...\n\n\n video [0%";
                 //instacia da classe do SDK
                 $api = new Dailymotion();
-                
+                echo "-10%";
                 //tempo de envio
                 $this->time($api, 10000);
-
+                echo "-25%";
                 //token api
                 $api->setGrantType(
                     Dailymotion::GRANT_TYPE_PASSWORD,
@@ -68,10 +71,13 @@ class UploadDaily{
                         'password' => $this->getTestPassword(),
                     )
                 );
+                echo "-40%";
                 //formatação e fatiamento do caminho
                 $res = $this->path($file);
+                echo "-45%";
                 //upload video
                 $url = $api->uploadFile($res);
+                echo "-50%";
                 $result = $api->post(
                     '/videos',
                     array(
@@ -86,22 +92,21 @@ class UploadDaily{
                 /**'
                  * @return  array(video, status)
                  */
+                echo "-100%].sucesso!!!";
                 return ['video' => $result, 'status' => true];
         }catch(DailymotionTransportException $ex){
             return ['error'=>  ['error', 'arquivo grande demorando enviar', 'status' => true]];
         }catch(Exception $ex){
             return ['error'=>  ['error', 'erro de analize do arquivo', 'status' => true]];
-        }finally{
-            dd($result);
         }
     }
 
 
-    private function time($object, $time) : void{
+    private function time($object, $time){
         $object->timeout = $time;
         $object->connectionTimeout = $time;
     }
-    private function path($file): string
+    private function path($file)
     {
         $slice =  Str::replaceFirst('\\','//' ,$file);
         $teste = explode("\\", $slice);

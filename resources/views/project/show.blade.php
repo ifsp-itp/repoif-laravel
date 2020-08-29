@@ -5,14 +5,12 @@
 <div class="row">
     @if($project->type == '2' && $project->sent == '1')
         <div class="embed-responsive embed-responsive-16by9 fl imgdefine">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$project->project}}" frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe frameborder="0" width="640" height="360" src="https://www.dailymotion.com/embed/video/{{ $project->project }}?autoplay=1&ui-highlight=fff" allowfullscreen allow="autoplay;fullscreen"></iframe>
         </div>
 
     @elseif($project->type == '2' && $project->sent == '0')
         <div class="w-100 posvideo">
-            <video class="w-100 videonorm" src="/storage/files/{{$project->project}}"
-                controls="controls">
+            <video class="w-100 videonorm" src="/storage/files/{{$project->project}}" controls="controls">
                 video não suportado
             </video>
         </div>
@@ -24,11 +22,36 @@
                     <iframe id="siteframe" class="codeExib mincodeweb w-100 h-50" src="{{$project->path_web}}/index.html"></iframe>
             @endif
     @endif
-
+    <div class="card-columns my-3 ml-3">
+        <div class="card-group-sm">
+            <div>
+                <form action="/like/{{$project->id}}" method="POST" class="form-inline fl btnLD btnLike">
+                    @method('POST')
+                    @csrf
+                    <br>
+                    <button class="btn btn-outline-success btn-sm" name="idProjeto">
+                        <i class="fa fa-thumbs-up"> {{$temLike}}</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="card-group">
+                <div>
+                    @if($project->type != '2')
+                        <a href="/download/{{$project->download}}" class="fl btnLD">
+                            <button type="button" class="btn btn-outline-success btn-sm">
+                                <i class="fa fa-cloud-download">Download</i>
+                            </button>
+                        </a>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="comentArea fl w-100 comentfixed">
 
         @forelse ($project->comments as $comment)
-        <table class="table table-bordered table-dark">
+        <table class="table table-bordered table-orange" style="border-color: gray; opacity: 0.4;">
             <div class="container">
                 <thead>
                     <tr>
@@ -141,30 +164,13 @@
             <i class="fa fa-eye largura"> {{$project->views}} pessoas visualizaram isso</i>
             <i class="fa fa-heart largura"> {{$project->likes->count()}} pessoas gostaram disso</i>
 
-            <form action="/like/{{$project->id}}" method="POST" class="form-inline fl btnLD btnLike">
-                @method('POST')
-                @csrf
-                <br>
-                <button class="btn  my-2 btn-outline-success btn-sm fl " name="idProjeto">
-                    <i class="fa fa-thumbs-up"> {{$temLike}}</i>
-                </button>
-            </form>
-
-            @if($project->type != '2')
-            <a href="/download/{{$project->download}}" class="flbtnLD " style="margin-right: 13%;">
-                <button type="button" class="btn my-2 btn-outline-success btn-sm ">
-                    <i class="fa fa-cloud-download"> Download</i>
-                </button>
-            </a>
-            @endif
-
         </div>
     </div>
 
 
     <div class="fl mgl dvShow">
 
-        <form action="/coments/{{$project->id}}" method="POST">
+        <form action="/coments/{{$project->id}}" method="POST" class="btnLD">
             @method('POST')
             @csrf
             <textarea name="body" id="form7" placeholder="Deixe seu comentário!" class="md-textarea form-control txtPerson"  value="Deixe seu comentário!" style="height:200px; font-size: 20pt;" required>

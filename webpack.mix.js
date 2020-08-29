@@ -17,4 +17,5 @@ mix.js('resources/js/app.js', 'public/js')
    
    .scripts('node_modules/form-master/dist/jquery.form.min.js', 'public/ajax/form/jquery.js')
    .sass('resources/sass/app.scss', 'public/css')
-   .sass('resources/sass/modify.scss','public/style/modify.css');
+   .sass('resources/sass/modify.scss','public/style/modify.css')
+   .scripts('resources/js/menu.js', 'public/menu/menu.js');
