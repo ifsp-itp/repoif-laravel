@@ -10970,6 +10970,14 @@ body {
   text-align: center;
 }
 
+/* img show */
+
+.imgdefine {
+  width: 100%;
+  height: auto;
+  margin: auto 7px auto 7px;
+}
+
 /*forms upload*/
 
 .inputformact {
@@ -11006,6 +11014,7 @@ body {
 /*format code web file*/
 
 .mincodeweb {
+  margin: auto 4px auto 4px;
   border: 2px solid rbga(255, 0, 0, 0.5);
   border-radius: 7px;
   min-height: 550px;
@@ -11017,13 +11026,25 @@ body {
 
 /*user photo*/
 
+.projectNameControll,
+.nameControll {
+  font-weight: bold;
+  font-style: Arial;
+  font-size: 24px;
+}
+
+.ext {
+  font-size: 10px;
+  font-weight: bold;
+}
+
 .userThumb {
-  width: 45px;
-  height: 45px;
-  border-radius: 10px;
+  width: 55px;
+  height: 55px;
+  border-radius: 11px;
   margin: 7px auto auto 3px;
   padding: 5px 5px 5px 5px;
-  border: 2px solid rgba(0, 200, 255, 0.53);
+  border: 2px solid rgba(110, 148, 158, 0.438);
 }
 
 .userThumb:hover {
@@ -11225,6 +11246,12 @@ figure.efect figcaption {
     max-width: 91%;
   }
 
+  .img-size {
+    width: 250px;
+    height: 290px;
+    border: border-box;
+  }
+
   ul li {
     list-style-type: none !important;
     text-decoration: none !important;
@@ -11238,7 +11265,7 @@ ul li {
   text-transform: none !important;
 }
 
-@media (zoom: false) {
+@media (min-width: 1366) and (min-height: 768px) {
   body {
     background-color: green;
   }

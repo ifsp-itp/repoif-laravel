@@ -5,7 +5,9 @@
 <div class="row">
     @if($project->type == '2' && $project->sent == '1')
         <div class="embed-responsive embed-responsive-16by9 fl imgdefine">
-            <iframe frameborder="0" width="640" height="360" src="https://www.dailymotion.com/embed/video/{{ $project->project }}?autoplay=1&ui-highlight=fff" allowfullscreen allow="autoplay;fullscreen"></iframe>
+
+            <iframe id="daily" frameborder="0" width="640" height="360" src="https://www.dailymotion.com/embed/video/{{ $project->project }}?autoplay=1&ui-highlight=fff" allowfullscreen allow="autoplay;fullscreen"></iframe>
+
         </div>
 
     @elseif($project->type == '2' && $project->sent == '0')
@@ -16,10 +18,12 @@
         </div>
 
     @elseif($project->type == '1')
-        <img src="/storage/files/{{$project->project}}" class="img-resposive w-100 imgdefine">          
+        <img src="/storage/files/{{$project->project}}" class="img-resposive imgdefine">          
     @else
             @if($project->file_type == 0)
+
                     <iframe id="siteframe" class="codeExib mincodeweb w-100 h-50" src="{{$project->path_web}}/index.html"></iframe>
+                    
             @endif
     @endif
     <div class="card-columns my-3 ml-3">
@@ -72,8 +76,6 @@
                             </span>
                         </th>
                     </tr>
-
-                    </code>
 
                 </thead>
                 <tbody>

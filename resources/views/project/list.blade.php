@@ -4,7 +4,6 @@
 
 <div id="background">
 	<div class="card flex card-deck">
-
 		@foreach ($projects as $project) 
 			<div class="block-size card mb-3 cover card-mutator">
 				@if($project->type == 1)
@@ -15,20 +14,15 @@
 			    	<img src="/storage/icons/videoThumb.png" class="cover card-img-top" id="imgCardRI" alt="caminho do arquivo de apresentação dos videos">
 			  	@elseif($project->type == 2 && $project->sent == '1')
 			  	<a href="/projects/show/{{$project->id}}" class="border-card-2 project-icon">
-			    	<img src="{{$project->thumbnailURL}}" class="cover card-img-top" id="imgCardRI" alt="caminho do arquivo de imagem">
-			    
+			    	<img src="/storage/icons/videoThumb_daily.png" class="cover card-img-top" id="imgCardRI" alt="caminho do arquivo de imagem"> 
 			    @elseif($project->type == 3)
 				
 					<a href="/projects/show/{{$project->id}}" class="border-card-3 project-icon">
 						<figure class="efect">
-							<img src="/storage/icons/siteStyle.jpg" class="cover subscreen card-img-top" alt="">
-							<figcaption>
-								<img width="100" height="70" src="/storage/icons/html.png" alt="codigo html css javascript">
-							</figcaption>	
+							<img src="/storage/icons/site-github-icon.png" class="cover subscreen card-img-top" alt="foto-site">	
 						</figure>
 			 	@endif
 			    </a>
-			    
 			    <div class="card-body">
 
 			      <div class="profileThumbHome pt-2 fl">
@@ -55,11 +49,12 @@
 					</a>
 					
 					<div class="my-2">
-						<h4 class="mx-1">{{ $project->extension }}</h4>
+						<h4 class="mx-1 ext">{{ $project->extension }}</h4>
 					</div>
 			      </div>
 
 			    </div>
+				
 			    <div class="card-footer">
 
 			      <span class="likesControll">

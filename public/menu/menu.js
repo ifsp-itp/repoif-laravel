@@ -3,16 +3,6 @@ function sizeOfThings(){
     var windowHeight = window.innerHeight;
     var screenWidth = screen.width;
     var screenHeight = screen.height;
-    var tela = screenWidth
-    var windowL = windowWidth
-    let body = window.document.querySelector(".response")
-
-    if ((tela < 940 && tela > 200) || ((windowL < 940 && windowL > 200))){
-        body.style.display = 'none'
-    }else{
-        body.style.display = 'block'
-    }
-
     console.log(windowWidth + 'x' + windowHeight)
     console.log(screenWidth + 'x' + screenHeight)
 };

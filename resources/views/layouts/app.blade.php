@@ -17,13 +17,14 @@
 
 
     <!-- Progress Bar -->
+    <!--
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script>
+    -->
     <script src="{{ asset('ajax/jquery.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('ajax/form/jquery.js') }}"></script>
-
-    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -53,14 +54,13 @@
                 </a>
                 
                 <!--menu dropdown-->
-                <button id="btn-menu" onClick="menu()" class="navbar-toggler" type="button" aria-expanded="false" data-toggle="collapse" data-target="#header-nav">
+                <button id="btn-menu" onClick="menu()" class="navbar-toggler" type="button" aria-expanded="false" data-toggle="collapse" data-target="header-nav">
                     <div type="context center">
                       <p class="h2 py-2 mr-4 icon-button text-light">
                           <img src="/storage/icons/icon-menu.png" width="20" height="20" alt="menu">
                       </p> 
                     </div>
                 </button>
-
                 <div class="collapse navbar-collapse menu-grade"  id="header-nav">
                     <ul class="flex navbar-nav  mr-auto mgl">
                         <li class="nav-item">
