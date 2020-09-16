@@ -224,7 +224,7 @@ figure.efect figcaption {
         margin: auto 2% auto 2%;
     } 
     .btnLD > button {
-        width: 85px;
+        width: auto;
     }
 }
 @media (min-width:992px) {
@@ -270,7 +270,7 @@ figure.efect figcaption {
             left: 2%;  
         }
         .btnLD > button {
-            width: 85px;
+            width: auto;
         }
         ul li {
             list-style-type: none !important;
@@ -280,7 +280,7 @@ figure.efect figcaption {
 }
 @media (max-width:350px){
     .btnLD > button {
-        width: 85px;
+        width: auto;
     }
     figure.efect figcaption {
        display: none; 

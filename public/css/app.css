@@ -11165,7 +11165,7 @@ figure.efect figcaption {
   }
 
   .btnLD > button {
-    width: 85px;
+    width: auto;
   }
 }
 
@@ -11220,7 +11220,7 @@ figure.efect figcaption {
   }
 
   .btnLD > button {
-    width: 85px;
+    width: auto;
   }
 
   ul li {
@@ -11232,7 +11232,7 @@ figure.efect figcaption {
 
 @media (max-width: 350px) {
   .btnLD > button {
-    width: 85px;
+    width: auto;
   }
 
   figure.efect figcaption {
