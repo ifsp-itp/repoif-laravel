@@ -154,10 +154,6 @@ class ProjectController extends Controller
 
     public function store(Request $request) //salvar o projeto
     {
-
-       
-
-
         $nameFile = null;
         $download = null;
         $thumbnailURL = null;
@@ -267,7 +263,8 @@ class ProjectController extends Controller
 
                     ])->save();
 
-                return response()->json(['success'  => 'o upload foi realizado mas não foi possivel para o dailymotion']);
+                return response()->json(['success'  => 'o upload foi feito para o REPOIF!!!']);
+                
             } 
  
             } else {

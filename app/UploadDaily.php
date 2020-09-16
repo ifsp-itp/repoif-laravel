@@ -50,10 +50,10 @@ class UploadDaily{
           
                 //instacia da classe do SDK
                 $api = new Dailymotion();
-                echo "-10%";
+               
                 //tempo de envio
                 $this->time($api, 10000);
-                echo "-25%";
+             
                 //token api
                 $api->setGrantType(
                     Dailymotion::GRANT_TYPE_PASSWORD,
@@ -114,6 +114,7 @@ class UploadDaily{
             }
             $resul += 1;      
         }
+       
         return $res;
     }
    private function getApiKey() {
