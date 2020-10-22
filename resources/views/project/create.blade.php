@@ -28,6 +28,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <!--scripts-->
+    <script src="{{ asset('ajax/jquery.js') }}"></script>
+    <script src="{{ asset('ajax/form/jquery.js') }}"></script>
+
 
     <style>
         .progress {
@@ -58,21 +62,20 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-xl nav-color">
+    <nav class="navbar navbar-expand-xl nav-color">
             <a class="navbar-brand text-light mr-auto" href="{{ url('/projects') }}">
                     REPOIF
-                </a>
+            </a>
 
             <!--menu dropdown-->
-            <button id="btn-menu" onClick="menu()" class="navbar-toggler mr-4" type="button" aria-expanded="false" data-toggle="collapse" data-target="#header-nav">
-                <div type="context center">
+            <button id="btn-menu" onClick="menu()" class="navbar-toggler" type="button" aria-expanded="false" data-toggle="collapse" data-target="header-nav">
+                    <div type="context center">
                       <p class="h2 py-2 mr-4 icon-button text-light">
                           <img src="/storage/icons/icon-menu.png" width="20" height="20" alt="menu">
                       </p> 
                     </div>
                 </button>
-
-            <div class="collapse navbar-collapse response" id="header-nav">
+            <div class="collapse navbar-collapse menu-grade" id="header-nav">
                 <ul class="flex navbar-nav  mr-auto mgl">
                     <li class="nav-item">
                         <a class="nav-link text-light" href="{{ url('/projects/news') }}">Ultimos envios</a>
@@ -103,18 +106,17 @@
                 </form>
 
                 <ul class="navbar-nav flex-row mr-lg-0">
-                @guest
+                    @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Entrar') }}</a>
+                        <a class="nav-link cor-link" href="{{ route('login') }}">{{ __('Entrar') }}</a>
                     </li>
                     @if (Route::has('register'))
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar') }}</a>
+                        <a class="nav-link cor-link" href="{{ route('register') }}">{{ __('Registrar') }}</a>
                     </li>
-                    @endif 
-                @else
+                    @endif @else
                     <li class="nav-item dropdown">
-                        <a class="nav-link text-light dropdown-toggle mr-3 mr-lg-0 mgl " id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret text-light">{{ Auth::user()->name }}</span>
+                        <a class="nav-link text-light dropdown-toggle mr-3 mr-lg-0 mgl " id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret user text-light">{{ Auth::user()->name }}</span>
                             </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="#navbarDropdownMenuLink" id="drop">
@@ -141,8 +143,6 @@
         <div class="lista">
             <ul class="menu">
                 <div>
-
-
                     <ul class="navbar-nav mr-auto mgl">
                         <li class="nav-item">
                             <a class="nav-link text-light" href="{{ url('/projects/news') }}">Ultimos envios</a>
@@ -157,7 +157,7 @@
                             <a class="nav-link text-light" href="{{ url('/projects/codes') }}">Scripts</a>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item it">
                             <a class="nav-link text-light" href="{{ url('/projects/create') }}">
                                 <span class="teste">
                                     CRIAR
@@ -168,7 +168,7 @@
                     </ul>
                 </div>
                 <div>
-                    <ul class="navbar-nav flex-row mr-lg-0">
+                    <ul class="navbar-nav flex-row mr-lg-0 st-link">
                         @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Entrar') }}</a>
@@ -179,7 +179,7 @@
                         </li>
                         @endif @else
                         <li class="nav-item dropdown">
-                            <a class="nav-link text-light dropdown-toggle mr-3 mr-lg-0 mgl " id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret text-light">{{ Auth::user()->name }}</span>
+                            <a class="nav-link text-light dropdown-toggle mr-3 mr-lg-0 mgl " id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret user text-light">{{ Auth::user()->name }}</span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="#navbarDropdownMenuLink" id="drop2">
@@ -195,7 +195,6 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-
                             </div>
                         </li>
                         @endguest
@@ -205,7 +204,6 @@
                 </div>
             </ul>
         </div>
-        <!--fim dropdown-->
         <div class="container-fluid">
 
             <main class="py-4">
@@ -288,9 +286,7 @@
                 </div>
             </main>
         </div>
-        <script src="{{ asset('ajax/jquery.js') }}"></script>
-        <script src="{{ asset('ajax/form/jquery.js') }}"></script>
-        
+       
         <script type="text/javascript">
                 function validate(formData, jqForm, options) {
                     var form = jqForm[0];
@@ -301,7 +297,7 @@
                 }
 
 
-                (function() {
+                $(function() {
 
                     var bar = $('.bar');
                     var percent = $('.percent');
@@ -333,7 +329,7 @@
                         }
                     });
 
-                })();
+                });
 
 
                 $('#file').change((event)=>{
@@ -363,6 +359,60 @@
                 function icons(txt){
                     return `<i class="${txt}"></i>`
                 }
+                        
+                function menu() {
+                    if (window.document.getElementsByClassName("menu")[0].style.display == "flex") {
+                        $(".menu").hide(32)
+                        var menu = window.document.getElementsByClassName("menu")[0].style.display = "none"
+                    } else if (window.document.getElementsByClassName("menu")[0].style.display == "none") {
+                        $(".menu").show(32)
+                        var menu = window.document.getElementsByClassName("menu")[0].style.display = "flex"
+                    } else {
+                        $(".menu").show(32)
+                        window.document.getElementsByClassName("menu")[0].style.display = "flex"
+                    }
+
+                }
+
+
+                
+                let nav  = document.querySelector("#navbarDropdownMenuLink")
+                let drop  = document.querySelector("#drop")
+                //p
+                let nav2  = document.querySelector("#navbarDropdownMenuLink2")
+                let drop2  = document.querySelector("#drop2")
+
+                nav.addEventListener("mousemove", ()=>{
+                    document.querySelector("#drop").style.display = "block"
+                });
+
+                drop.addEventListener("mouseout", ()=>{
+                    document.querySelector("#drop").style.display = "none"
+                });
+                drop.addEventListener("mousemove", ()=>{
+                    document.querySelector("#drop").style.display = "block"
+                });
+
+                nav.addEventListener("mouseout", ()=>{
+                    document.querySelector("#drop").style.display = "none"
+                });
+
+                //part 2
+
+                nav2.addEventListener("mousemove", ()=>{
+                    document.querySelector("#drop2").style.display = "block"
+                });
+
+                drop2.addEventListener("mouseout", ()=>{
+                    document.querySelector("#drop2").style.display = "none"
+                });
+                drop2.addEventListener("mousemove", ()=>{
+                    document.querySelector("#drop2").style.display = "block"
+                });
+
+                nav2.addEventListener("mouseout", ()=>{
+                    document.querySelector("#drop2").style.display = "none"
+                });
         </script>
 </body>
 
