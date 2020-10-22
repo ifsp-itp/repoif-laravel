@@ -82,7 +82,7 @@
                     </div>
                     <div class="col date">
                         <!--data comentário-->
-                        <p>{{ date('d/m/Y', strtotime($comment->date))}}</p>
+                        <p>{{ date('d/m/Y', strtotime($comment->data))}}</p>
                     </div>
                 </div>
             </div>
@@ -201,6 +201,19 @@
             }
         }
 
+        function menu() {
+            if (window.document.getElementsByClassName("menu")[0].style.display == "flex") {
+                $(".menu").hide(32)
+                var menu = window.document.getElementsByClassName("menu")[0].style.display = "none"
+            } else if (window.document.getElementsByClassName("menu")[0].style.display == "none") {
+                $(".menu").show(32)
+                var menu = window.document.getElementsByClassName("menu")[0].style.display = "flex"
+            } else {
+                $(".menu").show(32)
+                window.document.getElementsByClassName("menu")[0].style.display = "flex"
+            }
+
+        }
     </script>
 
 </div>
