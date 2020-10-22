@@ -34,7 +34,6 @@ php artisan make:model Project -m
 */
 class ProjectController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -115,8 +114,6 @@ class ProjectController extends Controller
         return view('project.list')->with('projects', $projects);
     }
 
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -164,13 +161,14 @@ class ProjectController extends Controller
         if($tipo == '2') {
 
                 try {
-                    //dailymotion
+                    //envio para banco de dados dailymotion
                     $upload = new UploadDaily();
                     $resul =   $upload->upload(request('title'), $request->file('file'));
                    
       
                     $enviado = 1;
 
+                    //guardando dados do video npo banco de dados
                     $project = Project::create([
                       'user_id' => auth()->id(),
                       'title' => request('title'),
@@ -345,42 +343,42 @@ class ProjectController extends Controller
             }elseif($tipo == '1'){
                     if ($request->hasFile('file') && $request->file('file')->isValid()) 
                     {
-                    // Define um aleatório para o arquivo baseado no timestamps atual
-                    $name = uniqid(date('HisYmd'));
-             
-                    // Recupera a extensão do arquivo
-                    $extension = $request->file->extension();
-                    // Define finalmente o nome
-                    $nameFile = "{$name}.{$extension}";
-             
-                    // Faz o upload:
-                    $upload = $request->file->storeAs('files', $nameFile);
-                    // Se tiver funcionado o arquivo foi armazenado em storage/app/public/files/nomedinamicoarquivo.extensao
-             
-                    // Verifica se NÃO deu certo o upload (Redireciona de volta)
-                    if ( !$upload )
-                        return redirect()
-                                    ->back()
-                                    ->with('error', 'Falha ao fazer upload')
-                                    ->withInput();
-                    $download = $nameFile;
-                                     
-                                   
-                    $project = Project::create([
-                        'user_id' => auth()->id(),
-                        'title' => request('title'),
-                        'description' => request('description'),
-                        'type' => request('type'),
-                        'download' => $download,
-                        'file_type' => 1,
-                        'extension' => 'Imagem',
-                        'date' => $actDate,
-                        'project' => $nameFile,
-                        'views' => 0,
-                        'thumbnailURL' => $thumbnailURL
-                        
-                    ])->save();
-                    return response()->json(['success'=>'postagem feita com sucesso!!!']);
+                        // Define um aleatório para o arquivo baseado no timestamps atual
+                        $name = uniqid(date('HisYmd'));
+                
+                        // Recupera a extensão do arquivo
+                        $extension = $request->file->extension();
+                        // Define finalmente o nome
+                        $nameFile = "{$name}.{$extension}";
+                
+                        // Faz o upload:
+                        $upload = $request->file->storeAs('files', $nameFile);
+                        // Se tiver funcionado o arquivo foi armazenado em storage/app/public/files/nomedinamicoarquivo.extensao
+                
+                        // Verifica se NÃO deu certo o upload (Redireciona de volta)
+                        if ( !$upload )
+                            return redirect()
+                                        ->back()
+                                        ->with('error', 'Falha ao fazer upload')
+                                        ->withInput();
+                        $download = $nameFile;
+                                        
+                                    
+                        $project = Project::create([
+                            'user_id' => auth()->id(),
+                            'title' => request('title'),
+                            'description' => request('description'),
+                            'type' => request('type'),
+                            'download' => $download,
+                            'file_type' => 1,
+                            'extension' => 'Imagem',
+                            'date' => $actDate,
+                            'project' => $nameFile,
+                            'views' => 0,
+                            'thumbnailURL' => $thumbnailURL
+                            
+                        ])->save();
+                        return response()->json(['success'=>'postagem feita com sucesso!!!']);
                 }else{
                     return response()->json(['success'=>'imagem não suportada']);
                 }
@@ -466,11 +464,6 @@ class ProjectController extends Controller
      */
     public function destroy($id) //deletar o projeto
     {
-     
-      
-
-       
-
         /**
          * use Facade Storage
          * method delete image

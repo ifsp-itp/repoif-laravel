@@ -24,7 +24,6 @@
 			 	@endif
 			    </a>
 			    <div class="card-body">
-
 			      <div class="profileThumbHome pt-2 fl">
 			      	<a href="/projects/userProject/{{$project->user->id}}">
 				      	@if($project->user->image == null)
@@ -36,18 +35,12 @@
 			      </div>
 
 			      <div class="fl">
-			      	<h3 class="projectNameControll">
-			      		{{$project->title}}
-					</h3>
-
-			      	<br />
-
+			      	<h2 class="projectNameControll">{{$project->title}}</h2>
 			      	<a href="/projects/userProject/{{$project->user->id}}">
 				      	<span class="nameControll">
 				      		{{$project->user->name}}
 				      	</span>
 					</a>
-					
 					<div class="my-2">
 						<h4 class="mx-1 ext">{{ $project->extension }}</h4>
 					</div>
@@ -57,25 +50,25 @@
 				
 			    <div class="card-footer">
 
-			      <span class="likesControll">
-			      	<i class="fa fa-heart fontIcon"></i> {{$project->likes->count()}}
-			      </span>
+						<span class="likesControll">
+							<i class="fa fa-heart fontIcon"></i> {{$project->likes->count()}}
+						</span>
 
-			      <span class="likesControll">
-			      	<i class="fa fa-comment fontIcon"></i> {{$project->comments->count()}}
-			      </span>
+						<span class="likesControll">
+							<i class="fa fa-comment fontIcon"></i> {{$project->comments->count()}}
+						</span>
 
-			      <span class="likesControll">
-			      	<i class="fa fa-eye fontIcon"></i> {{$project->views}}
-			      </span>
+						<span class="likesControll">
+							<i class="fa fa-eye fontIcon"></i> {{$project->views}}
+						</span>
 
-			      @if ($project->type == 1)
-			      	<i class="far fa-images fr fontList1"></i>
-			      @elseif ($project->type == 2)
-			      	<i class="fab fa-youtube fr fontList2"></i>
-			      @elseif ($project->type == 3)
-			      	<i class="fas fa-code fr fontList3"></i>
-			      @endif
+						@if ($project->type == 1)
+							<i class="far fa-images fr fontList1"></i>
+						@elseif ($project->type == 2)
+							<i class="fab fa-youtube fr fontList2"></i>
+						@elseif ($project->type == 3)
+							<i class="fas fa-code fr fontList3"></i>
+						@endif
 
 			    </div>
 			</div>

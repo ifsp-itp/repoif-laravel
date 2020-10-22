@@ -109,10 +109,9 @@
             var newnovo = num - 4
             var newout = num - 5
             var imageo = imageinput.value.slice(newout, num)
- 
             var image =  imageinput.value.slice(newnovo, num)
 
-            image = image..toLowerCase()
+            image = image.toLowerCase()
 
             if(image == '.jpg'){
                 document.getElementById('valid').removeAttribute('class',  'btn btn-success disabled disable')

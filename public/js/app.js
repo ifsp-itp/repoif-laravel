@@ -6252,6 +6252,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/fontawesome/scss/fontawesome.scss":
+/*!********************************************************!*\
+  !*** ./node_modules/fontawesome/scss/fontawesome.scss ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./node_modules/is-buffer/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/is-buffer/index.js ***!
@@ -49490,15 +49501,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!******************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/modify.scss ***!
-  \******************************************************************************************/
+/*!*******************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/modify.scss ./node_modules/fontawesome/scss/fontawesome.scss ***!
+  \*******************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\server\htdocs\project2\repoif-laravel\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! C:\server\htdocs\project2\repoif-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\server\htdocs\project2\repoif-laravel\resources\sass\modify.scss */"./resources/sass/modify.scss");
+__webpack_require__(/*! C:\server\htdocs\project2\repoif-laravel\resources\sass\modify.scss */"./resources/sass/modify.scss");
+module.exports = __webpack_require__(/*! C:\server\htdocs\project2\repoif-laravel\node_modules\fontawesome\scss\fontawesome.scss */"./node_modules/fontawesome/scss/fontawesome.scss");
 
 
 /***/ })
