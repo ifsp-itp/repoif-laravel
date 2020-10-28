@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <meta name="theme-colors" content="#000" />
+    <meta name="theme-color" content="#413e3e" />
 
     <title>REPOIF</title>
 

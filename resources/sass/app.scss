@@ -41,7 +41,7 @@ iframe {
 /*properties*/
 
 body {
-    background-color: rgb(65, 62, 62);
+    background-color: #413e3e;
     min-width: 80px;
 }
 
@@ -107,7 +107,7 @@ body {
 .block-size {
     min-width: 44%;
     width: auto;
-    max-width: 45%;
+    max-width: 50%;
 }
 
 .size-container {
@@ -508,7 +508,7 @@ form {
 
 .file {
     border-radius: 10px;
-    width: 380px;
+    box-sizing: border-box;
     height: 60px;
 }
 
@@ -611,7 +611,63 @@ figure.efect figcaption {
 
 /*responsive*/
 
+.card-response{
+    max-width: 100% !important;
+}
+/*  */
+
+@media (min-width: 1729px) {
+    .cover-img{
+        margin: 0px auto 0px auto;
+        padding: 0px auto 0px auto;
+        height: 1300px;
+    }
+}
+@media (max-width: 1080px) {
+    .cover-img{
+        margin: 0px auto 0px auto;
+        padding: 0px auto 0px auto;
+        height: 980px;
+    }
+}
+@media (max-width: 1000px) {
+    .cover-img{
+        margin: 0px auto 0px auto;
+        padding: 0px auto 0px auto;
+        height: 750px;
+    }
+}
+@media (max-width: 700px){
+    .cover-img{
+        margin: 0px auto 0px auto;
+        padding: 0px auto 0px auto;
+        height: 600px;
+    }  
+}
+@media (max-width: 580px){
+    .cover-img{
+        margin: 0px auto 0px auto;
+        padding: 0px auto 0px auto;
+        height: 492px;
+    }  
+}
+@media (max-width:520px) {
+    .cover-img{
+        margin: 0px auto 0px auto;
+        padding: 0px auto 0px auto;
+        height: 390px;
+    }
+}
+@media (max-width:404px) {
+    .cover-img{
+        margin: 0px auto 0px auto;
+        padding: 0px auto 0px auto;
+        height: 290px;
+    }
+}
+
 @media (max-width:779px) {
+
     ul li {
         list-style-type: none !important;
         text-decoration: none !important;
@@ -619,6 +675,13 @@ figure.efect figcaption {
     }
     #header-nav {
         display: none;
+    }
+    .card{
+        margin-left: 0;
+    }
+    .border-container{
+        max-width: 100%;
+        width: 100%;
     }
     .lef {
         margin: auto auto auto 10px;
@@ -732,7 +795,6 @@ ul li {
 }
 
 @media (min-width: 1366) and (min-height:768px) {
-    body {}
     input {
         width: 550px;
         height: 90px;

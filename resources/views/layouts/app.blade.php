@@ -12,7 +12,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <meta name="theme-colors" content="#000" />
+    <meta name="theme-color" content="#413e3e" />
 
     <title>REPOIF</title>
 
@@ -196,7 +196,7 @@
         <!--fim dropdown-->
 
 
-        <div class="container-fluid">
+        <div class="container-fluid border-container">
             <main class="py-2">
                 @yield('content')
             </main>

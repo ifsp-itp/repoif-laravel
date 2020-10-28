@@ -3,9 +3,9 @@
 @section('content')
 
 <div id="background">
-	<div class="card flex card-deck">
+	<div class="card flex card-deck border-container">
 		@foreach ($projects as $project) 
-			<div class="block-size card mb-3 cover card-mutator">
+			<div class="block-size card mb-3 cover card-mutator card-response">
 				@if($project->type == 1)
 			  	<a href="/projects/show/{{$project->id}}" class="border-card-1 project-icon">
 			  		<img src="/storage/files/{{$project->project}}" class="cover card-img-top" id="imgCardRI" alt="foto de apresentação dos sites">
